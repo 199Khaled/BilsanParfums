@@ -1,0 +1,70 @@
+C:\Users\Khaled\Desktop\Klinik Program\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.dll
+C:\Users\Khaled\Desktop\Klinik Program\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.pdb
+C:\Users\Khaled\Desktop\Klinik Program\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.AssemblyReference.cache
+C:\Users\Khaled\Desktop\Klinik Program\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.CoreCompileInputs.cache
+C:\Users\Khaled\Desktop\Klinik Program\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.dll
+C:\Users\Khaled\Desktop\Klinik Program\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.pdb
+C:\Users\khale\Desktop\Klinik Program\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.dll
+C:\Users\khale\Desktop\Klinik Program\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.pdb
+C:\Users\khale\Desktop\Klinik Program\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.AssemblyReference.cache
+C:\Users\khale\Desktop\Klinik Program\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.CoreCompileInputs.cache
+C:\Users\khale\Desktop\Klinik Program\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.dll
+C:\Users\khale\Desktop\Klinik Program\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.pdb
+C:\Users\Hamssa\Desktop\Praxis_Project\Klinik Program A\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.dll
+C:\Users\Hamssa\Desktop\Praxis_Project\Klinik Program A\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.pdb
+C:\Users\Hamssa\Desktop\Praxis_Project\Klinik Program A\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.AssemblyReference.cache
+C:\Users\Hamssa\Desktop\Praxis_Project\Klinik Program A\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.CoreCompileInputs.cache
+C:\Users\Hamssa\Desktop\Praxis_Project\Klinik Program A\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.dll
+C:\Users\Hamssa\Desktop\Praxis_Project\Klinik Program A\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.pdb
+C:\Users\khale\Desktop\Praxis_Project\Klinik Program A\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.dll
+C:\Users\khale\Desktop\Praxis_Project\Klinik Program A\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.pdb
+C:\Users\khale\Desktop\Praxis_Project\Klinik Program A\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.AssemblyReference.cache
+C:\Users\khale\Desktop\Praxis_Project\Klinik Program A\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.CoreCompileInputs.cache
+C:\Users\khale\Desktop\Praxis_Project\Klinik Program A\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.dll
+C:\Users\khale\Desktop\Praxis_Project\Klinik Program A\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.pdb
+C:\Users\Hamssa\Desktop\Parf-mLaden_Project - Kopie\Parfüm2025\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.dll
+C:\Users\Hamssa\Desktop\Parf-mLaden_Project - Kopie\Parfüm2025\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.pdb
+C:\Users\Hamssa\Desktop\Parf-mLaden_Project - Kopie\Parfüm2025\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.AssemblyReference.cache
+C:\Users\Hamssa\Desktop\Parf-mLaden_Project - Kopie\Parfüm2025\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.CoreCompileInputs.cache
+C:\Users\Hamssa\Desktop\Parf-mLaden_Project - Kopie\Parfüm2025\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.dll
+C:\Users\Hamssa\Desktop\Parf-mLaden_Project - Kopie\Parfüm2025\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.pdb
+C:\Users\khale\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.dll
+C:\Users\khale\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.pdb
+C:\Users\khale\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.AssemblyReference.cache
+C:\Users\khale\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.CoreCompileInputs.cache
+C:\Users\khale\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.dll
+C:\Users\khale\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.pdb
+C:\Users\Hamssa\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.dll
+C:\Users\Hamssa\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.pdb
+C:\Users\Hamssa\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.dll
+C:\Users\Hamssa\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.pdb
+C:\Users\Hamssa\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\bin\Debug\System.ValueTuple.dll
+C:\Users\Hamssa\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.AssemblyReference.cache
+C:\Users\Hamssa\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.CoreCompileInputs.cache
+C:\Users\Hamssa\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\obj\Debug\HilfsMet.AAF8E864.Up2Date
+C:\Users\Hamssa\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.dll
+C:\Users\Hamssa\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.pdb
+C:\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.dll
+C:\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.pdb
+C:\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.dll
+C:\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.pdb
+C:\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\bin\Debug\System.ValueTuple.dll
+C:\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.AssemblyReference.cache
+C:\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.CoreCompileInputs.cache
+C:\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\obj\Debug\HilfsMet.AAF8E864.Up2Date
+C:\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.dll
+C:\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.pdb
+C:\Users\khale\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.dll
+C:\Users\khale\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.pdb
+C:\Users\khale\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\bin\Debug\System.ValueTuple.dll
+C:\Users\khale\Desktop\Parf-mLaden_Project\Parfüm2025\clsHilfsMethoden\obj\Debug\HilfsMet.AAF8E864.Up2Date
+C:\Users\khale\Desktop\Parfüm2025\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.dll
+C:\Users\khale\Desktop\Parfüm2025\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.pdb
+C:\Users\khale\Desktop\Parfüm2025\clsHilfsMethoden\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.dll
+C:\Users\khale\Desktop\Parfüm2025\clsHilfsMethoden\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.pdb
+C:\Users\khale\Desktop\Parfüm2025\clsHilfsMethoden\bin\Debug\System.ValueTuple.dll
+C:\Users\khale\Desktop\Parfüm2025\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.AssemblyReference.cache
+C:\Users\khale\Desktop\Parfüm2025\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.CoreCompileInputs.cache
+C:\Users\khale\Desktop\Parfüm2025\clsHilfsMethoden\obj\Debug\HilfsMet.AAF8E864.Up2Date
+C:\Users\khale\Desktop\Parfüm2025\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.dll
+C:\Users\khale\Desktop\Parfüm2025\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.pdb
