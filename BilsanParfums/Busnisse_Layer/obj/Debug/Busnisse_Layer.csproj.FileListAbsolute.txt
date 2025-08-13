@@ -1,0 +1,9 @@
+C:\Users\Khaled\source\repos\Busnisse_Layer\obj\Debug\Busnisse_Layer.csproj.AssemblyReference.cache
+C:\Users\Khaled\source\repos\Busnisse_Layer\obj\Debug\Busnisse_Layer.csproj.CoreCompileInputs.cache
+C:\Users\Khaled\source\repos\Busnisse_Layer\bin\Debug\Busnisse_Layer.dll
+C:\Users\Khaled\source\repos\Busnisse_Layer\bin\Debug\Busnisse_Layer.pdb
+C:\Users\Khaled\source\repos\Busnisse_Layer\bin\Debug\Data_Layer.dll
+C:\Users\Khaled\source\repos\Busnisse_Layer\bin\Debug\Data_Layer.pdb
+C:\Users\Khaled\source\repos\Busnisse_Layer\obj\Debug\Busnisse.689CA989.Up2Date
+C:\Users\Khaled\source\repos\Busnisse_Layer\obj\Debug\Busnisse_Layer.dll
+C:\Users\Khaled\source\repos\Busnisse_Layer\obj\Debug\Busnisse_Layer.pdb

@@ -1,0 +1,6 @@
+C:\Users\Khaled\source\repos\Data_Layer\bin\Debug\Data_Layer.dll
+C:\Users\Khaled\source\repos\Data_Layer\bin\Debug\Data_Layer.pdb
+C:\Users\Khaled\source\repos\Data_Layer\obj\Debug\Data_Layer.csproj.AssemblyReference.cache
+C:\Users\Khaled\source\repos\Data_Layer\obj\Debug\Data_Layer.csproj.CoreCompileInputs.cache
+C:\Users\Khaled\source\repos\Data_Layer\obj\Debug\Data_Layer.dll
+C:\Users\Khaled\source\repos\Data_Layer\obj\Debug\Data_Layer.pdb
