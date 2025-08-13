@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Busnisse_Layer", "Busnisse_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data_Layer", "Data_Layer\Data_Layer.csproj", "{2CC70AB6-1F52-4774-A545-EA4E5A04BDB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HilfsMethoden", "..\..\..\..\..\Bilsan\Parfüm2025\clsHilfsMethoden\HilfsMethoden.csproj", "{0461C194-CE2D-40A6-A75E-FDF9A29E6383}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HilfsMethoden", "clsHilfsMethoden\HilfsMethoden.csproj", "{0461C194-CE2D-40A6-A75E-FDF9A29E6383}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

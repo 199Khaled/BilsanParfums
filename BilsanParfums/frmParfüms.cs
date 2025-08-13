@@ -453,7 +453,7 @@ namespace BilsanParfums
             else
             {
                 lbVorschläge.Visible = false;
-                _FilterAnwenden(cbFilterby, txtFilterwert, _bindingSourceAlleParfüms,null);
+                _FilterAnwenden(cbFilterby, txtFilterwert, _bindingSourceAlleParfüms,dgvAlleParfüms);
             }
             // Entferne diesen doppelten Aufruf, da er jetzt in den if/else-Blöcken passiert.
             // _MarkiereParfümZeilen(dgvAlleParfüms);

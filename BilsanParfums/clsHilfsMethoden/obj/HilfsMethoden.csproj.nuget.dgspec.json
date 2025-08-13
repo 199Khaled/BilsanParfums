@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Bilsan\\Parfüm2025\\clsHilfsMethoden\\HilfsMethoden.csproj": {}
+    "C:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj": {}
   },
   "projects": {
-    "C:\\Bilsan\\Parfüm2025\\clsHilfsMethoden\\HilfsMethoden.csproj": {
+    "C:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Bilsan\\Parfüm2025\\clsHilfsMethoden\\HilfsMethoden.csproj",
+        "projectUniqueName": "C:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj",
         "projectName": "clsHilfsMethoden",
-        "projectPath": "C:\\Bilsan\\Parfüm2025\\clsHilfsMethoden\\HilfsMethoden.csproj",
+        "projectPath": "C:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj",
         "packagesPath": "C:\\Users\\Hamssa\\.nuget\\packages\\",
-        "outputPath": "C:\\Bilsan\\Parfüm2025\\clsHilfsMethoden\\obj\\",
+        "outputPath": "C:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "UsingMicrosoftNETSdk": false,

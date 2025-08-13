@@ -107,13 +107,13 @@
     <None Include="Resources\update_7411697.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Bilsan\Parfüm2025\clsHilfsMethoden\HilfsMethoden.csproj">
-      <Project>{0461c194-ce2d-40a6-a75e-fdf9a29e6383}</Project>
-      <Name>HilfsMethoden</Name>
-    </ProjectReference>
     <ProjectReference Include="Busnisse_Layer\Busnisse_Layer.csproj">
       <Project>{1e9fe21d-3753-4a99-a158-64390e92f7a7}</Project>
       <Name>Busnisse_Layer</Name>
+    </ProjectReference>
+    <ProjectReference Include="clsHilfsMethoden\HilfsMethoden.csproj">
+      <Project>{0461c194-ce2d-40a6-a75e-fdf9a29e6383}</Project>
+      <Name>HilfsMethoden</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
