@@ -24,6 +24,7 @@ namespace BilsanParfums
         private DataTable _dtDamenParfüms;
         private DataTable _dtUnisexParfüms;
         private DataTable _dtKinderParfüms;
+        private DataTable _dtOrientalischeParfüms;
 
         private readonly object _dataloadLock = new object();
         private readonly object _filterLock = new object();
@@ -33,6 +34,7 @@ namespace BilsanParfums
         private BindingSource _bindingSourceDamenParfüms;
         private BindingSource _bindingSourceUnisexParfüms;
         private BindingSource _bindingSourceKinderParfüms;
+        private BindingSource _bindingSourceOrientalischeParfüms;
 
         private readonly object _autoComplateLock = new object();
         // Deklariere den AVL-Baum als privates Feld
@@ -46,6 +48,7 @@ namespace BilsanParfums
             _bindingSourceDamenParfüms = new BindingSource();
             _bindingSourceUnisexParfüms = new BindingSource();
             _bindingSourceKinderParfüms = new BindingSource();
+            _bindingSourceOrientalischeParfüms = new BindingSource();
         }
 
         private void frmParfüms_Load(object sender, EventArgs e)
@@ -72,11 +75,17 @@ namespace BilsanParfums
                 {
                     _bindingSourceAlleParfüms.DataSource = _dtParfüms;
                     dgvAlleParfüms.DataSource = _bindingSourceAlleParfüms;
+                    _AktualisiereAlleParfümdatenAnzahl(_bindingSourceAlleParfüms);
                     _PasseDataGridViewSchriftAn(dgvAlleParfüms);
                     _MarkiereParfümZeilen(dgvAlleParfüms);
                 }
             }
         }
+        private void _AktualisiereAlleParfümdatenAnzahl(BindingSource bgs)
+        {
+            lblAlleParfümsnazahl.Text = bgs.Count.ToString();
+        }
+
         private void _LadeHerrenParfümDaten()
         {
             lock (_dataloadLock)
@@ -86,10 +95,15 @@ namespace BilsanParfums
                 {
                     _bindingSourceHerrenParfüms.DataSource = _dtHerrenParfüms;
                     dgvHerrenParfüms.DataSource = _bindingSourceHerrenParfüms;
+                    _AktualisiereHerrenParfümdatenAnzahl(_bindingSourceHerrenParfüms);
                     _PasseDataGridViewSchriftAn(dgvHerrenParfüms);
                     _MarkiereParfümZeilen(dgvHerrenParfüms);
                 }
             }
+        }
+        private void _AktualisiereHerrenParfümdatenAnzahl(BindingSource bgs)
+        {
+            lblHerrenParfümsnazahl.Text = bgs.Count.ToString();
         }
         private void _LadeFrauenParfümDaten()
         {
@@ -104,10 +118,15 @@ namespace BilsanParfums
                 {
                     _bindingSourceDamenParfüms.DataSource = _dtDamenParfüms;
                     dgvDamenParfüms.DataSource = _bindingSourceDamenParfüms;
+                    _AktualisiereFrauenParfümdatenAnzahl(_bindingSourceDamenParfüms);
                     _PasseDataGridViewSchriftAn(dgvDamenParfüms);
                     _MarkiereParfümZeilen(dgvDamenParfüms);
                 }
             }
+        }
+        private void _AktualisiereFrauenParfümdatenAnzahl(BindingSource bgs)
+        {
+            lblDamenParfümsnazahl.Text = bgs.Count.ToString();
         }
 
         private void _LadeUnisexParfümDaten()
@@ -121,10 +140,15 @@ namespace BilsanParfums
                 {
                     _bindingSourceUnisexParfüms.DataSource = _dtUnisexParfüms;
                     dgvUnisexParfüms.DataSource = _bindingSourceUnisexParfüms;
+                    _AktualisiereUnisexParfümdatenAnzahl(_bindingSourceUnisexParfüms);
                     _PasseDataGridViewSchriftAn(dgvUnisexParfüms);
                     _MarkiereParfümZeilen(dgvUnisexParfüms);
                 }
             }
+        }
+        private void _AktualisiereUnisexParfümdatenAnzahl(BindingSource bgs)
+        {
+            lblUnisexParfümsnazahl.Text = bgs.Count.ToString();
         }
 
         private void _LadeKinderParfümDaten()
@@ -138,11 +162,68 @@ namespace BilsanParfums
                 {
                     _bindingSourceKinderParfüms.DataSource = _dtKinderParfüms;
                     dgvKinderParfüms.DataSource = _bindingSourceKinderParfüms;
+                    _AktualisiereKinderParfümdatenAnzahl(_bindingSourceKinderParfüms);
                     _PasseDataGridViewSchriftAn(dgvKinderParfüms);
                     _MarkiereParfümZeilen(dgvKinderParfüms);
                 }
             }
         }
+        private void _AktualisiereKinderParfümdatenAnzahl(BindingSource bgs)
+        {
+            lblKinderParfümanzahl.Text = bgs.Count.ToString();
+        }
+        private void _LadeOrientalischeParfümDaten()
+        {
+            lock (_dataloadLock)
+            {
+                // Filterlogik für Kinder-Parfüms
+                _dtOrientalischeParfüms = clsParfüms.GetAllOrientalischeParfüms();
+
+                if (_dtOrientalischeParfüms != null && _dtOrientalischeParfüms.Rows.Count > 0)
+                {
+                    _bindingSourceOrientalischeParfüms.DataSource = _dtOrientalischeParfüms;
+                    dgvOrientalischeParfüms.DataSource = _bindingSourceOrientalischeParfüms;
+                    _AktualisiereOrientalischParfümdatenAnzahl(_bindingSourceOrientalischeParfüms);
+                    _PasseDataGridViewSchriftAn(dgvOrientalischeParfüms);
+                    _MarkiereParfümZeilen(dgvOrientalischeParfüms);
+                }
+            }
+        }
+        private void _AktualisiereOrientalischParfümdatenAnzahl(BindingSource bgs)
+        {
+            lblOrientalischParfümsnazahl.Text = bgs.Count.ToString();
+        }
+
+        private void _AktualisiereParfümAnzahlFüeSelectedTabpage(BindingSource bgs)
+        {
+            if (tabControl1.SelectedTab == tabAllgemein)
+            {
+                _AktualisiereAlleParfümdatenAnzahl(bgs);
+            }
+            else if (tabControl1.SelectedTab == tabHerrendüfte)
+            {
+                _AktualisiereHerrenParfümdatenAnzahl(bgs);
+            }
+            else if (tabControl1.SelectedTab == tabDamendüfte)
+            {
+                _AktualisiereFrauenParfümdatenAnzahl(bgs);
+            }
+            else if (tabControl1.SelectedTab == tabUnisexdüfte)
+            {
+                _AktualisiereUnisexParfümdatenAnzahl(bgs);
+            }
+            else if (tabControl1.SelectedTab == tabKinderdüfte)
+            {
+                _AktualisiereKinderParfümdatenAnzahl(bgs);
+            }
+            else if (tabControl1.SelectedTab == tabOrientalischedüfte)
+            {
+                _AktualisiereOrientalischParfümdatenAnzahl(bgs);
+            }
+        }
+
+
+
 
         // --- Event-Handler ---
 
@@ -186,13 +267,10 @@ namespace BilsanParfums
                 _LadeKinderParfümDaten();
                // _MarkiereParfümZeilen(dgvKinderParfüms);
             }
-        }
-        private void cbFilterby_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbFilterby.SelectedIndex != -1)
+            else if (tabControl1.SelectedTab == tabOrientalischedüfte)
             {
-                txtFilterwert.Clear();
-                txtFilterwert.Focus();
+                _LadeOrientalischeParfümDaten();
+                // _MarkiereParfümZeilen(dgvKinderParfüms);
             }
         }
 
@@ -219,7 +297,8 @@ namespace BilsanParfums
         {
             if (dgvAlleParfüms.CurrentRow != null)
             {
-                _EntferneParfüm();
+                int parfümNummer = (int)dgvAlleParfüms.CurrentRow.Cells[0].Value;
+                _EntferneParfüm(parfümNummer);
             }
         }
 
@@ -273,6 +352,7 @@ namespace BilsanParfums
             }
             // Call the highlighting method here, passing the correct DataGridView
             _MarkiereParfümZeilen(dgv);
+            _AktualisiereParfümAnzahlFüeSelectedTabpage(bindingSource);
         }
 
         /// <summary>
@@ -306,7 +386,7 @@ namespace BilsanParfums
             }
 
         }
-        
+
         /// <summary>
         /// Öffnet die Hinzufügen-/Aktualisieren-Form.
         /// </summary>
@@ -316,20 +396,45 @@ namespace BilsanParfums
             {
                 frm.ShowDialog();
             }
-            // Daten nach der Rückkehr aus dem Dialog neu laden
-            _LadeAlleParfümDaten();
+            // Rufen Sie die Methode auf, um den ausgewählten Tab zu aktualisieren
+            _AktualisiereDatenNachTab();
         }
-
+        private void _AktualisiereDatenNachTab()
+        {
+            if (tabControl1.SelectedTab == tabAllgemein)
+            {
+                _LadeAlleParfümDaten();
+            }
+            else if (tabControl1.SelectedTab == tabHerrendüfte)
+            {
+                _LadeHerrenParfümDaten();
+            }
+            else if (tabControl1.SelectedTab == tabDamendüfte)
+            {
+                _LadeFrauenParfümDaten();
+            }
+            else if (tabControl1.SelectedTab == tabUnisexdüfte)
+            {
+                _LadeUnisexParfümDaten();
+            }
+            else if (tabControl1.SelectedTab == tabKinderdüfte)
+            {
+                _LadeKinderParfümDaten();
+            }
+            else if (tabControl1.SelectedTab == tabOrientalischedüfte)
+            {
+                _LadeOrientalischeParfümDaten();
+            }
+        }
         /// <summary>
         /// Entfernt ein Parfüm aus der Datenbank.
         /// </summary>
-        private void _EntferneParfüm()
+        private void _EntferneParfüm(int parfümNummer)
         {
             bool result = (MessageBox.Show("Sind Sie sicher, Sie möchten diesen Vorgang durchführen?", "Hinweis", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.OK);
 
             if (!result) return;
 
-            int parfümNummer = (int)dgvAlleParfüms.CurrentRow.Cells[0].Value;
             clsParfüms parfuemDaten = clsParfüms.FindByParfümNummer(parfümNummer);
 
             if (parfuemDaten != null && parfuemDaten.Delete())
@@ -339,7 +444,7 @@ namespace BilsanParfums
                 // tree.Delete(parfuemDaten.Name);
 
                 MessageBox.Show("Parfümdaten wurden erfolgreich entfernt", "Entfernung", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                _LadeAlleParfümDaten();
+                _AktualisiereDatenNachTab();
             }
             else
             {
@@ -436,74 +541,109 @@ namespace BilsanParfums
             filterTextBox.Focus();
         }
 
+
+
+        //#############################################################//
         // --- Evtent Handler für alle Parfüms (Haupt-Tab) ---
+        private void cbFilterby_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbFilterby.SelectedIndex != -1)
+            {
+                txtFilterwert.Clear();
+                txtFilterwert.Focus();
+            }
+        }
         private void txtFilterwert_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtFilterwert.Text))
             {
                 _bindingSourceAlleParfüms.Filter = string.Empty;
-                // WICHTIG: Rufe _MarkiereParfümZeilen direkt hier auf, wenn der Filter leer ist.
+                // WICHTIG: Die Markierung sollte hier nicht doppelt sein
                 _MarkiereParfümZeilen(dgvAlleParfüms);
+                _AktualisiereParfümAnzahlFüeSelectedTabpage(_bindingSourceAlleParfüms);
             }
 
+            // Prüfen, ob der "Name"-Filter ausgewählt ist
             if (cbFilterby.SelectedItem?.ToString() == "Name")
             {
-                _FühreAutoCompleteAus(txtFilterwert, lbVorschläge);
+                // Nur wenn der "Name"-Filter aktiv ist, die AutoComplete-Logik ausführen
+                _FühreAutoCompleteAus(txtFilterwert, lbVorschlägeFürAlleParfüms);
+                // Die Sichtbarkeit wird in _FühreAutoCompleteAus gesteuert
             }
             else
             {
-                lbVorschläge.Visible = false;
-                _FilterAnwenden(cbFilterby, txtFilterwert, _bindingSourceAlleParfüms,dgvAlleParfüms);
+                // Wenn ein anderer Filter ausgewählt ist, die Vorschläge ausblenden
+                lbVorschlägeFürAlleParfüms.Visible = false;
+                // Den Filter für die anderen Spalten anwenden
+                _FilterAnwenden(cbFilterby, txtFilterwert, _bindingSourceAlleParfüms, dgvAlleParfüms);
             }
-            // Entferne diesen doppelten Aufruf, da er jetzt in den if/else-Blöcken passiert.
-            // _MarkiereParfümZeilen(dgvAlleParfüms);
         }
-
-        private void lbVorschläge_Click(object sender, EventArgs e)
+        private void lbVorschlägeFürAlleParfüms_Click(object sender, EventArgs e)
         {
-            _WähleVorschlagAus(cbFilterby,txtFilterwert, lbVorschläge, _bindingSourceAlleParfüms,dgvAlleParfüms);
+            _WähleVorschlagAus(cbFilterby, txtFilterwert, lbVorschlägeFürAlleParfüms, _bindingSourceAlleParfüms, dgvAlleParfüms);
         }
-
-        private void txtFilterwert_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            string selectedItem = cbFilterby.SelectedItem.ToString();
-
-            if (selectedItem == "ParfümNummer")
-                e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
-
-        private void lbVorschläge_KeyDown(object sender, KeyEventArgs e)
+        private void lbVorschlägeFürAlleParfüms_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                _WähleVorschlagAus(cbFilterby, txtFilterwert, lbVorschläge, _bindingSourceAlleParfüms, dgvAlleParfüms);
+                _WähleVorschlagAus(cbFilterby, txtFilterwert, lbVorschlägeFürAlleParfüms, _bindingSourceAlleParfüms, dgvAlleParfüms);
                 e.Handled = true;
             }
             else if (e.KeyCode == Keys.Escape)
             {
-                lbVorschläge.Visible = false;
+                lbVorschlägeFürAlleParfüms.Visible = false;
                 txtFilterwert.Focus();
                 e.Handled = true;
             }
         }
 
-        private void txtFilterwert_KeyDown(object sender, KeyEventArgs e)
+        private void txtFilterwert_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyCode == Keys.Down && lbVorschläge.Visible && lbVorschläge.Items.Count > 0)
+            // Diese Methode wird aufgerufen, wenn eine Taste in der Textbox für Unisexdüfte gedrückt wird.
+            if (cbFilterby.SelectedItem == null)
             {
-                lbVorschläge.Focus();
-                e.Handled = true;
+                return;
+            }
+
+            string selectedItem = cbFilterby.SelectedItem.ToString();
+
+            if (selectedItem == "ParfümNummer")
+            {
+                e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
             }
         }
 
+        private void txtFilterwert_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down && lbVorschlägeFürAlleParfüms.Visible && lbVorschlägeFürAlleParfüms.Items.Count > 0)
+            {
+                lbVorschlägeFürAlleParfüms.Focus();
+                e.Handled = true;
+            }
+        }
+        private void dgvAlleParfüms_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            _MarkiereParfümZeilen(dgvAlleParfüms);
+        }
+
+
+        //#############################################################//
         // --- Event Handler für Damendüfte ---
 
         private void cbDamenFilterby_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // Diese Methode wird aufgerufen, wenn eine Taste in der Textbox für Damendüfte gedrückt wird.
+            if (cbDamenFilterby.SelectedItem == null)
+            {
+                return;
+            }
+
             string selectedItem = cbDamenFilterby.SelectedItem.ToString();
 
             if (selectedItem == "ParfümNummer")
+            {
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            }
         }
         private void cbDamenFilterby_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -519,6 +659,7 @@ namespace BilsanParfums
             {
                 _bindingSourceDamenParfüms.Filter = string.Empty;
                 _MarkiereParfümZeilen(dgvDamenParfüms);
+                _AktualisiereParfümAnzahlFüeSelectedTabpage(_bindingSourceDamenParfüms);
             }
 
             // Ich nehme an, dass es eine lbVorschlägeFürDamen gibt
@@ -537,7 +678,6 @@ namespace BilsanParfums
         {
             _WähleVorschlagAus(cbDamenFilterby, txtDamenFilterwert, lbVorschlägeFürDamen, _bindingSourceDamenParfüms,dgvDamenParfüms);
         }
-
         private void lbVorschlägeFürDamen_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -552,7 +692,6 @@ namespace BilsanParfums
                 e.Handled = true;
             }
         }
-
         private void txtDamenFilterwert_KeyDown(object sender, KeyEventArgs e)
         {
             // Die Methode wird ausgelöst, sobald eine Taste in der Textbox gedrückt wird.
@@ -575,14 +714,72 @@ namespace BilsanParfums
                 e.Handled = true;
             }
         }
+        private void btnParfümhinzufügen_Click(object sender, EventArgs e)
+        {
+            _ÖffneAddUpdateForm(-1);
+        }
+        private void neuesParfümHinzufügenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ÖffneAddUpdateForm(-1);
+        }
 
+        private void bestehendesParfümAktualisierenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvDamenParfüms.CurrentRow != null)
+            {
+                int parfümNummer = (int)dgvDamenParfüms.CurrentRow.Cells[0].Value;
+                _ÖffneAddUpdateForm(parfümNummer);
+            }
+        }
+
+        private void entferneParfümToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (dgvDamenParfüms.CurrentRow != null)
+            {
+                int parfümNummer = (int)dgvDamenParfüms.CurrentRow.Cells[0].Value;
+                _EntferneParfüm(parfümNummer);
+            }
+        }
+        private void dgvDamenParfüms_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            _MarkiereParfümZeilen(dgvDamenParfüms);
+        }
+        private void dgvDamenParfüms_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dgvDamenParfüms.Rows[e.RowIndex].Cells[2].Value != null)
+            {
+                string currentName = dgvDamenParfüms.Rows[e.RowIndex].Cells[2].Value.ToString();
+                _ÖffneParfumoWebseite(currentName);
+            }
+        }
+
+
+
+        //#############################################################//
         // --- Event Handler für Herrendüfte ---
         private void txtHerrenFilterwert_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // Diese Methode wird aufgerufen, wenn eine Taste in der Textbox für Herrendüfte gedrückt wird.
+            // Sie verhindert, dass Nicht-Zahlen eingegeben werden, wenn der Filter "ParfümNummer" ist.
+
+            // Wichtig: Prüfen, ob überhaupt ein Element in der ComboBox ausgewählt ist,
+            // bevor SelectedItem.ToString() aufgerufen wird, um NullReferenceException zu vermeiden.
+            if (cbHerrenFilterby.SelectedItem == null)
+            {
+                // Wenn nichts ausgewählt ist, wird die Eingabe nicht eingeschränkt.
+                // Sie könnten hier auch 'e.Handled = true;' setzen, um jegliche Eingabe zu blockieren,
+                // wenn kein Filter ausgewählt wurde – abhängig von Ihrem gewünschten Verhalten.
+                return;
+            }
+
             string selectedItem = cbHerrenFilterby.SelectedItem.ToString();
 
+            // Wenn der ausgewählte Filter "ParfümNummer" ist, nur Ziffern und Steuertasten zulassen.
             if (selectedItem == "ParfümNummer")
+            {
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            }
+            // Andernfalls (bei anderen Filtern wie "Name"), keine Einschränkung der Eingabe.
         }
         private void cbHerrenFilterby_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -598,6 +795,7 @@ namespace BilsanParfums
             {
                 _bindingSourceHerrenParfüms.Filter = string.Empty;
                 _MarkiereParfümZeilen(dgvHerrenParfüms);
+                _AktualisiereParfümAnzahlFüeSelectedTabpage(_bindingSourceHerrenParfüms);
             }
 
             // Ich nehme an, dass es eine lbVorschlägeFürHerren gibt
@@ -647,16 +845,62 @@ namespace BilsanParfums
                 e.Handled = true;
             }
         }
+        private void btnParfünhinzufügen_Click(object sender, EventArgs e)
+        {
+            _ÖffneAddUpdateForm(-1);
+        }
+        private void neuesParfümsHinzufügenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ÖffneAddUpdateForm(-1);
+        }
+
+        private void aktualisiereBestehendesParfümToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (dgvHerrenParfüms.CurrentRow != null)
+            {
+                int parfümNummer = (int)dgvHerrenParfüms.CurrentRow.Cells[0].Value;
+                _ÖffneAddUpdateForm(parfümNummer);
+            }
+        }
+
+        private void entfernToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvHerrenParfüms.CurrentRow != null)
+            {
+                int parfümNummer = (int)dgvHerrenParfüms.CurrentRow.Cells[0].Value;
+                _EntferneParfüm(parfümNummer);
+            }
+        }
+        private void dgvHerrenParfüms_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            _MarkiereParfümZeilen(dgvHerrenParfüms);
+        }
+        private void dgvHerrenParfüms_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dgvHerrenParfüms.Rows[e.RowIndex].Cells[2].Value != null)
+            {
+                string currentName = dgvHerrenParfüms.Rows[e.RowIndex].Cells[2].Value.ToString();
+                _ÖffneParfumoWebseite(currentName);
+            }
+        }
 
 
-
+        //#############################################################//
         // --- Event Handler für Unisexdüfte ---
         private void txtUnisexFilterwert_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // Diese Methode wird aufgerufen, wenn eine Taste in der Textbox für Unisexdüfte gedrückt wird.
+            if (cbUnisexFilterby.SelectedItem == null)
+            {
+                return;
+            }
+
             string selectedItem = cbUnisexFilterby.SelectedItem.ToString();
 
             if (selectedItem == "ParfümNummer")
+            {
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            }
         }
         private void cbUnisexFilterby_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -672,6 +916,7 @@ namespace BilsanParfums
             {
                 _bindingSourceUnisexParfüms.Filter = string.Empty;
                 _MarkiereParfümZeilen(dgvUnisexParfüms);
+                _AktualisiereParfümAnzahlFüeSelectedTabpage(_bindingSourceUnisexParfüms);
             }
 
             // Ich nehme an, dass es eine lbVorschlägeFürUnisex gibt
@@ -686,7 +931,25 @@ namespace BilsanParfums
             }
            // _MarkiereParfümZeilen(dgvUnisexParfüms);
         }
+        private void lbVorschlägeFürUnisexdüfte_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                _WähleVorschlagAus(cbUnisexFilterby, txtUnisexFilterwert, lbVorschlägeFürUnisexdüfte, _bindingSourceUnisexParfüms, dgvUnisexParfüms);
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                lbVorschlägeFürUnisexdüfte.Visible = false;
+                txtUnisexFilterwert.Focus();
+                e.Handled = true;
+            }
+        }
 
+        private void lbVorschlägeFürUnisexdüfte_Click(object sender, EventArgs e)
+        {
+            _WähleVorschlagAus(cbUnisexFilterby, txtUnisexFilterwert, lbVorschlägeFürUnisexdüfte, _bindingSourceUnisexParfüms, dgvUnisexParfüms);
+        }
         private void txtUnisexFilterwert_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Down && lbVorschlägeFürUnisexdüfte.Visible && lbVorschlägeFürUnisexdüfte.Items.Count > 0)
@@ -701,6 +964,190 @@ namespace BilsanParfums
                 // (z. B. das Bewegen des Cursors) ausgelöst wird.
                 e.Handled = true;
             }
+        }
+        private void btnHinzufügen_Click(object sender, EventArgs e)
+        {
+            _ÖffneAddUpdateForm(-1);
+        }
+        private void neuesParfümHinzufügenToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            _ÖffneAddUpdateForm(-1);
+        }
+
+        private void aktualisiereBestehendesParfümToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (dgvUnisexParfüms.CurrentRow != null)
+            {
+                int parfümNummer = (int)dgvUnisexParfüms.CurrentRow.Cells[0].Value;
+                _ÖffneAddUpdateForm(parfümNummer);
+            }
+        }
+
+        private void entferneParfümToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (dgvUnisexParfüms.CurrentRow != null)
+            {
+                int parfümNummer = (int)dgvUnisexParfüms.CurrentRow.Cells[0].Value;
+                _EntferneParfüm(parfümNummer);
+            }
+        }
+
+        private void dgvUnisexParfüms_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            _MarkiereParfümZeilen(dgvUnisexParfüms);
+        }
+
+        private void dgvUnisexParfüms_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dgvUnisexParfüms.Rows[e.RowIndex].Cells[2].Value != null)
+            {
+                string currentName = dgvUnisexParfüms.Rows[e.RowIndex].Cells[2].Value.ToString();
+                _ÖffneParfumoWebseite(currentName);
+            }
+        }
+
+
+
+        //#############################################################//
+        // --- Event Handler für Orientalischdüfte ---
+        private void cbOrientalischFilterby_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (txtOrientalischFilterwert == null) return; // Zusätzliche Absicherung
+
+            if (cbOrientalischFilterby.SelectedIndex != -1)
+            {
+                txtOrientalischFilterwert.Clear();
+                txtOrientalischFilterwert.ReadOnly = false;
+                txtOrientalischFilterwert.Focus();
+            }
+            else
+            {
+                txtOrientalischFilterwert.Clear();
+                txtOrientalischFilterwert.ReadOnly = true;
+            }
+        }
+
+        private void txtOrientalischFilterwert_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtOrientalischFilterwert.Text))
+            {
+                _bindingSourceOrientalischeParfüms.Filter = string.Empty;
+                _MarkiereParfümZeilen(dgvOrientalischeParfüms);
+                _AktualisiereParfümAnzahlFüeSelectedTabpage(_bindingSourceOrientalischeParfüms);
+            }
+
+            // Ich nehme an, dass es eine lbVorschlägeFürUnisex gibt
+            if (cbOrientalischFilterby.SelectedItem?.ToString() == "Name")
+            {
+                _FühreAutoCompleteAus(txtOrientalischFilterwert, lbVorschlägeFürOrientalischedüfte);
+            }
+            else
+            {
+                lbVorschlägeFürOrientalischedüfte.Visible = false;
+                _FilterAnwenden(cbOrientalischFilterby, txtOrientalischFilterwert, _bindingSourceOrientalischeParfüms, dgvOrientalischeParfüms);
+            }
+            // _MarkiereParfümZeilen(dgvUnisexParfüms);
+        }
+
+        private void txtOrientalischFilterwert_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Prüfen, ob überhaupt ein Element in der ComboBox ausgewählt ist
+            if (cbOrientalischFilterby.SelectedItem == null)
+            {
+                // Wenn nichts ausgewählt ist, wird die Eingabe nicht eingeschränkt.
+                // Sie können hier auch 'e.Handled = true;' setzen, um jegliche Eingabe zu blockieren,
+                // wenn kein Filter ausgewählt wurde. Das hängt von Ihrem gewünschten Verhalten ab.
+                return; // Methode beenden, da keine Filterregel angewendet werden kann
+            }
+
+            // Jetzt wissen wir, dass SelectedItem nicht null ist und können ToString() aufrufen
+            string selectedItem = cbOrientalischFilterby.SelectedItem.ToString();
+
+            if (selectedItem == "ParfümNummer")
+            {
+                // Nur Zahlen, Backspace, Delete etc. zulassen
+                e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            }
+            // Wichtig: Wenn 'selectedItem' nicht "ParfümNummer" ist, sollte 'e.Handled' NICHT gesetzt werden,
+            // damit normale Texteingabe (Buchstaben, Symbole) möglich ist.
+        }
+
+        private void lbVorschlägeFürOrientalischedüfte_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                _WähleVorschlagAus(cbOrientalischFilterby, txtOrientalischFilterwert, lbVorschlägeFürOrientalischedüfte, _bindingSourceOrientalischeParfüms, dgvOrientalischeParfüms);
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                lbVorschlägeFürOrientalischedüfte.Visible = false;
+                txtOrientalischFilterwert.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void lbVorschlägeFürOrientalischedüfte_Click(object sender, EventArgs e)
+        {
+            _WähleVorschlagAus(cbOrientalischFilterby, txtOrientalischFilterwert, lbVorschlägeFürOrientalischedüfte, _bindingSourceOrientalischeParfüms, dgvOrientalischeParfüms);
+        }
+
+        private void txtOrientalischFilterwert_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down && lbVorschlägeFürOrientalischedüfte.Visible && lbVorschlägeFürOrientalischedüfte.Items.Count > 0)
+            {
+                // Wenn die Bedingungen oben wahr sind, setzen wir den Fokus von der Textbox
+                // auf die Listbox. Der Benutzer kann jetzt mit den Pfeiltasten
+                // in der Vorschlagsliste navigieren.
+                lbVorschlägeFürOrientalischedüfte.Focus();
+
+                // Wir setzen 'e.Handled' auf true. Das signalisiert, dass wir das Tastendruck-Ereignis
+                // bereits verarbeitet haben. Dies verhindert, dass das Standardverhalten der Textbox
+                // (z. B. das Bewegen des Cursors) ausgelöst wird.
+                e.Handled = true;
+            }
+        }
+
+        private void btnOrientalischeduftHinzufügen_Click(object sender, EventArgs e)
+        {
+            _ÖffneAddUpdateForm(-1);
+        }
+
+        private void neuesParfümHinzufügenToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            _ÖffneAddUpdateForm(-1);
+        }
+
+        private void aktualisiereBestehendesParfümToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            if (dgvOrientalischeParfüms.CurrentRow != null)
+            {
+                int parfümNummer = (int)dgvOrientalischeParfüms.CurrentRow.Cells[0].Value;
+                _ÖffneAddUpdateForm(parfümNummer);
+            }
+        }
+
+        private void entferneParfümToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            if (dgvOrientalischeParfüms.CurrentRow != null)
+            {
+                int parfümNummer = (int)dgvOrientalischeParfüms.CurrentRow.Cells[0].Value;
+                _EntferneParfüm(parfümNummer);
+            }
+        }
+
+        private void dgvOrientalischeParfüms_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dgvOrientalischeParfüms.Rows[e.RowIndex].Cells[2].Value != null)
+            {
+                string currentName = dgvOrientalischeParfüms.Rows[e.RowIndex].Cells[2].Value.ToString();
+                _ÖffneParfumoWebseite(currentName);
+            }
+        }
+
+        private void dgvOrientalischeParfüms_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            _MarkiereParfümZeilen(dgvOrientalischeParfüms);
         }
     }
 }
