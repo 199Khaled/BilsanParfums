@@ -39,6 +39,8 @@ namespace BilsanParfums
         private readonly object _autoComplateLock = new object();
         // Deklariere den AVL-Baum als privates Feld
         private AVLTree _autoCompleteTree;
+        // In Ihrer Hauptform (z.B. frmParfüms.cs)
+        public static AutoComplete.AVLTree GlobalParfumeNameTree = new AutoComplete.AVLTree();
 
         public frmParfüms()
         {
@@ -60,8 +62,27 @@ namespace BilsanParfums
             //_LadeHerrenParfümDaten();
             //_LadeKinderParfümDaten();
             //_LadeUnisexParfümDaten();
-            // Initialisiere den AVL-Baum nur einmal beim Laden der Form
-            _InitialisiereAvlBaum();
+
+            // Baum einmalig beim Start befüllen
+            _InitialisiereUndFülleAutoCompleteBaum(); // Methode, die Sie selbst definieren
+        }
+
+        private void _InitialisiereUndFülleAutoCompleteBaum()
+        {
+            GlobalParfumeNameTree = new AutoComplete.AVLTree(); // Leeren Baum erstellen
+
+            // Alle Parfümnamen aus der Datenbank holen
+            DataTable allParfumsDt = clsParfüms.GetAllParfüms();
+            if (allParfumsDt != null)
+            {
+                foreach (DataRow row in allParfumsDt.Rows)
+                {
+                    if (row["Name"] != DBNull.Value)
+                    {
+                        GlobalParfumeNameTree.Insert(row["Name"].ToString());
+                    }
+                }
+            }
         }
         /// <summary>
         /// Lädt alle Parfüm-Daten und aktualisiert das DataGridView.
@@ -355,6 +376,28 @@ namespace BilsanParfums
             _AktualisiereParfümAnzahlFüeSelectedTabpage(bindingSource);
         }
 
+        private string _StatusFilterAnwenden(Guna2ComboBox stockComboBox)
+        {
+            // Stellt sicher, dass stockComboBox.SelectedItem nicht null ist, bevor ToString() aufgerufen wird.
+            // Wenn es null ist, wird es als "Alle" behandelt, um keinen Filter anzuwenden.
+            string selectedOption = stockComboBox.SelectedItem?.ToString() ?? "Alle";
+
+            switch (selectedOption)
+            {
+                case "Vorhanden":
+                    // Gibt den Filterstring zurück, um nur vorhandene Parfüms anzuzeigen.
+                    return "IstVorhanden = TRUE";
+                case "In Bestellung":
+                    // Gibt den Filterstring zurück, um nur Parfüms in Bestellung anzuzeigen.
+                    return "InBestellung = TRUE";
+                case "Alle":
+                    // Bei Auswahl von "Alle" soll kein Filter angewendet werden.
+                    return string.Empty;
+                default:
+                    // Bei unerwarteten Werten (falls die ComboBox andere Einträge hat) soll ebenfalls kein Filter angewendet werden.
+                    return string.Empty;
+            }
+        }
         /// <summary>
         /// Formatiert das DataGridView, um Spaltenbreite und Schriftart anzupassen.
         /// </summary>
@@ -394,10 +437,16 @@ namespace BilsanParfums
         {
             using (frmAddUpdateParfüms frm = new frmAddUpdateParfüms(parfümNummer))
             {
-                frm.ShowDialog();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    // Rufen Sie die Methode auf, um den ausgewählten Tab zu aktualisieren
+                    _AktualisiereDatenNachTab();
+
+                    // UND HIER bauen Sie den Autovervollständigungsbaum neu auf:
+                    _InitialisiereUndFülleAutoCompleteBaum();
+                }
             }
-            // Rufen Sie die Methode auf, um den ausgewählten Tab zu aktualisieren
-            _AktualisiereDatenNachTab();
+         
         }
         private void _AktualisiereDatenNachTab()
         {
@@ -445,6 +494,9 @@ namespace BilsanParfums
 
                 MessageBox.Show("Parfümdaten wurden erfolgreich entfernt", "Entfernung", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 _AktualisiereDatenNachTab();
+
+                // UND HIER bauen Sie den Autovervollständigungsbaum neu auf:
+                _InitialisiereUndFülleAutoCompleteBaum();
             }
             else
             {
@@ -467,35 +519,19 @@ namespace BilsanParfums
                 MessageBox.Show("Fehler beim Öffnen des Browsers: " + ex.Message);
             }
         }
-
-        // --- Neue Methode zur Initialisierung des Baumes ---
-        private void _InitialisiereAvlBaum()
-        {
-            // Erstelle einen neuen Baum
-            _autoCompleteTree = new AVLTree();
-
-            // Füge alle Namen nur einmal in den Baum ein, falls die Daten vorhanden sind
-            if (_dtParfüms != null)
-            {
-                foreach (DataRow row in _dtParfüms.Rows)
-                {
-                    _autoCompleteTree.Insert(row["Name"].ToString());
-                }
-            }
-        }
         private void _FühreAutoCompleteAus(Guna2TextBox filterTextBox, ListBox suggestionsListBox)
         {
             string prefix = filterTextBox.Text.Trim();
 
-            if (_autoCompleteTree != null)
+            if (GlobalParfumeNameTree != null)
             {
-                var completions = _autoCompleteTree.AutoComplete(prefix);
+                var completions = GlobalParfumeNameTree.AutoComplete(prefix);
                 _UpdateAutoCompleteListeBox(completions, filterTextBox, suggestionsListBox);
             }
         }
         private void _UpdateAutoCompleteListeBox(IEnumerable<string> completions, Guna2TextBox filterTextBox, ListBox suggestionsListBox)
         {
-            lock (_autoComplateLock)
+            lock (GlobalParfumeNameTree)
             {
                 suggestionsListBox.Items.Clear();
 
@@ -509,6 +545,7 @@ namespace BilsanParfums
                     suggestionsListBox.Visible = suggestionsListBox.Items.Count > 0;
                     if (suggestionsListBox.Visible)
                     {
+                        suggestionsListBox.BringToFront();
                        suggestionsListBox.SelectedIndex = -1; // Wähle den ersten Eintrag aus
                         filterTextBox.Focus(); // Setze den Fokus auf die ListBox
                     }
@@ -547,11 +584,65 @@ namespace BilsanParfums
         // --- Evtent Handler für alle Parfüms (Haupt-Tab) ---
         private void cbFilterby_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Dies ist eine gute Stelle, um den Filter temporär zu leeren,
+            // bevor die neue Filterlogik angewendet wird.
+            _bindingSourceAlleParfüms.Filter = string.Empty;
+
+            // Steuerung der Sichtbarkeit der Filter-Steuerelemente
+            if (cbFilterby.SelectedItem?.ToString() == "Status") // Verwenden Sie '?.ToString()' für Null-Sicherheit
+            {
+                cbAlleParfümsStatus.Visible = true; // Zeigt die Status-ComboBox
+                cbAlleParfümsStatus.SelectedIndex = 0; // Optional: Setzt die Auswahl zurück auf den ersten Eintrag (z.B. "Alle")
+                txtFilterwert.Visible = false;     // Blendet das Textfeld aus
+                txtFilterwert.Clear();             // Leert das Textfeld sicherheitshalber
+            }
+            else // Für alle anderen Filtertypen (Name, Marke, Nummer etc.)
+            {
+                cbAlleParfümsStatus.Visible = false; // Blendet die Status-ComboBox aus
+                                                     // Optional: cbIsVorhandenOderInBestellung.SelectedIndex = -1; // Setzt die Auswahl zurück
+                txtFilterwert.Visible = true;     // Zeigt das Textfeld an
+            }
+
+            // Zusätzliche Absicherung (meist nicht nötig, wenn Controls im Designer erstellt sind)
+            // if (txtOrientalischFilterwert == null) return; 
+
+            // Steuerung des ReadOnly-Zustands und des Fokus des Textfeldes
             if (cbFilterby.SelectedIndex != -1)
             {
-                txtFilterwert.Clear();
-                txtFilterwert.Focus();
+                txtFilterwert.Clear();        // Textfeld leeren
+                //txtHerrenFilterwert.ReadOnly = false; // Eingabe erlauben
+                txtFilterwert.Focus();        // Fokus auf das Textfeld setzen
             }
+            else // Wenn kein Element ausgewählt ist (SelectedIndex ist -1)
+            {
+                txtFilterwert.Clear();        // Textfeld leeren
+                                                   //  txtHerrenFilterwert.ReadOnly = true;  // Eingabe verhindern                                                           // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar is                                                     // this.ActiveControl = cbOrientalischFilterby;
+            }
+        }
+        private void cbAlleParfümsStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<string> activeFilters = new List<string>();
+            // 2. Filter vom Status-ComboBox (Vorhanden, In Bestellung) hinzufügen
+            string stockStatusFilter = _StatusFilterAnwenden(cbAlleParfümsStatus);
+
+            if (!string.IsNullOrEmpty(stockStatusFilter))
+            {
+                activeFilters.Add(stockStatusFilter);
+            }
+
+            // Kombiniere alle aktiven Filter mit " AND "
+            string combinedFilter = string.Empty;
+            if (activeFilters.Any())
+            {
+                combinedFilter = string.Join(" AND ", activeFilters);
+            }
+
+            // Wende den kombinierten Filter auf die BindingSource an
+            _bindingSourceAlleParfüms.Filter = combinedFilter;
+
+            // Aktualisiere die Zähler und die visuellen Markierungen nach dem Filtern
+            _AktualisiereAlleParfümdatenAnzahl(_bindingSourceAlleParfüms);
+            _MarkiereParfümZeilen(dgvAlleParfüms);
         }
         private void txtFilterwert_TextChanged(object sender, EventArgs e)
         {
@@ -578,11 +669,11 @@ namespace BilsanParfums
                 _FilterAnwenden(cbFilterby, txtFilterwert, _bindingSourceAlleParfüms, dgvAlleParfüms);
             }
         }
-        private void lbVorschlägeFürAlleParfüms_Click(object sender, EventArgs e)
+        private void lbVorschlägeFürAlleParfüms_Click_1(object sender, EventArgs e)
         {
             _WähleVorschlagAus(cbFilterby, txtFilterwert, lbVorschlägeFürAlleParfüms, _bindingSourceAlleParfüms, dgvAlleParfüms);
         }
-        private void lbVorschlägeFürAlleParfüms_KeyDown(object sender, KeyEventArgs e)
+        private void lbVorschlägeFürAlleParfüms_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -596,7 +687,6 @@ namespace BilsanParfums
                 e.Handled = true;
             }
         }
-
         private void txtFilterwert_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Diese Methode wird aufgerufen, wenn eine Taste in der Textbox für Unisexdüfte gedrückt wird.
@@ -647,11 +737,65 @@ namespace BilsanParfums
         }
         private void cbDamenFilterby_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Dies ist eine gute Stelle, um den Filter temporär zu leeren,
+            // bevor die neue Filterlogik angewendet wird.
+            _bindingSourceDamenParfüms.Filter = string.Empty;
+
+            // Steuerung der Sichtbarkeit der Filter-Steuerelemente
+            if (cbDamenFilterby.SelectedItem?.ToString() == "Status") // Verwenden Sie '?.ToString()' für Null-Sicherheit
+            {
+                cbDamenParfümStatus.Visible = true; // Zeigt die Status-ComboBox
+                cbDamenParfümStatus.SelectedIndex = 0; // Optional: Setzt die Auswahl zurück auf den ersten Eintrag (z.B. "Alle")
+                txtDamenFilterwert.Visible = false;     // Blendet das Textfeld aus
+                txtDamenFilterwert.Clear();             // Leert das Textfeld sicherheitshalber
+            }
+            else // Für alle anderen Filtertypen (Name, Marke, Nummer etc.)
+            {
+                cbDamenParfümStatus.Visible = false; // Blendet die Status-ComboBox aus
+                                                     // Optional: cbIsVorhandenOderInBestellung.SelectedIndex = -1; // Setzt die Auswahl zurück
+                txtDamenFilterwert.Visible = true;     // Zeigt das Textfeld an
+            }
+
+            // Zusätzliche Absicherung (meist nicht nötig, wenn Controls im Designer erstellt sind)
+            // if (txtOrientalischFilterwert == null) return; 
+
+            // Steuerung des ReadOnly-Zustands und des Fokus des Textfeldes
             if (cbDamenFilterby.SelectedIndex != -1)
             {
-                txtDamenFilterwert.Clear();
-                txtDamenFilterwert.Focus();
+                txtDamenFilterwert.Clear();        // Textfeld leeren
+                //txtHerrenFilterwert.ReadOnly = false; // Eingabe erlauben
+                txtDamenFilterwert.Focus();        // Fokus auf das Textfeld setzen
             }
+            else // Wenn kein Element ausgewählt ist (SelectedIndex ist -1)
+            {
+                txtDamenFilterwert.Clear();        // Textfeld leeren
+              //  txtHerrenFilterwert.ReadOnly = true;  // Eingabe verhindern                                                           // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar is                                                     // this.ActiveControl = cbOrientalischFilterby;
+            }
+        }
+        private void cbDamenParfümStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<string> activeFilters = new List<string>();
+            // 2. Filter vom Status-ComboBox (Vorhanden, In Bestellung) hinzufügen
+            string stockStatusFilter = _StatusFilterAnwenden(cbDamenParfümStatus);
+
+            if (!string.IsNullOrEmpty(stockStatusFilter))
+            {
+                activeFilters.Add(stockStatusFilter);
+            }
+
+            // Kombiniere alle aktiven Filter mit " AND "
+            string combinedFilter = string.Empty;
+            if (activeFilters.Any())
+            {
+                combinedFilter = string.Join(" AND ", activeFilters);
+            }
+
+            // Wende den kombinierten Filter auf die BindingSource an
+            _bindingSourceDamenParfüms.Filter = combinedFilter;
+
+            // Aktualisiere die Zähler und die visuellen Markierungen nach dem Filtern
+            _AktualisiereFrauenParfümdatenAnzahl(_bindingSourceDamenParfüms);
+            _MarkiereParfümZeilen(dgvDamenParfüms);
         }
         private void txtDamenFilterwert_TextChanged(object sender, EventArgs e)
         {
@@ -783,11 +927,65 @@ namespace BilsanParfums
         }
         private void cbHerrenFilterby_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Dies ist eine gute Stelle, um den Filter temporär zu leeren,
+            // bevor die neue Filterlogik angewendet wird.
+            _bindingSourceHerrenParfüms.Filter = string.Empty;
+
+            // Steuerung der Sichtbarkeit der Filter-Steuerelemente
+            if (cbHerrenFilterby.SelectedItem?.ToString() == "Status") // Verwenden Sie '?.ToString()' für Null-Sicherheit
+            {
+                cbHerrenParfümStatus.Visible = true; // Zeigt die Status-ComboBox
+                cbHerrenParfümStatus.SelectedIndex = 0; // Optional: Setzt die Auswahl zurück auf den ersten Eintrag (z.B. "Alle")
+                txtHerrenFilterwert.Visible = false;     // Blendet das Textfeld aus
+                txtHerrenFilterwert.Clear();             // Leert das Textfeld sicherheitshalber
+            }
+            else // Für alle anderen Filtertypen (Name, Marke, Nummer etc.)
+            {
+                cbHerrenParfümStatus.Visible = false; // Blendet die Status-ComboBox aus
+                                                      // Optional: cbIsVorhandenOderInBestellung.SelectedIndex = -1; // Setzt die Auswahl zurück
+                txtHerrenFilterwert.Visible = true;     // Zeigt das Textfeld an
+            }
+
+            // Zusätzliche Absicherung (meist nicht nötig, wenn Controls im Designer erstellt sind)
+            // if (txtOrientalischFilterwert == null) return; 
+
+            // Steuerung des ReadOnly-Zustands und des Fokus des Textfeldes
             if (cbHerrenFilterby.SelectedIndex != -1)
             {
-                txtHerrenFilterwert.Clear();
-                txtHerrenFilterwert.Focus();
+                txtHerrenFilterwert.Clear();        // Textfeld leeren
+                //txtHerrenFilterwert.ReadOnly = false; // Eingabe erlauben
+                txtHerrenFilterwert.Focus();        // Fokus auf das Textfeld setzen
             }
+            else // Wenn kein Element ausgewählt ist (SelectedIndex ist -1)
+            {
+                txtHerrenFilterwert.Clear();        // Textfeld leeren
+               // txtHerrenFilterwert.ReadOnly = true;  // Eingabe verhindern                                                           // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar is                                                     // this.ActiveControl = cbOrientalischFilterby;
+            }
+        }
+        private void cbHerrenParfümStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<string> activeFilters = new List<string>();
+            // 2. Filter vom Status-ComboBox (Vorhanden, In Bestellung) hinzufügen
+            string stockStatusFilter = _StatusFilterAnwenden(cbHerrenParfümStatus);
+
+            if (!string.IsNullOrEmpty(stockStatusFilter))
+            {
+                activeFilters.Add(stockStatusFilter);
+            }
+
+            // Kombiniere alle aktiven Filter mit " AND "
+            string combinedFilter = string.Empty;
+            if (activeFilters.Any())
+            {
+                combinedFilter = string.Join(" AND ", activeFilters);
+            }
+
+            // Wende den kombinierten Filter auf die BindingSource an
+            _bindingSourceHerrenParfüms.Filter = combinedFilter;
+
+            // Aktualisiere die Zähler und die visuellen Markierungen nach dem Filtern
+            _AktualisiereHerrenParfümdatenAnzahl(_bindingSourceHerrenParfüms);
+            _MarkiereParfümZeilen(dgvHerrenParfüms);
         }
         private void txtHerrenFilterwert_TextChanged(object sender, EventArgs e)
         {
@@ -904,12 +1102,68 @@ namespace BilsanParfums
         }
         private void cbUnisexFilterby_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            // Dies ist eine gute Stelle, um den Filter temporär zu leeren,
+            // bevor die neue Filterlogik angewendet wird.
+            _bindingSourceUnisexParfüms.Filter = string.Empty;
+
+            // Steuerung der Sichtbarkeit der Filter-Steuerelemente
+            if (cbUnisexFilterby.SelectedItem?.ToString() == "Status") // Verwenden Sie '?.ToString()' für Null-Sicherheit
+            {
+                cbUnisexParfümsStatus.Visible = true; // Zeigt die Status-ComboBox
+                cbUnisexParfümsStatus.SelectedIndex = 0; // Optional: Setzt die Auswahl zurück auf den ersten Eintrag (z.B. "Alle")
+                txtUnisexFilterwert.Visible = false;     // Blendet das Textfeld aus
+                txtUnisexFilterwert.Clear();             // Leert das Textfeld sicherheitshalber
+            }
+            else // Für alle anderen Filtertypen (Name, Marke, Nummer etc.)
+            {
+                cbUnisexParfümsStatus.Visible = false; // Blendet die Status-ComboBox aus
+                                                       // Optional: cbIsVorhandenOderInBestellung.SelectedIndex = -1; // Setzt die Auswahl zurück
+                txtUnisexFilterwert.Visible = true;     // Zeigt das Textfeld an
+            }
+
+            // Zusätzliche Absicherung (meist nicht nötig, wenn Controls im Designer erstellt sind)
+            // if (txtOrientalischFilterwert == null) return; 
+
+            // Steuerung des ReadOnly-Zustands und des Fokus des Textfeldes
             if (cbUnisexFilterby.SelectedIndex != -1)
             {
-                txtUnisexFilterwert.Clear();
-                txtUnisexFilterwert.Focus();
+                txtUnisexFilterwert.Clear();        // Textfeld leeren
+               // txtUnisexFilterwert.ReadOnly = false; // Eingabe erlauben
+                txtUnisexFilterwert.Focus();        // Fokus auf das Textfeld setzen
+            }
+            else // Wenn kein Element ausgewählt ist (SelectedIndex ist -1)
+            {
+                txtUnisexFilterwert.Clear();        // Textfeld leeren
+               // txtUnisexFilterwert.ReadOnly = true;  // Eingabe verhindern                                                           // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar is                                                     // this.ActiveControl = cbOrientalischFilterby;
             }
         }
+        private void cbUnisexParfümsStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<string> activeFilters = new List<string>();
+            // 2. Filter vom Status-ComboBox (Vorhanden, In Bestellung) hinzufügen
+            string stockStatusFilter = _StatusFilterAnwenden(cbUnisexParfümsStatus);
+
+            if (!string.IsNullOrEmpty(stockStatusFilter))
+            {
+                activeFilters.Add(stockStatusFilter);
+            }
+
+            // Kombiniere alle aktiven Filter mit " AND "
+            string combinedFilter = string.Empty;
+            if (activeFilters.Any())
+            {
+                combinedFilter = string.Join(" AND ", activeFilters);
+            }
+
+            // Wende den kombinierten Filter auf die BindingSource an
+            _bindingSourceUnisexParfüms.Filter = combinedFilter;
+
+            // Aktualisiere die Zähler und die visuellen Markierungen nach dem Filtern
+            _AktualisiereUnisexParfümdatenAnzahl(_bindingSourceUnisexParfüms);
+            _MarkiereParfümZeilen(dgvUnisexParfüms);
+        }
+
         private void txtUnisexFilterwert_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtUnisexFilterwert.Text))
@@ -1012,21 +1266,69 @@ namespace BilsanParfums
         // --- Event Handler für Orientalischdüfte ---
         private void cbOrientalischFilterby_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (txtOrientalischFilterwert == null) return; // Zusätzliche Absicherung
+            // Dies ist eine gute Stelle, um den Filter temporär zu leeren,
+            // bevor die neue Filterlogik angewendet wird.
+            _bindingSourceOrientalischeParfüms.Filter = string.Empty;
 
+            // Steuerung der Sichtbarkeit der Filter-Steuerelemente
+            if (cbOrientalischFilterby.SelectedItem?.ToString() == "Status") // Verwenden Sie '?.ToString()' für Null-Sicherheit
+            {
+                cbOrientalischeParfümsStatus.Visible = true; // Zeigt die Status-ComboBox
+                cbOrientalischeParfümsStatus.SelectedIndex = 0; // Optional: Setzt die Auswahl zurück auf den ersten Eintrag (z.B. "Alle")
+                txtOrientalischFilterwert.Visible = false;     // Blendet das Textfeld aus
+                txtOrientalischFilterwert.Clear();             // Leert das Textfeld sicherheitshalber
+            }
+            else // Für alle anderen Filtertypen (Name, Marke, Nummer etc.)
+            {
+                cbOrientalischeParfümsStatus.Visible = false; // Blendet die Status-ComboBox aus
+                                                               // Optional: cbIsVorhandenOderInBestellung.SelectedIndex = -1; // Setzt die Auswahl zurück
+                txtOrientalischFilterwert.Visible = true;     // Zeigt das Textfeld an
+            }
+
+            // Zusätzliche Absicherung (meist nicht nötig, wenn Controls im Designer erstellt sind)
+            // if (txtOrientalischFilterwert == null) return; 
+
+            // Steuerung des ReadOnly-Zustands und des Fokus des Textfeldes
             if (cbOrientalischFilterby.SelectedIndex != -1)
             {
-                txtOrientalischFilterwert.Clear();
-                txtOrientalischFilterwert.ReadOnly = false;
-                txtOrientalischFilterwert.Focus();
+                txtOrientalischFilterwert.Clear();        // Textfeld leeren
+                //txtOrientalischFilterwert.ReadOnly = false; // Eingabe erlauben
+                txtOrientalischFilterwert.Focus();        // Fokus auf das Textfeld setzen
             }
-            else
+            else // Wenn kein Element ausgewählt ist (SelectedIndex ist -1)
             {
-                txtOrientalischFilterwert.Clear();
-                txtOrientalischFilterwert.ReadOnly = true;
+                txtOrientalischFilterwert.Clear();        // Textfeld leeren
+               // txtOrientalischFilterwert.ReadOnly = true;  // Eingabe verhindern
+                                                            // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar ist
+                                                            // this.ActiveControl = cbOrientalischFilterby;
             }
-        }
 
+        }
+        private void cbOrientalischeParfümsStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<string> activeFilters = new List<string>();
+            // 2. Filter vom Status-ComboBox (Vorhanden, In Bestellung) hinzufügen
+            string stockStatusFilter = _StatusFilterAnwenden(cbOrientalischeParfümsStatus);
+
+            if (!string.IsNullOrEmpty(stockStatusFilter))
+            {
+                activeFilters.Add(stockStatusFilter);
+            }
+
+            // Kombiniere alle aktiven Filter mit " AND "
+            string combinedFilter = string.Empty;
+            if (activeFilters.Any())
+            {
+                combinedFilter = string.Join(" AND ", activeFilters);
+            }
+
+            // Wende den kombinierten Filter auf die BindingSource an
+            _bindingSourceOrientalischeParfüms.Filter = combinedFilter;
+
+            // Aktualisiere die Zähler und die visuellen Markierungen nach dem Filtern
+            _AktualisiereOrientalischParfümdatenAnzahl(_bindingSourceOrientalischeParfüms);
+            _MarkiereParfümZeilen(dgvOrientalischeParfüms);
+        }
         private void txtOrientalischFilterwert_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtOrientalischFilterwert.Text))
