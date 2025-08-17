@@ -54,3 +54,10 @@ C:\BilsanParfums\BilsanParfums\obj\Debug\BilsanParfums.csproj.CoreCompileInputs.
 C:\BilsanParfums\BilsanParfums\obj\Debug\BilsanPa.685CCE3D.Up2Date
 C:\BilsanParfums\BilsanParfums\obj\Debug\BilsanParfums.exe
 C:\BilsanParfums\BilsanParfums\obj\Debug\BilsanParfums.pdb
+C:\BilsanParfums\BilsanParfums\obj\Debug\BilsanParfums.csproj.SuggestedBindingRedirects.cache
+C:\BilsanParfums\BilsanParfums\obj\Debug\BilsanParfums.exe.config
+C:\BilsanParfums\BilsanParfums\bin\Debug\BouncyCastle.Cryptography.dll
+C:\BilsanParfums\BilsanParfums\bin\Debug\itextsharp.dll
+C:\BilsanParfums\BilsanParfums\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.dll
+C:\BilsanParfums\BilsanParfums\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.pdb
+C:\BilsanParfums\BilsanParfums\bin\Debug\System.ValueTuple.dll

@@ -57,7 +57,7 @@
             // 
             this.btnBearbeiten.BackColor = System.Drawing.Color.Teal;
             this.btnBearbeiten.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBearbeiten.ForeColor = System.Drawing.Color.White;
+            this.btnBearbeiten.ForeColor = System.Drawing.Color.Gold;
             this.btnBearbeiten.Location = new System.Drawing.Point(48, 387);
             this.btnBearbeiten.Margin = new System.Windows.Forms.Padding(2);
             this.btnBearbeiten.Name = "btnBearbeiten";
@@ -95,9 +95,9 @@
             // 
             // btnAbbrechen
             // 
-            this.btnAbbrechen.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.btnAbbrechen.BackColor = System.Drawing.Color.DarkCyan;
             this.btnAbbrechen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAbbrechen.ForeColor = System.Drawing.Color.White;
+            this.btnAbbrechen.ForeColor = System.Drawing.Color.Gold;
             this.btnAbbrechen.Location = new System.Drawing.Point(344, 500);
             this.btnAbbrechen.Margin = new System.Windows.Forms.Padding(2);
             this.btnAbbrechen.Name = "btnAbbrechen";
@@ -109,9 +109,9 @@
             // 
             // btnspeichern
             // 
-            this.btnspeichern.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.btnspeichern.BackColor = System.Drawing.Color.DarkCyan;
             this.btnspeichern.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnspeichern.ForeColor = System.Drawing.Color.White;
+            this.btnspeichern.ForeColor = System.Drawing.Color.Gold;
             this.btnspeichern.Location = new System.Drawing.Point(179, 500);
             this.btnspeichern.Margin = new System.Windows.Forms.Padding(2);
             this.btnspeichern.Name = "btnspeichern";
@@ -343,7 +343,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.panel1.BackColor = System.Drawing.Color.DarkCyan;
             this.panel1.Controls.Add(this.label7);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -357,7 +357,7 @@
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.ForeColor = System.Drawing.Color.Gold;
             this.label7.Location = new System.Drawing.Point(156, 10);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
@@ -392,6 +392,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmAddUpdateParfüms";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAddUpdateParfüms";
             this.Load += new System.EventHandler(this.frmAddUpdateParfüms_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

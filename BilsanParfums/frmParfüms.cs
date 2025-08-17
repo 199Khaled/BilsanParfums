@@ -4,14 +4,19 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Management.Instrumentation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Busnisse_Layer;
 using clsHilfsMethoden;
 using Guna.UI2.WinForms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using static clsHilfsMethoden.AutoComplete;
 
 namespace BilsanParfums
@@ -406,8 +411,8 @@ namespace BilsanParfums
             // AutoSizeColumnsMode auf AllCells setzen, um die Spaltenbreite automatisch anzupassen
             //dgv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             // Beispiel mit Segoe UI
-            dgv.DefaultCellStyle.Font = new Font("Segoe UI", 13, FontStyle.Regular);
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 14, FontStyle.Italic);
+            dgv.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13, FontStyle.Regular);
+            dgv.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 14, FontStyle.Italic);
 
             // Beispiel mit Calibri
             //dgv.DefaultCellStyle.Font = new Font("Calibri", 13, FontStyle.Regular);
@@ -421,15 +426,51 @@ namespace BilsanParfums
         {
             foreach (DataGridViewRow row in dgv.Rows)
             {
-                if (row.Cells["IstVorhanden"].Value != null && Convert.ToBoolean(row.Cells["IstVorhanden"].Value) == true)
+                // Überspringe die leere Zeile am Ende
+                if (row.IsNewRow) continue;
+
+                // Setze die Standardstile der Zeile zurück
+                row.DefaultCellStyle.BackColor = System.Drawing.Color.White;
+                row.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+
+                // Werte aus den Status-Spalten abrufen
+                bool istVorhanden = row.Cells["IstVorhanden"].Value != null && Convert.ToBoolean(row.Cells["IstVorhanden"].Value);
+                bool isInBestellung = row.Cells["InBestellung"].Value != null && Convert.ToBoolean(row.Cells["InBestellung"].Value);
+
+                // --- Logik für die Markierung ---
+
+                // 1. Fall: Das Parfüm ist gleichzeitig vorhanden UND in Bestellung
+                if (istVorhanden && isInBestellung)
                 {
-                    row.DefaultCellStyle.BackColor = Color.PaleGreen;
-                    row.DefaultCellStyle.ForeColor = Color.Black;
+                    // Färbe die gesamte Zeile hellgrün
+                    row.DefaultCellStyle.BackColor = System.Drawing.Color.LightBlue;
+
+                    // Färbe die Zelle "InBestellung" zusätzlich Orange
+                    row.Cells["InBestellung"].Style.BackColor = System.Drawing.Color.Orange;
+                }
+                // 2. Fall: Das Parfüm ist NUR vorhanden (nicht in Bestellung)
+                else if (istVorhanden)
+                {
+                    // Färbe die gesamte Zeile Hellgrün
+                    row.DefaultCellStyle.BackColor = System.Drawing.Color.LightBlue;
+                    // Färbe die restlichen Zellen der Zeile Hellgrün
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.OwningColumn.Name == "InBestellung")
+                        {
+                            cell.Style.BackColor = System.Drawing.Color.White;
+                        }
+                    }
+                }
+                // 3. Fall: Das Parfüm ist NUR in Bestellung (nicht vorhanden)
+                else if (isInBestellung)
+                {
+                    // Färbe nur die Zelle "InBestellung" Orange
+                    row.Cells["InBestellung"].Style.BackColor = System.Drawing.Color.Orange;
                 }
             }
 
         }
-
         /// <summary>
         /// Öffnet die Hinzufügen-/Aktualisieren-Form.
         /// </summary>
@@ -618,6 +659,7 @@ namespace BilsanParfums
                 txtFilterwert.Clear();        // Textfeld leeren
                                                    //  txtHerrenFilterwert.ReadOnly = true;  // Eingabe verhindern                                                           // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar is                                                     // this.ActiveControl = cbOrientalischFilterby;
             }
+            _MarkiereParfümZeilen(dgvAlleParfüms);
         }
         private void cbAlleParfümsStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -771,6 +813,7 @@ namespace BilsanParfums
                 txtDamenFilterwert.Clear();        // Textfeld leeren
               //  txtHerrenFilterwert.ReadOnly = true;  // Eingabe verhindern                                                           // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar is                                                     // this.ActiveControl = cbOrientalischFilterby;
             }
+            _MarkiereParfümZeilen(dgvDamenParfüms);
         }
         private void cbDamenParfümStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -961,6 +1004,7 @@ namespace BilsanParfums
                 txtHerrenFilterwert.Clear();        // Textfeld leeren
                // txtHerrenFilterwert.ReadOnly = true;  // Eingabe verhindern                                                           // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar is                                                     // this.ActiveControl = cbOrientalischFilterby;
             }
+            _MarkiereParfümZeilen(dgvHerrenParfüms);
         }
         private void cbHerrenParfümStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1137,6 +1181,7 @@ namespace BilsanParfums
                 txtUnisexFilterwert.Clear();        // Textfeld leeren
                // txtUnisexFilterwert.ReadOnly = true;  // Eingabe verhindern                                                           // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar is                                                     // this.ActiveControl = cbOrientalischFilterby;
             }
+            _MarkiereParfümZeilen(dgvUnisexParfüms);
         }
         private void cbUnisexParfümsStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1302,6 +1347,7 @@ namespace BilsanParfums
                                                             // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar ist
                                                             // this.ActiveControl = cbOrientalischFilterby;
             }
+            _MarkiereParfümZeilen(dgvOrientalischeParfüms);
 
         }
         private void cbOrientalischeParfümsStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -1450,6 +1496,259 @@ namespace BilsanParfums
         private void dgvOrientalischeParfüms_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             _MarkiereParfümZeilen(dgvOrientalischeParfüms);
+        }
+
+        private void btnPdfParfümsliste_Click(object sender, EventArgs e)
+        {
+            // Bestimmen, welcher Filter-Typ ausgewählt ist
+            string filterType = "Alle";
+            string pdfTitle = "Alle Parfüms";
+
+            if (cbFilterby.SelectedIndex != -1 && cbFilterby.SelectedItem.ToString() == "Status")
+            {
+                if (cbAlleParfümsStatus.SelectedItem.ToString() == "Vorhanden")
+                {
+                    filterType = "Vorhanden";
+                    pdfTitle = "Vorhandene Parfüms";
+                }
+                else if (cbAlleParfümsStatus.SelectedItem.ToString() == "In Bestellung")
+                {
+                    filterType = "In Bestellung";
+                    pdfTitle = "Bestellte Parfüms";
+                }
+            }
+
+            // Rufen Sie die Methode mit dem Titel und dem Filter-Typ auf
+            _ErstellePdfVonParfuem(dgvAlleParfüms, pdfTitle, filterType);
+        }
+        private void _ErstellePdfVonParfuem(DataGridView dgv, string pdfTitle, string filterType)
+        {
+            // Pfad zum Desktop des aktuellen Benutzers
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            // Name und Pfad der PDF-Datei
+            string fileName = pdfTitle + "-" + DateTime.Now.ToString("dd.MM.yyyy") + ".pdf";
+            string filePath = Path.Combine(desktopPath, fileName);
+
+            try
+            {
+                // PDF speichern
+                using (FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    using (Document pdfDoc = new Document())
+                    {
+                        PdfWriter.GetInstance(pdfDoc, stream);
+                        pdfDoc.Open();
+
+                        // Erstelle eine Tabelle mit 3 Spalten
+                        PdfPTable table = new PdfPTable(4);
+                        table.WidthPercentage = 100;
+
+
+                        //// Header mit Hintergrundfarbe
+                        //table.AddCell(new PdfPCell(new Phrase("Parfümnummer"))
+                        //{
+                        //    BackgroundColor = BaseColor.LIGHT_GRAY,
+                        //    Padding = 10f
+                        //});
+                        //table.AddCell(new PdfPCell(new Phrase("Parfümmarke"))
+                        //{
+                        //    BackgroundColor = BaseColor.LIGHT_GRAY,
+                        //    Padding = 10f
+                        //});
+                        //table.AddCell(new PdfPCell(new Phrase("Parfümname"))
+                        //{
+                        //    BackgroundColor = BaseColor.LIGHT_GRAY,
+                        //    Padding = 10f
+                        //});
+
+                        // Filterlogik basierend auf dem `filterType`-Parameter
+                        var parfums = dgv.Rows.Cast<DataGridViewRow>().Where(row => !row.IsNewRow);
+
+                        if (filterType == "Vorhanden")
+                        {
+                            parfums = parfums.Where(row => (bool)row.Cells["IstVorhanden"].Value == true);
+                        }
+                        else if (filterType == "In Bestellung")
+                        {
+                            parfums = parfums.Where(row => (bool)row.Cells["InBestellung"].Value == true); // Annahme: Es gibt eine Spalte "InBestellung"
+                        }
+
+                        var sortierteParfums = parfums.OrderBy(row => row.Cells["Kategorie"].Value?.ToString()).ToList();
+
+                        string aktuelleKategorie = "";
+                        int zeilenIndex = 0; // Für abwechselnde Farben
+
+                        // Füge die Daten sortiert in die Tabelle ein
+                        foreach (DataGridViewRow row in sortierteParfums)
+                        {
+                            var kategorie = row.Cells["Kategorie"]?.Value?.ToString();
+                            var parfuemNummer = row.Cells["Parfümnummer"]?.Value?.ToString();
+                            var parfuemMarke = row.Cells["Marke"]?.Value.ToString();
+                            var parfuemName = row.Cells["Name"]?.Value?.ToString();
+                            var Duftrichtun = row.Cells["Duftrichtung"]?.Value?.ToString();
+
+                            if (!string.IsNullOrEmpty(parfuemNummer) && !string.IsNullOrEmpty(parfuemMarke) && !string.IsNullOrEmpty(parfuemName))
+                            {
+                                // Neue Kategorie? Dann eine farbige Überschrift einfügen
+                                if (kategorie != aktuelleKategorie)
+                                {
+                                    PdfPCell headerCell = new PdfPCell(new Phrase("--- " + kategorie + " ---",
+                                      new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12f, iTextSharp.text.Font.BOLD, BaseColor.BLACK)))
+                                    {
+                                        Colspan = 4,
+                                        HorizontalAlignment = Element.ALIGN_CENTER,
+                                        BackgroundColor = BaseColor.GREEN,
+                                        Padding = 8f
+                                    };
+                                    table.AddCell(headerCell);
+                                    aktuelleKategorie = kategorie;
+                                    zeilenIndex = 0; // Zeilenzähler zurücksetzen bei neuer Kategorie
+                                }
+
+                                // Abwechselnde Hintergrundfarben für Zeilen
+                                BaseColor rowColor = (zeilenIndex % 2 == 0) ? BaseColor.YELLOW : BaseColor.PINK;
+
+                                PdfPCell cell1 = new PdfPCell(new Phrase(parfuemNummer))
+                                {
+                                    BackgroundColor = rowColor,
+                                    Padding = 6f
+                                };
+                                PdfPCell cell2 = new PdfPCell(new Phrase(parfuemMarke))
+                                {
+                                    BackgroundColor = rowColor,
+                                    Padding = 6f
+                                };
+                                PdfPCell cell3 = new PdfPCell(new Phrase(parfuemName))
+                                {
+                                    BackgroundColor = rowColor,
+                                    Padding = 6f
+                                };
+                                PdfPCell cell4 = new PdfPCell(new Phrase(Duftrichtun))
+                                {
+                                    BackgroundColor = rowColor,
+                                    Padding = 6f
+                                };
+
+                                table.AddCell(cell1);
+                                table.AddCell(cell2);
+                                table.AddCell(cell3);
+                                table.AddCell(cell4);
+
+                                zeilenIndex++;
+                            }
+                        }
+
+                        // Tabelle zur PDF hinzufügen
+                        pdfDoc.Add(table);
+                        pdfDoc.Close();
+                    }
+                }
+
+                // Erfolgsmeldung
+                MessageBox.Show($"Die Datei wurde erfolgreich auf dem Desktop gespeichert:\n{filePath}", "Erfolg", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                // Fehlerbehandlung
+                MessageBox.Show($"Fehler beim Speichern der Datei: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnParfümlisteFürDamen_Click(object sender, EventArgs e)
+        {
+            // Bestimmen, welcher Filter-Typ ausgewählt ist
+            string filterType = "Alle";
+            string pdfTitle = "Alle Damenparfüms";
+
+            if (cbDamenFilterby.SelectedIndex != -1 && cbDamenFilterby.SelectedItem.ToString() == "Status")
+            {
+                if (cbDamenParfümStatus.SelectedItem.ToString() == "Vorhanden")
+                {
+                    filterType = "Vorhanden";
+                    pdfTitle = "Vorhandene Damenparfüms";
+                }
+                else if (cbDamenParfümStatus.SelectedItem.ToString() == "In Bestellung")
+                {
+                    filterType = "In Bestellung";
+                    pdfTitle = "Bestellte Damenparfüms";
+                }
+            }
+
+            // Rufen Sie die Methode mit dem Titel und dem Filter-Typ auf
+            _ErstellePdfVonParfuem(dgvDamenParfüms, pdfTitle, filterType);
+        }
+
+        private void btnParümslisteFürHerren_Click(object sender, EventArgs e)
+        {
+            // Bestimmen, welcher Filter-Typ ausgewählt ist
+            string filterType = "Alle";
+            string pdfTitle = "Alle Herrenparfüms";
+
+            if (cbHerrenFilterby.SelectedIndex != -1 && cbHerrenFilterby.SelectedItem.ToString() == "Status")
+            {
+                if (cbHerrenParfümStatus.SelectedItem.ToString() == "Vorhanden")
+                {
+                    filterType = "Vorhanden";
+                    pdfTitle = "Vorhandene Herrenparfüms";
+                }
+                else if (cbHerrenParfümStatus.SelectedItem.ToString() == "In Bestellung")
+                {
+                    filterType = "In Bestellung";
+                    pdfTitle = "Bestellte Herrenparfüms";
+                }
+            }
+
+            // Rufen Sie die Methode mit dem Titel und dem Filter-Typ auf
+            _ErstellePdfVonParfuem(dgvHerrenParfüms, pdfTitle, filterType);
+        }
+
+        private void btnParfümslisteFürUnisex_Click(object sender, EventArgs e)
+        {
+            // Bestimmen, welcher Filter-Typ ausgewählt ist
+            string filterType = "Alle";
+            string pdfTitle = "Alle Unisexparfüms";
+
+            if (cbUnisexFilterby.SelectedIndex != -1 && cbUnisexFilterby.SelectedItem.ToString() == "Status")
+            {
+                if (cbUnisexParfümsStatus.SelectedItem.ToString() == "Vorhanden")
+                {
+                    filterType = "Vorhanden";
+                    pdfTitle = "Vorhandene Unisexparfüms";
+                }
+                else if (cbUnisexParfümsStatus.SelectedItem.ToString() == "In Bestellung")
+                {
+                    filterType = "In Bestellung";
+                    pdfTitle = "Bestellte Unisexparfüms";
+                }
+            }
+
+            // Rufen Sie die Methode mit dem Titel und dem Filter-Typ auf
+            _ErstellePdfVonParfuem(dgvUnisexParfüms, pdfTitle, filterType);
+        }
+
+        private void btnParfümslisteFürOrientalisch_Click(object sender, EventArgs e)
+        {
+            // Bestimmen, welcher Filter-Typ ausgewählt ist
+            string filterType = "Alle";
+            string pdfTitle = "Alle Orientalischeparfüms";
+
+            if (cbOrientalischFilterby.SelectedIndex != -1 && cbOrientalischFilterby.SelectedItem.ToString() == "Status")
+            {
+                if (cbOrientalischeParfümsStatus.SelectedItem.ToString() == "Vorhanden")
+                {
+                    filterType = "Vorhanden";
+                    pdfTitle = "Vorhandene Orientalischeparfüms";
+                }
+                else if (cbOrientalischeParfümsStatus.SelectedItem.ToString() == "In Bestellung")
+                {
+                    filterType = "In Bestellung";
+                    pdfTitle = "Bestellte Orientalischeparfüms";
+                }
+            }
+
+            // Rufen Sie die Methode mit dem Titel und dem Filter-Typ auf
+            _ErstellePdfVonParfuem(dgvOrientalischeParfüms, pdfTitle, filterType);
         }
     }
 }
