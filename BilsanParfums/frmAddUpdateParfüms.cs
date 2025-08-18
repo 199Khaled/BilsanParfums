@@ -23,7 +23,7 @@ namespace BilsanParfums
         private enMode _mode = enMode.addnew;
 
         // Instanz der clsParfüms-Klasse, die die aktuellen Parfümdaten speichert und verwaltet
-        clsParfüms _parfüms;
+        clsNeueParfümDaten _parfüms;
 
         // Die ParfümNummer, die beim Initialisieren des Formulars übergeben wird.
         // -1 bedeutet, dass ein neues Parfüm hinzugefügt werden soll (addnew).
@@ -116,11 +116,12 @@ namespace BilsanParfums
         /// </summary>
         private void _holeParfümDatenFromDatenbank()
         {
-            _parfüms = clsParfüms.FindByParfümNummer(_parfümNummer); // Parfümdaten abrufen
+            _parfüms = clsNeueParfümDaten.FindByParfümNummer(_parfümNummer); // Parfümdaten abrufen
 
             if (_parfüms != null)
             {
                 // Daten aus dem geladenen _parfüms-Objekt in die UI-Felder übertragen
+                txtAlteNummer.Text = _parfüms.AlteNummer.ToString();
                 txtParfümNummer.Text = _parfüms.parfümNummer.ToString();
                 txtMarke.Text = _parfüms.Marke;
                 txtName.Text = _parfüms.Name;
@@ -173,6 +174,11 @@ namespace BilsanParfums
                 _parfüms.parfümNummer = Convert.ToInt32(txtParfümNummer.Text);
 
             // Zuweisung der Textfeldwerte zu den Eigenschaften des Parfüm-Objekts
+            if (!string.IsNullOrEmpty(txtAlteNummer.Text))
+                _parfüms.AlteNummer = Convert.ToInt32(txtAlteNummer.Text);
+            else
+                _parfüms.AlteNummer = null;
+
             _parfüms.Marke = txtMarke.Text;
             _parfüms.Name = txtName.Text;
             _parfüms.Kategorie = txtKategorie.Text;
@@ -195,7 +201,7 @@ namespace BilsanParfums
 
             // Prüft, ob die Nummer bereits existiert UND ob es sich NICHT um die alte Nummer im Update-Modus handelt.
             // Dies verhindert eine Kollision, wenn die Nummer im Update-Modus unverändert bleibt.
-            if (clsParfüms.IstParfümNummerVergeben(parfümNummer) && !_IstAlteParfümNummerGleichWieNeue())
+            if (clsNeueParfümDaten.IstParfümNummerVergeben(parfümNummer) && !_IstAlteParfümNummerGleichWieNeue())
             {
                 MessageBox.Show("Diese Nummer ist bereits vergeben!\nBitte versuchen Sie eine andere Nummer.", "Hinweis",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -225,7 +231,7 @@ namespace BilsanParfums
             // falls es beim Load-Ereignis nicht passierte.
             if (_parfüms == null)
             {
-                _parfüms = new clsParfüms();
+                _parfüms = new clsNeueParfümDaten();
             }
 
             // 3. Füllen des _parfüms-Objekts mit den aktuellen Daten aus dem Formular
@@ -312,7 +318,7 @@ namespace BilsanParfums
             else
             {
                 // Wenn _parfümNummer -1 ist, wird ein neues Parfüm hinzugefügt (AddNew-Modus).
-                _parfüms = new clsParfüms(); // Erstellt ein neues, leeres Parfüm-Objekt
+                _parfüms = new clsNeueParfümDaten(); // Erstellt ein neues, leeres Parfüm-Objekt
                 _mode = enMode.addnew; // Setzt den Modus auf "AddNew"
             }
             // Optional: Sicherstellen, dass txtParfümNummer im Add-Modus editierbar ist,

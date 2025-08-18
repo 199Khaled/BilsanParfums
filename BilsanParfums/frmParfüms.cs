@@ -96,7 +96,7 @@ namespace BilsanParfums
         {
             lock (_dataloadLock)
             {
-                _dtParfüms = clsParfüms.GetAllParfüms();
+                _dtParfüms = clsNeueParfümDaten.GetAllParfüms();
                 if (_dtParfüms != null && _dtParfüms.Rows.Count > 0)
                 {
                     _bindingSourceAlleParfüms.DataSource = _dtParfüms;
@@ -116,7 +116,7 @@ namespace BilsanParfums
         {
             lock (_dataloadLock)
             {
-                _dtHerrenParfüms = clsParfüms.GetAllHerrenParfüms();
+                _dtHerrenParfüms = clsNeueParfümDaten.GetAllHerrenParfüms();
                 if (_dtHerrenParfüms != null && _dtHerrenParfüms.Rows.Count > 0)
                 {
                     _bindingSourceHerrenParfüms.DataSource = _dtHerrenParfüms;
@@ -138,7 +138,7 @@ namespace BilsanParfums
                 // Annahme: Die Methode GetAllParfüms() lädt alle Parfüms.
                 // Du benötigst eine Logik, um nur Frauenparfüms zu filtern.
                 // Dies könnte eine separate Abfrage oder ein Filter auf dem bestehenden DataTable sein.
-                _dtDamenParfüms = clsParfüms.GetAllDamenParfüms(); // Hier sollte eine Filter-Methode stehen.
+                _dtDamenParfüms = clsNeueParfümDaten.GetAllDamenParfüms(); // Hier sollte eine Filter-Methode stehen.
 
                 if (_dtDamenParfüms != null && _dtDamenParfüms.Rows.Count > 0)
                 {
@@ -160,7 +160,7 @@ namespace BilsanParfums
             lock (_dataloadLock)
             {
                 // Filterlogik für Unisex-Parfüms
-                _dtUnisexParfüms = clsParfüms.GetAllUnisexParfüms();
+                _dtUnisexParfüms = clsNeueParfümDaten.GetAllUnisexParfüms();
 
                 if (_dtUnisexParfüms != null && _dtUnisexParfüms.Rows.Count > 0)
                 {
@@ -182,7 +182,7 @@ namespace BilsanParfums
             lock (_dataloadLock)
             {
                 // Filterlogik für Kinder-Parfüms
-                _dtKinderParfüms = clsParfüms.GetAllKinderParfüms();
+                _dtKinderParfüms = clsNeueParfümDaten.GetAllKinderParfüms();
 
                 if (_dtKinderParfüms != null && _dtKinderParfüms.Rows.Count > 0)
                 {
@@ -203,7 +203,7 @@ namespace BilsanParfums
             lock (_dataloadLock)
             {
                 // Filterlogik für Kinder-Parfüms
-                _dtOrientalischeParfüms = clsParfüms.GetAllOrientalischeParfüms();
+                _dtOrientalischeParfüms = clsNeueParfümDaten.GetAllOrientalischeParfüms();
 
                 if (_dtOrientalischeParfüms != null && _dtOrientalischeParfüms.Rows.Count > 0)
                 {
@@ -314,7 +314,7 @@ namespace BilsanParfums
         {
             if (dgvAlleParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvAlleParfüms.CurrentRow.Cells[0].Value;
+                int parfümNummer = (int)dgvAlleParfüms.CurrentRow.Cells[1].Value;
                 _ÖffneAddUpdateForm(parfümNummer);
             }
         }
@@ -323,16 +323,16 @@ namespace BilsanParfums
         {
             if (dgvAlleParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvAlleParfüms.CurrentRow.Cells[0].Value;
+                int parfümNummer = (int)dgvAlleParfüms.CurrentRow.Cells[1].Value;
                 _EntferneParfüm(parfümNummer);
             }
         }
 
         private void dgvAlleParfüms_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dgvAlleParfüms.Rows[e.RowIndex].Cells[2].Value != null)
+            if (e.RowIndex >= 0 && dgvAlleParfüms.Rows[e.RowIndex].Cells[3].Value != null)
             {
-                string currentName = dgvAlleParfüms.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string currentName = dgvAlleParfüms.Rows[e.RowIndex].Cells[3].Value.ToString();
                 _ÖffneParfumoWebseite(currentName);
             }
         }
@@ -357,6 +357,15 @@ namespace BilsanParfums
 
                 string spalteName = filterComboBox.SelectedItem.ToString();
                 string filterString = "";
+
+                // Spezialzeichen behandeln
+                // Das Apostroph ' muss verdoppelt werden, um es zu escapen
+                filterwert = filterwert.Replace("'", "''");
+
+                // Das Backtick ` wird oft als Anführungszeichen verwendet
+                // Manchmal muss es auch entfernt oder escapet werden,
+                // um Konflikte zu vermeiden. Hier ersetzen wir es sicherheitshalber.
+                filterwert = filterwert.Replace("`", "");
 
                 switch (spalteName)
                 {
@@ -433,6 +442,7 @@ namespace BilsanParfums
                 row.DefaultCellStyle.BackColor = System.Drawing.Color.White;
                 row.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
 
+                row.Cells["AlteNummer"].Style.BackColor = Color.LightGray;
                 // Werte aus den Status-Spalten abrufen
                 bool istVorhanden = row.Cells["IstVorhanden"].Value != null && Convert.ToBoolean(row.Cells["IstVorhanden"].Value);
                 bool isInBestellung = row.Cells["InBestellung"].Value != null && Convert.ToBoolean(row.Cells["InBestellung"].Value);
@@ -525,7 +535,7 @@ namespace BilsanParfums
 
             if (!result) return;
 
-            clsParfüms parfuemDaten = clsParfüms.FindByParfümNummer(parfümNummer);
+            clsNeueParfümDaten parfuemDaten = clsNeueParfümDaten.FindByParfümNummer(parfümNummer);
 
             if (parfuemDaten != null && parfuemDaten.Delete())
             {
@@ -914,7 +924,7 @@ namespace BilsanParfums
         {
             if (dgvDamenParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvDamenParfüms.CurrentRow.Cells[0].Value;
+                int parfümNummer = (int)dgvDamenParfüms.CurrentRow.Cells[1].Value;
                 _ÖffneAddUpdateForm(parfümNummer);
             }
         }
@@ -923,7 +933,7 @@ namespace BilsanParfums
         {
             if (dgvDamenParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvDamenParfüms.CurrentRow.Cells[0].Value;
+                int parfümNummer = (int)dgvDamenParfüms.CurrentRow.Cells[1].Value;
                 _EntferneParfüm(parfümNummer);
             }
         }
@@ -933,9 +943,9 @@ namespace BilsanParfums
         }
         private void dgvDamenParfüms_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dgvDamenParfüms.Rows[e.RowIndex].Cells[2].Value != null)
+            if (e.RowIndex >= 0 && dgvDamenParfüms.Rows[e.RowIndex].Cells[3].Value != null)
             {
-                string currentName = dgvDamenParfüms.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string currentName = dgvDamenParfüms.Rows[e.RowIndex].Cells[3].Value.ToString();
                 _ÖffneParfumoWebseite(currentName);
             }
         }
@@ -1277,7 +1287,7 @@ namespace BilsanParfums
         {
             if (dgvUnisexParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvUnisexParfüms.CurrentRow.Cells[0].Value;
+                int parfümNummer = (int)dgvUnisexParfüms.CurrentRow.Cells[1].Value;
                 _ÖffneAddUpdateForm(parfümNummer);
             }
         }
@@ -1286,7 +1296,7 @@ namespace BilsanParfums
         {
             if (dgvUnisexParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvUnisexParfüms.CurrentRow.Cells[0].Value;
+                int parfümNummer = (int)dgvUnisexParfüms.CurrentRow.Cells[1].Value;
                 _EntferneParfüm(parfümNummer);
             }
         }
@@ -1298,9 +1308,9 @@ namespace BilsanParfums
 
         private void dgvUnisexParfüms_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dgvUnisexParfüms.Rows[e.RowIndex].Cells[2].Value != null)
+            if (e.RowIndex >= 0 && dgvUnisexParfüms.Rows[e.RowIndex].Cells[3].Value != null)
             {
-                string currentName = dgvUnisexParfüms.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string currentName = dgvUnisexParfüms.Rows[e.RowIndex].Cells[3].Value.ToString();
                 _ÖffneParfumoWebseite(currentName);
             }
         }
@@ -1470,7 +1480,7 @@ namespace BilsanParfums
         {
             if (dgvOrientalischeParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvOrientalischeParfüms.CurrentRow.Cells[0].Value;
+                int parfümNummer = (int)dgvOrientalischeParfüms.CurrentRow.Cells[1].Value;
                 _ÖffneAddUpdateForm(parfümNummer);
             }
         }
@@ -1479,16 +1489,16 @@ namespace BilsanParfums
         {
             if (dgvOrientalischeParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvOrientalischeParfüms.CurrentRow.Cells[0].Value;
+                int parfümNummer = (int)dgvOrientalischeParfüms.CurrentRow.Cells[1].Value;
                 _EntferneParfüm(parfümNummer);
             }
         }
 
         private void dgvOrientalischeParfüms_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dgvOrientalischeParfüms.Rows[e.RowIndex].Cells[2].Value != null)
+            if (e.RowIndex >= 0 && dgvOrientalischeParfüms.Rows[e.RowIndex].Cells[3].Value != null)
             {
-                string currentName = dgvOrientalischeParfüms.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string currentName = dgvOrientalischeParfüms.Rows[e.RowIndex].Cells[3].Value.ToString();
                 _ÖffneParfumoWebseite(currentName);
             }
         }

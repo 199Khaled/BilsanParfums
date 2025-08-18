@@ -49,6 +49,8 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
+            this.txtAlteNummer = new Guna.UI2.WinForms.Guna2TextBox();
+            this.lblAlteNummer = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -58,7 +60,7 @@
             this.btnBearbeiten.BackColor = System.Drawing.Color.Teal;
             this.btnBearbeiten.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBearbeiten.ForeColor = System.Drawing.Color.Gold;
-            this.btnBearbeiten.Location = new System.Drawing.Point(48, 387);
+            this.btnBearbeiten.Location = new System.Drawing.Point(53, 428);
             this.btnBearbeiten.Margin = new System.Windows.Forms.Padding(2);
             this.btnBearbeiten.Name = "btnBearbeiten";
             this.btnBearbeiten.Size = new System.Drawing.Size(111, 45);
@@ -71,7 +73,7 @@
             // 
             this.chbInBestellung.AutoSize = true;
             this.chbInBestellung.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chbInBestellung.Location = new System.Drawing.Point(338, 452);
+            this.chbInBestellung.Location = new System.Drawing.Point(343, 493);
             this.chbInBestellung.Margin = new System.Windows.Forms.Padding(2);
             this.chbInBestellung.Name = "chbInBestellung";
             this.chbInBestellung.Size = new System.Drawing.Size(134, 24);
@@ -85,7 +87,7 @@
             this.chbIstVorhanden.Checked = true;
             this.chbIstVorhanden.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chbIstVorhanden.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chbIstVorhanden.Location = new System.Drawing.Point(169, 452);
+            this.chbIstVorhanden.Location = new System.Drawing.Point(174, 493);
             this.chbIstVorhanden.Margin = new System.Windows.Forms.Padding(2);
             this.chbIstVorhanden.Name = "chbIstVorhanden";
             this.chbIstVorhanden.Size = new System.Drawing.Size(138, 24);
@@ -98,7 +100,7 @@
             this.btnAbbrechen.BackColor = System.Drawing.Color.DarkCyan;
             this.btnAbbrechen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAbbrechen.ForeColor = System.Drawing.Color.Gold;
-            this.btnAbbrechen.Location = new System.Drawing.Point(344, 500);
+            this.btnAbbrechen.Location = new System.Drawing.Point(349, 541);
             this.btnAbbrechen.Margin = new System.Windows.Forms.Padding(2);
             this.btnAbbrechen.Name = "btnAbbrechen";
             this.btnAbbrechen.Size = new System.Drawing.Size(128, 41);
@@ -112,7 +114,7 @@
             this.btnspeichern.BackColor = System.Drawing.Color.DarkCyan;
             this.btnspeichern.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnspeichern.ForeColor = System.Drawing.Color.Gold;
-            this.btnspeichern.Location = new System.Drawing.Point(179, 500);
+            this.btnspeichern.Location = new System.Drawing.Point(184, 541);
             this.btnspeichern.Margin = new System.Windows.Forms.Padding(2);
             this.btnspeichern.Name = "btnspeichern";
             this.btnspeichern.Size = new System.Drawing.Size(128, 41);
@@ -125,7 +127,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(55, 361);
+            this.label6.Location = new System.Drawing.Point(60, 402);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(96, 24);
@@ -136,7 +138,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(41, 306);
+            this.label5.Location = new System.Drawing.Point(46, 347);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(115, 24);
@@ -147,7 +149,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(56, 251);
+            this.label4.Location = new System.Drawing.Point(61, 292);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(102, 24);
@@ -158,7 +160,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(86, 195);
+            this.label3.Location = new System.Drawing.Point(91, 236);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(73, 24);
@@ -169,7 +171,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(86, 140);
+            this.label2.Location = new System.Drawing.Point(91, 181);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 24);
@@ -180,7 +182,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(11, 79);
+            this.label1.Location = new System.Drawing.Point(16, 120);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(155, 24);
@@ -202,7 +204,7 @@
             this.txtParfümNummer.ForeColor = System.Drawing.Color.Black;
             this.txtParfümNummer.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtParfümNummer.HoverState.Parent = this.txtParfümNummer;
-            this.txtParfümNummer.Location = new System.Drawing.Point(179, 69);
+            this.txtParfümNummer.Location = new System.Drawing.Point(184, 110);
             this.txtParfümNummer.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtParfümNummer.Name = "txtParfümNummer";
             this.txtParfümNummer.PasswordChar = '\0';
@@ -227,7 +229,7 @@
             this.txtMarke.ForeColor = System.Drawing.Color.Black;
             this.txtMarke.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtMarke.HoverState.Parent = this.txtMarke;
-            this.txtMarke.Location = new System.Drawing.Point(179, 129);
+            this.txtMarke.Location = new System.Drawing.Point(184, 170);
             this.txtMarke.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtMarke.Name = "txtMarke";
             this.txtMarke.PasswordChar = '\0';
@@ -252,7 +254,7 @@
             this.txtName.ForeColor = System.Drawing.Color.Black;
             this.txtName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtName.HoverState.Parent = this.txtName;
-            this.txtName.Location = new System.Drawing.Point(179, 186);
+            this.txtName.Location = new System.Drawing.Point(184, 227);
             this.txtName.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtName.Name = "txtName";
             this.txtName.PasswordChar = '\0';
@@ -277,7 +279,7 @@
             this.txtKategorie.ForeColor = System.Drawing.Color.Black;
             this.txtKategorie.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtKategorie.HoverState.Parent = this.txtKategorie;
-            this.txtKategorie.Location = new System.Drawing.Point(179, 240);
+            this.txtKategorie.Location = new System.Drawing.Point(184, 281);
             this.txtKategorie.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtKategorie.Name = "txtKategorie";
             this.txtKategorie.PasswordChar = '\0';
@@ -302,7 +304,7 @@
             this.txtDuftrichtung.ForeColor = System.Drawing.Color.Black;
             this.txtDuftrichtung.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtDuftrichtung.HoverState.Parent = this.txtDuftrichtung;
-            this.txtDuftrichtung.Location = new System.Drawing.Point(179, 297);
+            this.txtDuftrichtung.Location = new System.Drawing.Point(184, 338);
             this.txtDuftrichtung.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtDuftrichtung.Name = "txtDuftrichtung";
             this.txtDuftrichtung.PasswordChar = '\0';
@@ -327,7 +329,7 @@
             this.txtBasisnote.ForeColor = System.Drawing.Color.Black;
             this.txtBasisnote.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtBasisnote.HoverState.Parent = this.txtBasisnote;
-            this.txtBasisnote.Location = new System.Drawing.Point(179, 354);
+            this.txtBasisnote.Location = new System.Drawing.Point(184, 395);
             this.txtBasisnote.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtBasisnote.Name = "txtBasisnote";
             this.txtBasisnote.PasswordChar = '\0';
@@ -365,12 +367,50 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Add/Update Parfüm";
             // 
+            // txtAlteNummer
+            // 
+            this.txtAlteNummer.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtAlteNummer.DefaultText = "";
+            this.txtAlteNummer.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtAlteNummer.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtAlteNummer.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtAlteNummer.DisabledState.Parent = this.txtAlteNummer;
+            this.txtAlteNummer.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtAlteNummer.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtAlteNummer.FocusedState.Parent = this.txtAlteNummer;
+            this.txtAlteNummer.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAlteNummer.ForeColor = System.Drawing.Color.Black;
+            this.txtAlteNummer.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtAlteNummer.HoverState.Parent = this.txtAlteNummer;
+            this.txtAlteNummer.Location = new System.Drawing.Point(184, 54);
+            this.txtAlteNummer.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtAlteNummer.Name = "txtAlteNummer";
+            this.txtAlteNummer.PasswordChar = '\0';
+            this.txtAlteNummer.PlaceholderText = "";
+            this.txtAlteNummer.SelectedText = "";
+            this.txtAlteNummer.ShadowDecoration.Parent = this.txtAlteNummer;
+            this.txtAlteNummer.Size = new System.Drawing.Size(293, 44);
+            this.txtAlteNummer.TabIndex = 42;
+            // 
+            // lblAlteNummer
+            // 
+            this.lblAlteNummer.AutoSize = true;
+            this.lblAlteNummer.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAlteNummer.Location = new System.Drawing.Point(42, 64);
+            this.lblAlteNummer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblAlteNummer.Name = "lblAlteNummer";
+            this.lblAlteNummer.Size = new System.Drawing.Size(121, 24);
+            this.lblAlteNummer.TabIndex = 43;
+            this.lblAlteNummer.Text = "AlteNummer:";
+            // 
             // frmAddUpdateParfüms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
-            this.ClientSize = new System.Drawing.Size(501, 552);
+            this.ClientSize = new System.Drawing.Size(501, 585);
+            this.Controls.Add(this.lblAlteNummer);
+            this.Controls.Add(this.txtAlteNummer);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtBasisnote);
             this.Controls.Add(this.txtDuftrichtung);
@@ -425,5 +465,7 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblAlteNummer;
+        private Guna.UI2.WinForms.Guna2TextBox txtAlteNummer;
     }
 }
