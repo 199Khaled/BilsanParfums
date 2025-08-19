@@ -77,7 +77,7 @@ namespace BilsanParfums
             GlobalParfumeNameTree = new AutoComplete.AVLTree(); // Leeren Baum erstellen
 
             // Alle Parfümnamen aus der Datenbank holen
-            DataTable allParfumsDt = clsParfüms.GetAllParfüms();
+            DataTable allParfumsDt = clsNeueParfümDaten.GetAllParfüms();
             if (allParfumsDt != null)
             {
                 foreach (DataRow row in allParfumsDt.Rows)
@@ -370,6 +370,7 @@ namespace BilsanParfums
                 switch (spalteName)
                 {
                     case "ParfümNummer":
+                    case "AlteNummer":
                         filterString = $"{spalteName} = {filterwert}";
                         break;
                     case "Name":
@@ -488,7 +489,7 @@ namespace BilsanParfums
         {
             using (frmAddUpdateParfüms frm = new frmAddUpdateParfüms(parfümNummer))
             {
-                if (frm.ShowDialog() == DialogResult.OK)
+                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     // Rufen Sie die Methode auf, um den ausgewählten Tab zu aktualisieren
                     _AktualisiereDatenNachTab();
@@ -749,7 +750,7 @@ namespace BilsanParfums
 
             string selectedItem = cbFilterby.SelectedItem.ToString();
 
-            if (selectedItem == "ParfümNummer")
+            if (selectedItem == "ParfümNummer" || selectedItem == "AlteNummer")
             {
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
             }
@@ -782,7 +783,7 @@ namespace BilsanParfums
 
             string selectedItem = cbDamenFilterby.SelectedItem.ToString();
 
-            if (selectedItem == "ParfümNummer")
+            if (selectedItem == "ParfümNummer" || selectedItem == "AlteNummer")
             {
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
             }
@@ -972,7 +973,7 @@ namespace BilsanParfums
             string selectedItem = cbHerrenFilterby.SelectedItem.ToString();
 
             // Wenn der ausgewählte Filter "ParfümNummer" ist, nur Ziffern und Steuertasten zulassen.
-            if (selectedItem == "ParfümNummer")
+            if (selectedItem == "ParfümNummer" || selectedItem == "AlteNummer")
             {
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
             }
@@ -1149,7 +1150,7 @@ namespace BilsanParfums
 
             string selectedItem = cbUnisexFilterby.SelectedItem.ToString();
 
-            if (selectedItem == "ParfümNummer")
+            if (selectedItem == "ParfümNummer" || selectedItem == "AlteNummer")
             {
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
             }
@@ -1421,7 +1422,7 @@ namespace BilsanParfums
             // Jetzt wissen wir, dass SelectedItem nicht null ist und können ToString() aufrufen
             string selectedItem = cbOrientalischFilterby.SelectedItem.ToString();
 
-            if (selectedItem == "ParfümNummer")
+            if (selectedItem == "ParfümNummer" || selectedItem == "AlteNummer")
             {
                 // Nur Zahlen, Backspace, Delete etc. zulassen
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
@@ -1508,6 +1509,13 @@ namespace BilsanParfums
             _MarkiereParfümZeilen(dgvOrientalischeParfüms);
         }
 
+
+
+
+
+
+
+        //####################    pdf erstellen     ################################
         private void btnPdfParfümsliste_Click(object sender, EventArgs e)
         {
             // Bestimmen, welcher Filter-Typ ausgewählt ist
@@ -1531,6 +1539,7 @@ namespace BilsanParfums
             // Rufen Sie die Methode mit dem Titel und dem Filter-Typ auf
             _ErstellePdfVonParfuem(dgvAlleParfüms, pdfTitle, filterType);
         }
+
         private void _ErstellePdfVonParfuem(DataGridView dgv, string pdfTitle, string filterType)
         {
             // Pfad zum Desktop des aktuellen Benutzers
@@ -1553,6 +1562,15 @@ namespace BilsanParfums
                         // Erstelle eine Tabelle mit 3 Spalten
                         PdfPTable table = new PdfPTable(4);
                         table.WidthPercentage = 100;
+                        // Spaltennamen für die Nummer
+                        string nummerSpaltenName = (filterType == "Vorhanden") ? "Parfümnummer" : "AlteNummer";
+
+                        // Header in der PDF-Tabelle festlegen
+                        table.AddCell(new PdfPCell(new Phrase(nummerSpaltenName)) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 10f });
+                        table.AddCell(new PdfPCell(new Phrase("Marke")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 10f });
+                        table.AddCell(new PdfPCell(new Phrase("Name")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 10f });
+                        table.AddCell(new PdfPCell(new Phrase("Duftrichtung")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 10f });
+
 
 
                         //// Header mit Hintergrundfarbe
@@ -1593,7 +1611,8 @@ namespace BilsanParfums
                         foreach (DataGridViewRow row in sortierteParfums)
                         {
                             var kategorie = row.Cells["Kategorie"]?.Value?.ToString();
-                            var parfuemNummer = row.Cells["Parfümnummer"]?.Value?.ToString();
+                            // Hier wird der Spaltenname aus der Variablen genommen
+                            var parfuemNummer = row.Cells[nummerSpaltenName]?.Value?.ToString();
                             var parfuemMarke = row.Cells["Marke"]?.Value.ToString();
                             var parfuemName = row.Cells["Name"]?.Value?.ToString();
                             var Duftrichtun = row.Cells["Duftrichtung"]?.Value?.ToString();

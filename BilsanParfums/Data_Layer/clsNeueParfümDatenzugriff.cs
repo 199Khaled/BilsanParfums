@@ -419,7 +419,7 @@ namespace Data_Layer
                                 duftrichtung = reader["Duftrichtung"] != DBNull.Value ? (string)reader["Duftrichtung"] : null;
                                 basisnote = reader["Basisnote"] != DBNull.Value ? (string)reader["Basisnote"] : null;
                                 istVorhanden = (bool)reader["IstVorhanden"];
-                                inBestellung = reader["InBestellung"] != DBNull.Value ? (bool)reader["InBestellung"] : false;
+                                inBestellung = (bool)reader["InBestellung"];
                             }
                         }
                     }

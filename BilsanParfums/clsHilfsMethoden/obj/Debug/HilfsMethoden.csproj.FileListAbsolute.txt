@@ -68,3 +68,13 @@ C:\Users\khale\Desktop\Parfüm2025\clsHilfsMethoden\obj\Debug\HilfsMethoden.cspr
 C:\Users\khale\Desktop\Parfüm2025\clsHilfsMethoden\obj\Debug\HilfsMet.AAF8E864.Up2Date
 C:\Users\khale\Desktop\Parfüm2025\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.dll
 C:\Users\khale\Desktop\Parfüm2025\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.pdb
+C:\BilsanParfums\BilsanParfums\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.dll
+C:\BilsanParfums\BilsanParfums\clsHilfsMethoden\bin\Debug\clsHilfsMethoden.pdb
+C:\BilsanParfums\BilsanParfums\clsHilfsMethoden\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.dll
+C:\BilsanParfums\BilsanParfums\clsHilfsMethoden\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.pdb
+C:\BilsanParfums\BilsanParfums\clsHilfsMethoden\bin\Debug\System.ValueTuple.dll
+C:\BilsanParfums\BilsanParfums\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.AssemblyReference.cache
+C:\BilsanParfums\BilsanParfums\clsHilfsMethoden\obj\Debug\HilfsMethoden.csproj.CoreCompileInputs.cache
+C:\BilsanParfums\BilsanParfums\clsHilfsMethoden\obj\Debug\HilfsMet.AAF8E864.Up2Date
+C:\BilsanParfums\BilsanParfums\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.dll
+C:\BilsanParfums\BilsanParfums\clsHilfsMethoden\obj\Debug\clsHilfsMethoden.pdb

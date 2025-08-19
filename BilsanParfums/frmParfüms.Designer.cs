@@ -29,24 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cbAlleParfümStatus = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnPdfParfümsliste = new Guna.UI2.WinForms.Guna2Button();
@@ -63,6 +63,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dgvAlleParfüms = new System.Windows.Forms.DataGridView();
             this.tabDamendüfte = new System.Windows.Forms.TabPage();
+            this.btnParfümlisteFürDamen = new Guna.UI2.WinForms.Guna2Button();
             this.cbDamenParfümStatus = new Guna.UI2.WinForms.Guna2ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
@@ -78,6 +79,7 @@
             this.bestehendesParfümAktualisierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entferneParfümToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabHerrendüfte = new System.Windows.Forms.TabPage();
+            this.btnParümslisteFürHerren = new Guna.UI2.WinForms.Guna2Button();
             this.cbHerrenParfümStatus = new Guna.UI2.WinForms.Guna2ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
@@ -93,6 +95,7 @@
             this.aktualisiereBestehendesParfümToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.entfernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabUnisexdüfte = new System.Windows.Forms.TabPage();
+            this.btnParfümslisteFürUnisex = new Guna.UI2.WinForms.Guna2Button();
             this.cbUnisexParfümsStatus = new Guna.UI2.WinForms.Guna2ComboBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
@@ -113,6 +116,7 @@
             this.lblKinderParfümanzahl = new System.Windows.Forms.Label();
             this.dgvKinderParfüms = new System.Windows.Forms.DataGridView();
             this.tabOrientalischedüfte = new System.Windows.Forms.TabPage();
+            this.btnParfümslisteFürOrientalisch = new Guna.UI2.WinForms.Guna2Button();
             this.cbOrientalischeParfümsStatus = new Guna.UI2.WinForms.Guna2ComboBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
@@ -131,10 +135,6 @@
             this.neueParfümHinzufügenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aktualisiereBestehendesParfümToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entferneParfümToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnParfümlisteFürDamen = new Guna.UI2.WinForms.Guna2Button();
-            this.btnParümslisteFürHerren = new Guna.UI2.WinForms.Guna2Button();
-            this.btnParfümslisteFürUnisex = new Guna.UI2.WinForms.Guna2Button();
-            this.btnParfümslisteFürOrientalisch = new Guna.UI2.WinForms.Guna2Button();
             this.cbAlleParfümStatus.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabAllgemein.SuspendLayout();
@@ -374,6 +374,7 @@
             this.cbFilterby.HoverState.Parent = this.cbFilterby;
             this.cbFilterby.ItemHeight = 30;
             this.cbFilterby.Items.AddRange(new object[] {
+            "AlteNummer",
             "ParfümNummer",
             "Marke",
             "Name",
@@ -410,32 +411,31 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvAlleParfüms.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAlleParfüms.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAlleParfüms.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle25.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAlleParfüms.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
             this.dgvAlleParfüms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAlleParfüms.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAlleParfüms.DefaultCellStyle = dataGridViewCellStyle26;
             this.dgvAlleParfüms.EnableHeadersVisualStyles = false;
             this.dgvAlleParfüms.Location = new System.Drawing.Point(2, 74);
             this.dgvAlleParfüms.MultiSelect = false;
             this.dgvAlleParfüms.Name = "dgvAlleParfüms";
             this.dgvAlleParfüms.ReadOnly = true;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dgvAlleParfüms.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvAlleParfüms.RowsDefaultCellStyle = dataGridViewCellStyle27;
             this.dgvAlleParfüms.RowTemplate.Height = 35;
-            this.dgvAlleParfüms.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvAlleParfüms.Size = new System.Drawing.Size(1012, 443);
             this.dgvAlleParfüms.TabIndex = 0;
             this.dgvAlleParfüms.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAlleParfüms_CellDoubleClick);
@@ -459,6 +459,23 @@
             this.tabDamendüfte.TabIndex = 1;
             this.tabDamendüfte.Text = "Damendüfte";
             this.tabDamendüfte.UseVisualStyleBackColor = true;
+            // 
+            // btnParfümlisteFürDamen
+            // 
+            this.btnParfümlisteFürDamen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnParfümlisteFürDamen.CheckedState.Parent = this.btnParfümlisteFürDamen;
+            this.btnParfümlisteFürDamen.CustomImages.Parent = this.btnParfümlisteFürDamen;
+            this.btnParfümlisteFürDamen.FillColor = System.Drawing.Color.DarkCyan;
+            this.btnParfümlisteFürDamen.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnParfümlisteFürDamen.ForeColor = System.Drawing.Color.Gold;
+            this.btnParfümlisteFürDamen.HoverState.Parent = this.btnParfümlisteFürDamen;
+            this.btnParfümlisteFürDamen.Location = new System.Drawing.Point(774, 26);
+            this.btnParfümlisteFürDamen.Name = "btnParfümlisteFürDamen";
+            this.btnParfümlisteFürDamen.ShadowDecoration.Parent = this.btnParfümlisteFürDamen;
+            this.btnParfümlisteFürDamen.Size = new System.Drawing.Size(235, 36);
+            this.btnParfümlisteFürDamen.TabIndex = 67;
+            this.btnParfümlisteFürDamen.Text = "Parfümliste als PDF speichern";
+            this.btnParfümlisteFürDamen.Click += new System.EventHandler(this.btnParfümlisteFürDamen_Click);
             // 
             // cbDamenParfümStatus
             // 
@@ -593,6 +610,7 @@
             this.cbDamenFilterby.HoverState.Parent = this.cbDamenFilterby;
             this.cbDamenFilterby.ItemHeight = 30;
             this.cbDamenFilterby.Items.AddRange(new object[] {
+            "AlteNummer",
             "ParfümNummer",
             "Marke",
             "Name",
@@ -630,33 +648,32 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDamenParfüms.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDamenParfüms.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDamenParfüms.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDamenParfüms.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.dgvDamenParfüms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDamenParfüms.ContextMenuStrip = this.cmsDamenParfüms;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDamenParfüms.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDamenParfüms.DefaultCellStyle = dataGridViewCellStyle17;
             this.dgvDamenParfüms.EnableHeadersVisualStyles = false;
             this.dgvDamenParfüms.Location = new System.Drawing.Point(2, 68);
             this.dgvDamenParfüms.MultiSelect = false;
             this.dgvDamenParfüms.Name = "dgvDamenParfüms";
             this.dgvDamenParfüms.ReadOnly = true;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dgvDamenParfüms.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvDamenParfüms.RowsDefaultCellStyle = dataGridViewCellStyle18;
             this.dgvDamenParfüms.RowTemplate.Height = 35;
-            this.dgvDamenParfüms.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvDamenParfüms.Size = new System.Drawing.Size(1012, 451);
             this.dgvDamenParfüms.TabIndex = 39;
             this.dgvDamenParfüms.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDamenParfüms_CellDoubleClick);
@@ -717,6 +734,23 @@
             this.tabHerrendüfte.TabIndex = 2;
             this.tabHerrendüfte.Text = "Herrendüfe";
             this.tabHerrendüfte.UseVisualStyleBackColor = true;
+            // 
+            // btnParümslisteFürHerren
+            // 
+            this.btnParümslisteFürHerren.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnParümslisteFürHerren.CheckedState.Parent = this.btnParümslisteFürHerren;
+            this.btnParümslisteFürHerren.CustomImages.Parent = this.btnParümslisteFürHerren;
+            this.btnParümslisteFürHerren.FillColor = System.Drawing.Color.DarkCyan;
+            this.btnParümslisteFürHerren.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnParümslisteFürHerren.ForeColor = System.Drawing.Color.Gold;
+            this.btnParümslisteFürHerren.HoverState.Parent = this.btnParümslisteFürHerren;
+            this.btnParümslisteFürHerren.Location = new System.Drawing.Point(770, 24);
+            this.btnParümslisteFürHerren.Name = "btnParümslisteFürHerren";
+            this.btnParümslisteFürHerren.ShadowDecoration.Parent = this.btnParümslisteFürHerren;
+            this.btnParümslisteFürHerren.Size = new System.Drawing.Size(235, 36);
+            this.btnParümslisteFürHerren.TabIndex = 68;
+            this.btnParümslisteFürHerren.Text = "Parfümliste als PDF speichern";
+            this.btnParümslisteFürHerren.Click += new System.EventHandler(this.btnParümslisteFürHerren_Click);
             // 
             // cbHerrenParfümStatus
             // 
@@ -852,6 +886,7 @@
             this.cbHerrenFilterby.HoverState.Parent = this.cbHerrenFilterby;
             this.cbHerrenFilterby.ItemHeight = 30;
             this.cbHerrenFilterby.Items.AddRange(new object[] {
+            "AlteNummer",
             "ParfümNummer",
             "Marke",
             "Name",
@@ -888,33 +923,32 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvHerrenParfüms.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvHerrenParfüms.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvHerrenParfüms.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvHerrenParfüms.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.dgvHerrenParfüms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHerrenParfüms.ContextMenuStrip = this.cmsHerrenParfüms;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvHerrenParfüms.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvHerrenParfüms.DefaultCellStyle = dataGridViewCellStyle23;
             this.dgvHerrenParfüms.EnableHeadersVisualStyles = false;
             this.dgvHerrenParfüms.Location = new System.Drawing.Point(9, 68);
             this.dgvHerrenParfüms.MultiSelect = false;
             this.dgvHerrenParfüms.Name = "dgvHerrenParfüms";
             this.dgvHerrenParfüms.ReadOnly = true;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dgvHerrenParfüms.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvHerrenParfüms.RowsDefaultCellStyle = dataGridViewCellStyle24;
             this.dgvHerrenParfüms.RowTemplate.Height = 35;
-            this.dgvHerrenParfüms.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvHerrenParfüms.Size = new System.Drawing.Size(1012, 451);
             this.dgvHerrenParfüms.TabIndex = 44;
             this.dgvHerrenParfüms.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHerrenParfüms_CellDoubleClick);
@@ -975,6 +1009,23 @@
             this.tabUnisexdüfte.TabIndex = 3;
             this.tabUnisexdüfte.Text = "Unisexdüfte";
             this.tabUnisexdüfte.UseVisualStyleBackColor = true;
+            // 
+            // btnParfümslisteFürUnisex
+            // 
+            this.btnParfümslisteFürUnisex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnParfümslisteFürUnisex.CheckedState.Parent = this.btnParfümslisteFürUnisex;
+            this.btnParfümslisteFürUnisex.CustomImages.Parent = this.btnParfümslisteFürUnisex;
+            this.btnParfümslisteFürUnisex.FillColor = System.Drawing.Color.DarkCyan;
+            this.btnParfümslisteFürUnisex.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnParfümslisteFürUnisex.ForeColor = System.Drawing.Color.Gold;
+            this.btnParfümslisteFürUnisex.HoverState.Parent = this.btnParfümslisteFürUnisex;
+            this.btnParfümslisteFürUnisex.Location = new System.Drawing.Point(776, 25);
+            this.btnParfümslisteFürUnisex.Name = "btnParfümslisteFürUnisex";
+            this.btnParfümslisteFürUnisex.ShadowDecoration.Parent = this.btnParfümslisteFürUnisex;
+            this.btnParfümslisteFürUnisex.Size = new System.Drawing.Size(235, 36);
+            this.btnParfümslisteFürUnisex.TabIndex = 69;
+            this.btnParfümslisteFürUnisex.Text = "Parfümliste als PDF speichern";
+            this.btnParfümslisteFürUnisex.Click += new System.EventHandler(this.btnParfümslisteFürUnisex_Click);
             // 
             // cbUnisexParfümsStatus
             // 
@@ -1110,6 +1161,7 @@
             this.cbUnisexFilterby.HoverState.Parent = this.cbUnisexFilterby;
             this.cbUnisexFilterby.ItemHeight = 30;
             this.cbUnisexFilterby.Items.AddRange(new object[] {
+            "AlteNummer",
             "ParfümNummer",
             "Marke",
             "Name",
@@ -1146,33 +1198,32 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvUnisexParfüms.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvUnisexParfüms.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvUnisexParfüms.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvUnisexParfüms.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvUnisexParfüms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUnisexParfüms.ContextMenuStrip = this.cmsUnisexParfüms;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUnisexParfüms.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUnisexParfüms.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvUnisexParfüms.EnableHeadersVisualStyles = false;
             this.dgvUnisexParfüms.Location = new System.Drawing.Point(2, 68);
             this.dgvUnisexParfüms.MultiSelect = false;
             this.dgvUnisexParfüms.Name = "dgvUnisexParfüms";
             this.dgvUnisexParfüms.ReadOnly = true;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dgvUnisexParfüms.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvUnisexParfüms.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvUnisexParfüms.RowTemplate.Height = 35;
-            this.dgvUnisexParfüms.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvUnisexParfüms.Size = new System.Drawing.Size(1012, 447);
             this.dgvUnisexParfüms.TabIndex = 44;
             this.dgvUnisexParfüms.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUnisexParfüms_CellDoubleClick);
@@ -1243,7 +1294,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label9.AutoSize = true;
-            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.ForeColor = System.Drawing.Color.Gold;
             this.label9.Location = new System.Drawing.Point(5, 12);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(159, 25);
@@ -1254,7 +1305,7 @@
             // 
             this.lblKinderParfümanzahl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblKinderParfümanzahl.AutoSize = true;
-            this.lblKinderParfümanzahl.ForeColor = System.Drawing.Color.White;
+            this.lblKinderParfümanzahl.ForeColor = System.Drawing.Color.Gold;
             this.lblKinderParfümanzahl.Location = new System.Drawing.Point(170, 12);
             this.lblKinderParfümanzahl.Name = "lblKinderParfümanzahl";
             this.lblKinderParfümanzahl.Size = new System.Drawing.Size(60, 25);
@@ -1270,32 +1321,31 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvKinderParfüms.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvKinderParfüms.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvKinderParfüms.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle28.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle28.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvKinderParfüms.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle28;
             this.dgvKinderParfüms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvKinderParfüms.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle29.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle29.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvKinderParfüms.DefaultCellStyle = dataGridViewCellStyle29;
             this.dgvKinderParfüms.EnableHeadersVisualStyles = false;
             this.dgvKinderParfüms.Location = new System.Drawing.Point(2, 22);
             this.dgvKinderParfüms.MultiSelect = false;
             this.dgvKinderParfüms.Name = "dgvKinderParfüms";
             this.dgvKinderParfüms.ReadOnly = true;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dgvKinderParfüms.RowsDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvKinderParfüms.RowsDefaultCellStyle = dataGridViewCellStyle30;
             this.dgvKinderParfüms.RowTemplate.Height = 35;
-            this.dgvKinderParfüms.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvKinderParfüms.Size = new System.Drawing.Size(1012, 503);
             this.dgvKinderParfüms.TabIndex = 44;
             // 
@@ -1317,6 +1367,23 @@
             this.tabOrientalischedüfte.TabIndex = 5;
             this.tabOrientalischedüfte.Text = "Orientalischedüfte";
             this.tabOrientalischedüfte.UseVisualStyleBackColor = true;
+            // 
+            // btnParfümslisteFürOrientalisch
+            // 
+            this.btnParfümslisteFürOrientalisch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnParfümslisteFürOrientalisch.CheckedState.Parent = this.btnParfümslisteFürOrientalisch;
+            this.btnParfümslisteFürOrientalisch.CustomImages.Parent = this.btnParfümslisteFürOrientalisch;
+            this.btnParfümslisteFürOrientalisch.FillColor = System.Drawing.Color.DarkCyan;
+            this.btnParfümslisteFürOrientalisch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnParfümslisteFürOrientalisch.ForeColor = System.Drawing.Color.Gold;
+            this.btnParfümslisteFürOrientalisch.HoverState.Parent = this.btnParfümslisteFürOrientalisch;
+            this.btnParfümslisteFürOrientalisch.Location = new System.Drawing.Point(774, 33);
+            this.btnParfümslisteFürOrientalisch.Name = "btnParfümslisteFürOrientalisch";
+            this.btnParfümslisteFürOrientalisch.ShadowDecoration.Parent = this.btnParfümslisteFürOrientalisch;
+            this.btnParfümslisteFürOrientalisch.Size = new System.Drawing.Size(235, 36);
+            this.btnParfümslisteFürOrientalisch.TabIndex = 70;
+            this.btnParfümslisteFürOrientalisch.Text = "Parfümliste als PDF speichern";
+            this.btnParfümslisteFürOrientalisch.Click += new System.EventHandler(this.btnParfümslisteFürOrientalisch_Click);
             // 
             // cbOrientalischeParfümsStatus
             // 
@@ -1452,6 +1519,7 @@
             this.cbOrientalischFilterby.HoverState.Parent = this.cbOrientalischFilterby;
             this.cbOrientalischFilterby.ItemHeight = 30;
             this.cbOrientalischFilterby.Items.AddRange(new object[] {
+            "AlteNummer",
             "ParfümNummer",
             "Marke",
             "Name",
@@ -1488,33 +1556,32 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvOrientalischeParfüms.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOrientalischeParfüms.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrientalischeParfüms.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrientalischeParfüms.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvOrientalischeParfüms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrientalischeParfüms.ContextMenuStrip = this.cmsOrientalischParüms;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOrientalischeParfüms.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrientalischeParfüms.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvOrientalischeParfüms.EnableHeadersVisualStyles = false;
             this.dgvOrientalischeParfüms.Location = new System.Drawing.Point(5, 75);
             this.dgvOrientalischeParfüms.MultiSelect = false;
             this.dgvOrientalischeParfüms.Name = "dgvOrientalischeParfüms";
             this.dgvOrientalischeParfüms.ReadOnly = true;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dgvOrientalischeParfüms.RowsDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvOrientalischeParfüms.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvOrientalischeParfüms.RowTemplate.Height = 35;
-            this.dgvOrientalischeParfüms.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvOrientalischeParfüms.Size = new System.Drawing.Size(1012, 448);
             this.dgvOrientalischeParfüms.TabIndex = 45;
             this.dgvOrientalischeParfüms.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrientalischeParfüms_CellDoubleClick);
@@ -1593,74 +1660,6 @@
             this.entferneParfümToolStripMenuItem.Size = new System.Drawing.Size(374, 38);
             this.entferneParfümToolStripMenuItem.Text = "Entferne Parfüm";
             this.entferneParfümToolStripMenuItem.Click += new System.EventHandler(this.entferneParfümToolStripMenuItem_Click);
-            // 
-            // btnParfümlisteFürDamen
-            // 
-            this.btnParfümlisteFürDamen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnParfümlisteFürDamen.CheckedState.Parent = this.btnParfümlisteFürDamen;
-            this.btnParfümlisteFürDamen.CustomImages.Parent = this.btnParfümlisteFürDamen;
-            this.btnParfümlisteFürDamen.FillColor = System.Drawing.Color.DarkCyan;
-            this.btnParfümlisteFürDamen.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnParfümlisteFürDamen.ForeColor = System.Drawing.Color.Gold;
-            this.btnParfümlisteFürDamen.HoverState.Parent = this.btnParfümlisteFürDamen;
-            this.btnParfümlisteFürDamen.Location = new System.Drawing.Point(774, 26);
-            this.btnParfümlisteFürDamen.Name = "btnParfümlisteFürDamen";
-            this.btnParfümlisteFürDamen.ShadowDecoration.Parent = this.btnParfümlisteFürDamen;
-            this.btnParfümlisteFürDamen.Size = new System.Drawing.Size(235, 36);
-            this.btnParfümlisteFürDamen.TabIndex = 67;
-            this.btnParfümlisteFürDamen.Text = "Parfümliste als PDF speichern";
-            this.btnParfümlisteFürDamen.Click += new System.EventHandler(this.btnParfümlisteFürDamen_Click);
-            // 
-            // btnParümslisteFürHerren
-            // 
-            this.btnParümslisteFürHerren.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnParümslisteFürHerren.CheckedState.Parent = this.btnParümslisteFürHerren;
-            this.btnParümslisteFürHerren.CustomImages.Parent = this.btnParümslisteFürHerren;
-            this.btnParümslisteFürHerren.FillColor = System.Drawing.Color.DarkCyan;
-            this.btnParümslisteFürHerren.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnParümslisteFürHerren.ForeColor = System.Drawing.Color.Gold;
-            this.btnParümslisteFürHerren.HoverState.Parent = this.btnParümslisteFürHerren;
-            this.btnParümslisteFürHerren.Location = new System.Drawing.Point(770, 24);
-            this.btnParümslisteFürHerren.Name = "btnParümslisteFürHerren";
-            this.btnParümslisteFürHerren.ShadowDecoration.Parent = this.btnParümslisteFürHerren;
-            this.btnParümslisteFürHerren.Size = new System.Drawing.Size(235, 36);
-            this.btnParümslisteFürHerren.TabIndex = 68;
-            this.btnParümslisteFürHerren.Text = "Parfümliste als PDF speichern";
-            this.btnParümslisteFürHerren.Click += new System.EventHandler(this.btnParümslisteFürHerren_Click);
-            // 
-            // btnParfümslisteFürUnisex
-            // 
-            this.btnParfümslisteFürUnisex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnParfümslisteFürUnisex.CheckedState.Parent = this.btnParfümslisteFürUnisex;
-            this.btnParfümslisteFürUnisex.CustomImages.Parent = this.btnParfümslisteFürUnisex;
-            this.btnParfümslisteFürUnisex.FillColor = System.Drawing.Color.DarkCyan;
-            this.btnParfümslisteFürUnisex.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnParfümslisteFürUnisex.ForeColor = System.Drawing.Color.Gold;
-            this.btnParfümslisteFürUnisex.HoverState.Parent = this.btnParfümslisteFürUnisex;
-            this.btnParfümslisteFürUnisex.Location = new System.Drawing.Point(776, 25);
-            this.btnParfümslisteFürUnisex.Name = "btnParfümslisteFürUnisex";
-            this.btnParfümslisteFürUnisex.ShadowDecoration.Parent = this.btnParfümslisteFürUnisex;
-            this.btnParfümslisteFürUnisex.Size = new System.Drawing.Size(235, 36);
-            this.btnParfümslisteFürUnisex.TabIndex = 69;
-            this.btnParfümslisteFürUnisex.Text = "Parfümliste als PDF speichern";
-            this.btnParfümslisteFürUnisex.Click += new System.EventHandler(this.btnParfümslisteFürUnisex_Click);
-            // 
-            // btnParfümslisteFürOrientalisch
-            // 
-            this.btnParfümslisteFürOrientalisch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnParfümslisteFürOrientalisch.CheckedState.Parent = this.btnParfümslisteFürOrientalisch;
-            this.btnParfümslisteFürOrientalisch.CustomImages.Parent = this.btnParfümslisteFürOrientalisch;
-            this.btnParfümslisteFürOrientalisch.FillColor = System.Drawing.Color.DarkCyan;
-            this.btnParfümslisteFürOrientalisch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnParfümslisteFürOrientalisch.ForeColor = System.Drawing.Color.Gold;
-            this.btnParfümslisteFürOrientalisch.HoverState.Parent = this.btnParfümslisteFürOrientalisch;
-            this.btnParfümslisteFürOrientalisch.Location = new System.Drawing.Point(774, 33);
-            this.btnParfümslisteFürOrientalisch.Name = "btnParfümslisteFürOrientalisch";
-            this.btnParfümslisteFürOrientalisch.ShadowDecoration.Parent = this.btnParfümslisteFürOrientalisch;
-            this.btnParfümslisteFürOrientalisch.Size = new System.Drawing.Size(235, 36);
-            this.btnParfümslisteFürOrientalisch.TabIndex = 70;
-            this.btnParfümslisteFürOrientalisch.Text = "Parfümliste als PDF speichern";
-            this.btnParfümslisteFürOrientalisch.Click += new System.EventHandler(this.btnParfümslisteFürOrientalisch_Click);
             // 
             // frmParfüms
             // 
