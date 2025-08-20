@@ -57,6 +57,12 @@
     <Compile Include="frmAddUpdateParfüms.Designer.cs">
       <DependentUpon>frmAddUpdateParfüms.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmFlakons.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFlakons.Designer.cs">
+      <DependentUpon>frmFlakons.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmParfüms.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +73,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAddUpdateParfüms.resx">
       <DependentUpon>frmAddUpdateParfüms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFlakons.resx">
+      <DependentUpon>frmFlakons.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmParfüms.resx">
       <DependentUpon>frmParfüms.cs</DependentUpon>
@@ -120,6 +129,12 @@
     <PackageReference Include="iTextSharp">
       <Version>5.5.13.4</Version>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.4-beta1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flakons.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

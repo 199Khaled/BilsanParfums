@@ -10,3 +10,6 @@ C:\BilsanParfums\BilsanParfums\Data_Layer\obj\Debug\Data_Layer.csproj.AssemblyRe
 C:\BilsanParfums\BilsanParfums\Data_Layer\obj\Debug\Data_Layer.csproj.CoreCompileInputs.cache
 C:\BilsanParfums\BilsanParfums\Data_Layer\obj\Debug\Data_Layer.dll
 C:\BilsanParfums\BilsanParfums\Data_Layer\obj\Debug\Data_Layer.pdb
+C:\BilsanParfums\BilsanParfums\Data_Layer\bin\Debug\Newtonsoft.Json.dll
+C:\BilsanParfums\BilsanParfums\Data_Layer\bin\Debug\Newtonsoft.Json.xml
+C:\BilsanParfums\BilsanParfums\Data_Layer\obj\Debug\Data_Layer.csproj.Up2Date

@@ -61,3 +61,5 @@ C:\BilsanParfums\BilsanParfums\bin\Debug\itextsharp.dll
 C:\BilsanParfums\BilsanParfums\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.dll
 C:\BilsanParfums\BilsanParfums\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.pdb
 C:\BilsanParfums\BilsanParfums\bin\Debug\System.ValueTuple.dll
+C:\BilsanParfums\BilsanParfums\obj\Debug\BilsanParfums.frmFlakons.resources
+C:\BilsanParfums\BilsanParfums\bin\Debug\Newtonsoft.Json.dll

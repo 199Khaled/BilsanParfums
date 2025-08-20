@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsFlakons.cs" />
     <Compile Include="clsNeueParfümDaten.cs" />
     <Compile Include="clsParfüms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data_Layer\Data_Layer.csproj">

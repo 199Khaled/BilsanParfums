@@ -73,6 +73,16 @@ namespace BilsanParfums.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Flakons {
+            get {
+                object obj = ResourceManager.GetObject("Flakons", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap plus_10021331 {
             get {
                 object obj = ResourceManager.GetObject("plus_10021331", resourceCulture);
