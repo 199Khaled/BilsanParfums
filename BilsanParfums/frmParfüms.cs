@@ -541,8 +541,7 @@ namespace BilsanParfums
             if (parfuemDaten != null && parfuemDaten.Delete())
             {
                 // TODO: Korrekte Handhabung des AVL-Baums prüfen, falls nötig
-                // AutoComplete.AVLTree tree = new AutoComplete.AVLTree();
-                // tree.Delete(parfuemDaten.Name);
+                GlobalParfumeNameTree.Delete(parfuemDaten.Name);
 
                 MessageBox.Show("Parfümdaten wurden erfolgreich entfernt", "Entfernung", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 _AktualisiereDatenNachTab();

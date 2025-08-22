@@ -44,7 +44,7 @@ CREATE OR ALTER PROCEDURE SP_Add_Flakons
     @Form nvarchar(50) = NULL,
     @Verschlussart nvarchar(50) = NULL,
     @Farbe nvarchar(50) = NULL,
-    @FlakonsMengeInMl int,
+    @FlakonsMengeInMl nvarchar(10),
     @Flakons_pro_Karton int,
     @Kartons_Lager int,
     @Verbleibende_Flakons int = NULL,
@@ -71,7 +71,8 @@ BEGIN
     @Flakons_pro_Karton,
     @Kartons_Lager,
     @Verbleibende_Flakons,
-    @Erstellungsdatum);
+    @Erstellungsdatum
+);
 
         -- Set the new ID
         SET @NewID = SCOPE_IDENTITY();  -- Get the last inserted ID
@@ -89,11 +90,12 @@ CREATE OR ALTER PROCEDURE SP_Update_Flakons_ByID
     @Form nvarchar(50) = NULL,
     @Verschlussart nvarchar(50) = NULL,
     @Farbe nvarchar(50) = NULL,
-    @FlakonsMengeInMl int,
+    @FlakonsMengeInMl nvarchar(10),
     @Flakons_pro_Karton int,
     @Kartons_Lager int,
     @Verbleibende_Flakons int = NULL,
-    @Erstellungsdatum date = NULL
+    @Erstellungsdatum date = NULL
+
 )
 AS
 BEGIN
@@ -116,7 +118,8 @@ BEGIN
     [Flakons_pro_Karton] = @Flakons_pro_Karton,
     [Kartons_Lager] = @Kartons_Lager,
     [Verbleibende_Flakons] = @Verbleibende_Flakons,
-    [Erstellungsdatum] = @Erstellungsdatum
+    [Erstellungsdatum] = @Erstellungsdatum
+
         WHERE FlakonID = @FlakonID;
         
         -- Optionally, you can check if the update was successful and raise an error if no rows were updated

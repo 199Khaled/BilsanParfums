@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="clsFlakons.cs" />
+    <Compile Include="clsFlakonsDatenzugriff.cs" />
     <Compile Include="clsNeueParfümDatenzugriff.cs" />
     <Compile Include="clsParfümDatenzugriff.cs" />
     <Compile Include="ConnectionString\clsDataAccessSettings.cs" />

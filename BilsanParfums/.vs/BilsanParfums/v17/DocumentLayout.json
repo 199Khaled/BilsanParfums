@@ -3,40 +3,36 @@
   "WorkspaceRootPath": "C:\\BilsanParfums\\BilsanParfums\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1E9FE21D-3753-4A99-A158-64390E92F7A7}|Busnisse_Layer\\Busnisse_Layer.csproj|c:\\bilsanparfums\\bilsanparfums\\busnisse_layer\\clsflakons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E9FE21D-3753-4A99-A158-64390E92F7A7}|Busnisse_Layer\\Busnisse_Layer.csproj|solutionrelative:busnisse_layer\\clsflakons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|c:\\bilsanparfums\\bilsanparfums\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|c:\\bilsanparfums\\bilsanparfums\\frmaddupdateparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|solutionrelative:frmaddupdateparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|c:\\bilsanparfums\\bilsanparfums\\frmaddupdateparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|solutionrelative:frmaddupdateparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|C:\\BilsanParfums\\BilsanParfums\\frmparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|solutionrelative:frmparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|c:\\bilsanparfums\\bilsanparfums\\frmparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|solutionrelative:frmparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|c:\\bilsanparfums\\bilsanparfums\\frmparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|solutionrelative:frmparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|c:\\bilsanparfums\\bilsanparfums\\frmflakons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|C:\\BilsanParfums\\BilsanParfums\\frmflakons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|solutionrelative:frmflakons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|c:\\bilsanparfums\\bilsanparfums\\frmflakons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1E9FE21D-3753-4A99-A158-64390E92F7A7}|Busnisse_Layer\\Busnisse_Layer.csproj|c:\\bilsanparfums\\bilsanparfums\\busnisse_layer\\clsflakons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E9FE21D-3753-4A99-A158-64390E92F7A7}|Busnisse_Layer\\Busnisse_Layer.csproj|solutionrelative:busnisse_layer\\clsflakons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|C:\\BilsanParfums\\BilsanParfums\\frmflakons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|solutionrelative:frmflakons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CC70AB6-1F52-4774-A545-EA4E5A04BDB0}|Data_Layer\\Data_Layer.csproj|c:\\bilsanparfums\\bilsanparfums\\data_layer\\errorhandler\\clserrorhandlingmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CC70AB6-1F52-4774-A545-EA4E5A04BDB0}|Data_Layer\\Data_Layer.csproj|solutionrelative:data_layer\\errorhandler\\clserrorhandlingmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2CC70AB6-1F52-4774-A545-EA4E5A04BDB0}|Data_Layer\\Data_Layer.csproj|c:\\bilsanparfums\\bilsanparfums\\data_layer\\clsflakonsdatenzugriff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CC70AB6-1F52-4774-A545-EA4E5A04BDB0}|Data_Layer\\Data_Layer.csproj|solutionrelative:data_layer\\clsflakonsdatenzugriff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1E9FE21D-3753-4A99-A158-64390E92F7A7}|Busnisse_Layer\\Busnisse_Layer.csproj|c:\\bilsanparfums\\bilsanparfums\\busnisse_layer\\sqlhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E9FE21D-3753-4A99-A158-64390E92F7A7}|Busnisse_Layer\\Busnisse_Layer.csproj|solutionrelative:busnisse_layer\\sqlhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|c:\\bilsanparfums\\bilsanparfums\\frmaddupdateparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|solutionrelative:frmaddupdateparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,113 +42,88 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frmAddUpdateParf\u00FCms.cs",
-              "DocumentMoniker": "C:\\BilsanParfums\\BilsanParfums\\frmAddUpdateParf\u00FCms.cs",
-              "RelativeDocumentMoniker": "frmAddUpdateParf\u00FCms.cs",
-              "ToolTip": "C:\\BilsanParfums\\BilsanParfums\\frmAddUpdateParf\u00FCms.cs",
-              "RelativeToolTip": "frmAddUpdateParf\u00FCms.cs",
-              "ViewState": "AQIAAMsAAAAAAAAAAADwvzsAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\BilsanParfums\\BilsanParfums\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\BilsanParfums\\BilsanParfums\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABIAAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T15:24:27.167Z",
+              "WhenOpened": "2025-08-22T09:41:01.23Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "frmAddUpdateParf\u00FCms.cs [Entwurf]",
-              "DocumentMoniker": "C:\\BilsanParfums\\BilsanParfums\\frmAddUpdateParf\u00FCms.cs",
-              "RelativeDocumentMoniker": "frmAddUpdateParf\u00FCms.cs",
-              "ToolTip": "C:\\BilsanParfums\\BilsanParfums\\frmAddUpdateParf\u00FCms.cs [Entwurf]",
-              "RelativeToolTip": "frmAddUpdateParf\u00FCms.cs [Entwurf]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T15:24:24.897Z",
-              "EditorCaption": " [Entwurf]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "frmParf\u00FCms.cs",
-              "DocumentMoniker": "C:\\BilsanParfums\\BilsanParfums\\frmParf\u00FCms.cs",
-              "RelativeDocumentMoniker": "frmParf\u00FCms.cs",
-              "ToolTip": "C:\\BilsanParfums\\BilsanParfums\\frmParf\u00FCms.cs",
-              "RelativeToolTip": "frmParf\u00FCms.cs",
-              "ViewState": "AQIAAC8BAAAAAAAAAAApwDABAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T15:18:39.383Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "frmParf\u00FCms.cs [Entwurf]",
               "DocumentMoniker": "C:\\BilsanParfums\\BilsanParfums\\frmParf\u00FCms.cs",
               "RelativeDocumentMoniker": "frmParf\u00FCms.cs",
               "ToolTip": "C:\\BilsanParfums\\BilsanParfums\\frmParf\u00FCms.cs [Entwurf]",
               "RelativeToolTip": "frmParf\u00FCms.cs [Entwurf]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T15:18:34.438Z",
+              "WhenOpened": "2025-08-21T11:07:44.171Z",
               "EditorCaption": " [Entwurf]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "SqlHelper.cs",
-              "DocumentMoniker": "C:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\SqlHelper.cs",
-              "RelativeDocumentMoniker": "Busnisse_Layer\\SqlHelper.cs",
-              "ToolTip": "C:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\SqlHelper.cs",
-              "RelativeToolTip": "Busnisse_Layer\\SqlHelper.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAGAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T14:44:30.586Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "clsFlakons.cs",
               "DocumentMoniker": "C:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\clsFlakons.cs",
               "RelativeDocumentMoniker": "Busnisse_Layer\\clsFlakons.cs",
               "ToolTip": "C:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\clsFlakons.cs",
               "RelativeToolTip": "Busnisse_Layer\\clsFlakons.cs",
-              "ViewState": "AQIAADgAAAAAAAAAAADwvwMAAAAGAAAA",
+              "ViewState": "AQIAAIsAAAAAAAAAAAAMwJwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T14:44:24.809Z",
+              "WhenOpened": "2025-08-21T10:36:19.933Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "clsErrorHandlingManager.cs",
-              "DocumentMoniker": "C:\\BilsanParfums\\BilsanParfums\\Data_Layer\\ErrorHandler\\clsErrorHandlingManager.cs",
-              "RelativeDocumentMoniker": "Data_Layer\\ErrorHandler\\clsErrorHandlingManager.cs",
-              "ToolTip": "C:\\BilsanParfums\\BilsanParfums\\Data_Layer\\ErrorHandler\\clsErrorHandlingManager.cs",
-              "RelativeToolTip": "Data_Layer\\ErrorHandler\\clsErrorHandlingManager.cs",
-              "ViewState": "AQIAAEIAAAAAAAAAAAApwE0AAAA+AAAA",
+              "Title": "frmAddUpdateParf\u00FCms.cs",
+              "DocumentMoniker": "C:\\BilsanParfums\\BilsanParfums\\frmAddUpdateParf\u00FCms.cs",
+              "RelativeDocumentMoniker": "frmAddUpdateParf\u00FCms.cs",
+              "ToolTip": "C:\\BilsanParfums\\BilsanParfums\\frmAddUpdateParf\u00FCms.cs",
+              "RelativeToolTip": "frmAddUpdateParf\u00FCms.cs",
+              "ViewState": "AQIAAAIBAAAAAAAAAAAmwAABAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T14:44:15.349Z",
+              "WhenOpened": "2025-08-21T08:46:45.749Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
+              "Title": "frmParf\u00FCms.cs",
+              "DocumentMoniker": "C:\\BilsanParfums\\BilsanParfums\\frmParf\u00FCms.cs",
+              "RelativeDocumentMoniker": "frmParf\u00FCms.cs",
+              "ToolTip": "C:\\BilsanParfums\\BilsanParfums\\frmParf\u00FCms.cs",
+              "RelativeToolTip": "frmParf\u00FCms.cs",
+              "ViewState": "AQIAABECAAAAAAAAAAAhwCACAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T15:18:39.383Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "frmFlakons.cs",
               "DocumentMoniker": "C:\\BilsanParfums\\BilsanParfums\\frmFlakons.cs",
               "RelativeDocumentMoniker": "frmFlakons.cs",
               "ToolTip": "C:\\BilsanParfums\\BilsanParfums\\frmFlakons.cs",
               "RelativeToolTip": "frmFlakons.cs",
-              "ViewState": "AQIAADsAAAAAAAAAAADgv04AAABPAAAA",
+              "ViewState": "AQIAACsBAAAAAAAAAAAowDMBAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-20T13:41:33.567Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "frmFlakons.cs [Entwurf]",
               "DocumentMoniker": "C:\\BilsanParfums\\BilsanParfums\\frmFlakons.cs",
               "RelativeDocumentMoniker": "frmFlakons.cs",
@@ -161,6 +132,19 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-20T11:27:46.197Z",
               "EditorCaption": " [Entwurf]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "clsFlakonsDatenzugriff.cs",
+              "DocumentMoniker": "C:\\BilsanParfums\\BilsanParfums\\Data_Layer\\clsFlakonsDatenzugriff.cs",
+              "RelativeDocumentMoniker": "Data_Layer\\clsFlakonsDatenzugriff.cs",
+              "ToolTip": "C:\\BilsanParfums\\BilsanParfums\\Data_Layer\\clsFlakonsDatenzugriff.cs",
+              "RelativeToolTip": "Data_Layer\\clsFlakonsDatenzugriff.cs",
+              "ViewState": "AQIAAN0AAAAAAAAAAAAhwOkAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T11:04:54.848Z",
+              "EditorCaption": ""
             }
           ]
         }
