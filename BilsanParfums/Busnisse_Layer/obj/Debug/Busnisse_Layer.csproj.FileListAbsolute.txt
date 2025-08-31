@@ -18,3 +18,14 @@ C:\BilsanParfums\BilsanParfums\Busnisse_Layer\obj\Debug\Busnisse_Layer.dll
 C:\BilsanParfums\BilsanParfums\Busnisse_Layer\obj\Debug\Busnisse_Layer.pdb
 C:\BilsanParfums\BilsanParfums\Busnisse_Layer\bin\Debug\Newtonsoft.Json.dll
 C:\BilsanParfums\BilsanParfums\Busnisse_Layer\bin\Debug\Newtonsoft.Json.xml
+D:\BilsanParfums\BilsanParfums\Busnisse_Layer\bin\Debug\Busnisse_Layer.dll
+D:\BilsanParfums\BilsanParfums\Busnisse_Layer\bin\Debug\Busnisse_Layer.pdb
+D:\BilsanParfums\BilsanParfums\Busnisse_Layer\bin\Debug\Data_Layer.dll
+D:\BilsanParfums\BilsanParfums\Busnisse_Layer\bin\Debug\Newtonsoft.Json.dll
+D:\BilsanParfums\BilsanParfums\Busnisse_Layer\bin\Debug\Data_Layer.pdb
+D:\BilsanParfums\BilsanParfums\Busnisse_Layer\bin\Debug\Newtonsoft.Json.xml
+D:\BilsanParfums\BilsanParfums\Busnisse_Layer\obj\Debug\Busnisse_Layer.csproj.AssemblyReference.cache
+D:\BilsanParfums\BilsanParfums\Busnisse_Layer\obj\Debug\Busnisse_Layer.csproj.CoreCompileInputs.cache
+D:\BilsanParfums\BilsanParfums\Busnisse_Layer\obj\Debug\Busnisse.689CA989.Up2Date
+D:\BilsanParfums\BilsanParfums\Busnisse_Layer\obj\Debug\Busnisse_Layer.dll
+D:\BilsanParfums\BilsanParfums\Busnisse_Layer\obj\Debug\Busnisse_Layer.pdb

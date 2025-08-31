@@ -1819,24 +1819,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Khaled\\.nuget\\packages\\": {},
+    "C:\\Users\\khale\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\BilsanParfums\\BilsanParfums\\BilsanParfums.csproj",
+      "projectUniqueName": "D:\\BilsanParfums\\BilsanParfums\\BilsanParfums.csproj",
       "projectName": "BilsanParfums",
-      "projectPath": "C:\\BilsanParfums\\BilsanParfums\\BilsanParfums.csproj",
-      "packagesPath": "C:\\Users\\Khaled\\.nuget\\packages\\",
-      "outputPath": "C:\\BilsanParfums\\BilsanParfums\\obj\\",
+      "projectPath": "D:\\BilsanParfums\\BilsanParfums\\BilsanParfums.csproj",
+      "packagesPath": "C:\\Users\\khale\\.nuget\\packages\\",
+      "outputPath": "D:\\BilsanParfums\\BilsanParfums\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
+      "UsingMicrosoftNETSdk": false,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Khaled\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\khale\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1850,11 +1851,11 @@
       "frameworks": {
         "net472": {
           "projectReferences": {
-            "C:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\Busnisse_Layer.csproj": {
-              "projectPath": "C:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\Busnisse_Layer.csproj"
+            "D:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\Busnisse_Layer.csproj": {
+              "projectPath": "D:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\Busnisse_Layer.csproj"
             },
-            "C:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj": {
-              "projectPath": "C:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj"
+            "D:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj": {
+              "projectPath": "D:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj"
             }
           }
         }

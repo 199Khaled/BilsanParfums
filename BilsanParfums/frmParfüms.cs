@@ -1110,7 +1110,7 @@ namespace BilsanParfums
         {
             if (dgvHerrenParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvHerrenParfüms.CurrentRow.Cells[0].Value;
+                int parfümNummer = (int)dgvHerrenParfüms.CurrentRow.Cells[1].Value;
                 _ÖffneAddUpdateForm(parfümNummer);
             }
         }
@@ -1129,9 +1129,9 @@ namespace BilsanParfums
         }
         private void dgvHerrenParfüms_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dgvHerrenParfüms.Rows[e.RowIndex].Cells[2].Value != null)
+            if (e.RowIndex >= 0 && dgvHerrenParfüms.Rows[e.RowIndex].Cells[3].Value != null)
             {
-                string currentName = dgvHerrenParfüms.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string currentName = dgvHerrenParfüms.Rows[e.RowIndex].Cells[3].Value.ToString();
                 _ÖffneParfumoWebseite(currentName);
             }
         }
