@@ -18,6 +18,8 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using static clsHilfsMethoden.AutoComplete;
+using ClosedXML;
+using ClosedXML.Excel;
 
 namespace BilsanParfums
 {
@@ -271,7 +273,7 @@ namespace BilsanParfums
             if (tabControl1.SelectedTab == tabAllgemein)
             {
                 _LadeAlleParfümDaten();
-               // _MarkiereParfümZeilen(dgvAlleParfüms);
+                // _MarkiereParfümZeilen(dgvAlleParfüms);
             }
             else if (tabControl1.SelectedTab == tabHerrendüfte)
             {
@@ -281,7 +283,7 @@ namespace BilsanParfums
             else if (tabControl1.SelectedTab == tabDamendüfte)
             {
                 _LadeFrauenParfümDaten();
-               // _MarkiereParfümZeilen(dgvDamenParfüms);
+                // _MarkiereParfümZeilen(dgvDamenParfüms);
             }
             else if (tabControl1.SelectedTab == tabUnisexdüfte)
             {
@@ -291,7 +293,7 @@ namespace BilsanParfums
             else if (tabControl1.SelectedTab == tabKinderdüfte)
             {
                 _LadeKinderParfümDaten();
-               // _MarkiereParfümZeilen(dgvKinderParfüms);
+                // _MarkiereParfümZeilen(dgvKinderParfüms);
             }
             else if (tabControl1.SelectedTab == tabOrientalischedüfte)
             {
@@ -342,7 +344,7 @@ namespace BilsanParfums
         /// <summary>
         /// Wendet den Filter basierend auf der Auswahl an.
         /// </summary>
-        private void _FilterAnwenden(Guna2ComboBox filterComboBox, Guna2TextBox filterTextBox, 
+        private void _FilterAnwenden(Guna2ComboBox filterComboBox, Guna2TextBox filterTextBox,
             BindingSource bindingSource, DataGridView dgv)
         {
             lock (_filterLock)
@@ -489,7 +491,7 @@ namespace BilsanParfums
         {
             using (frmAddUpdateParfüms frm = new frmAddUpdateParfüms(parfümNummer))
             {
-                 if (frm.ShowDialog() == DialogResult.OK)
+                if (frm.ShowDialog() == DialogResult.OK)
                 {
                     // Rufen Sie die Methode auf, um den ausgewählten Tab zu aktualisieren
                     _AktualisiereDatenNachTab();
@@ -498,7 +500,7 @@ namespace BilsanParfums
                     _InitialisiereUndFülleAutoCompleteBaum();
                 }
             }
-         
+
         }
         private void _AktualisiereDatenNachTab()
         {
@@ -597,7 +599,7 @@ namespace BilsanParfums
                     if (suggestionsListBox.Visible)
                     {
                         suggestionsListBox.BringToFront();
-                       suggestionsListBox.SelectedIndex = -1; // Wähle den ersten Eintrag aus
+                        suggestionsListBox.SelectedIndex = -1; // Wähle den ersten Eintrag aus
                         filterTextBox.Focus(); // Setze den Fokus auf die ListBox
                     }
                 }
@@ -617,7 +619,7 @@ namespace BilsanParfums
                 suggestionsListBox.Visible = false;
 
                 // Hier wird die ComboBox korrekt übergeben
-                _FilterAnwenden(filterComboBox, filterTextBox, bindingSource,dgv);
+                _FilterAnwenden(filterComboBox, filterTextBox, bindingSource, dgv);
             }
             else
             {
@@ -667,7 +669,7 @@ namespace BilsanParfums
             else // Wenn kein Element ausgewählt ist (SelectedIndex ist -1)
             {
                 txtFilterwert.Clear();        // Textfeld leeren
-                                                   //  txtHerrenFilterwert.ReadOnly = true;  // Eingabe verhindern                                                           // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar is                                                     // this.ActiveControl = cbOrientalischFilterby;
+                                              //  txtHerrenFilterwert.ReadOnly = true;  // Eingabe verhindern                                                           // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar is                                                     // this.ActiveControl = cbOrientalischFilterby;
             }
             _MarkiereParfümZeilen(dgvAlleParfüms);
         }
@@ -821,7 +823,7 @@ namespace BilsanParfums
             else // Wenn kein Element ausgewählt ist (SelectedIndex ist -1)
             {
                 txtDamenFilterwert.Clear();        // Textfeld leeren
-              //  txtHerrenFilterwert.ReadOnly = true;  // Eingabe verhindern                                                           // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar is                                                     // this.ActiveControl = cbOrientalischFilterby;
+                                                   //  txtHerrenFilterwert.ReadOnly = true;  // Eingabe verhindern                                                           // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar is                                                     // this.ActiveControl = cbOrientalischFilterby;
             }
             _MarkiereParfümZeilen(dgvDamenParfüms);
         }
@@ -867,19 +869,19 @@ namespace BilsanParfums
             else
             {
                 lbVorschlägeFürDamen.Visible = false;
-                _FilterAnwenden(cbDamenFilterby, txtDamenFilterwert, _bindingSourceDamenParfüms,dgvDamenParfüms);
+                _FilterAnwenden(cbDamenFilterby, txtDamenFilterwert, _bindingSourceDamenParfüms, dgvDamenParfüms);
             }
-           // _MarkiereParfümZeilen(dgvDamenParfüms);
+            // _MarkiereParfümZeilen(dgvDamenParfüms);
         }
         private void lbVorschlägeFürDamen_Click(object sender, EventArgs e)
         {
-            _WähleVorschlagAus(cbDamenFilterby, txtDamenFilterwert, lbVorschlägeFürDamen, _bindingSourceDamenParfüms,dgvDamenParfüms);
+            _WähleVorschlagAus(cbDamenFilterby, txtDamenFilterwert, lbVorschlägeFürDamen, _bindingSourceDamenParfüms, dgvDamenParfüms);
         }
         private void lbVorschlägeFürDamen_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                _WähleVorschlagAus(cbDamenFilterby, txtDamenFilterwert, lbVorschlägeFürDamen, _bindingSourceDamenParfüms,dgvDamenParfüms);
+                _WähleVorschlagAus(cbDamenFilterby, txtDamenFilterwert, lbVorschlägeFürDamen, _bindingSourceDamenParfüms, dgvDamenParfüms);
                 e.Handled = true;
             }
             else if (e.KeyCode == Keys.Escape)
@@ -1012,7 +1014,7 @@ namespace BilsanParfums
             else // Wenn kein Element ausgewählt ist (SelectedIndex ist -1)
             {
                 txtHerrenFilterwert.Clear();        // Textfeld leeren
-               // txtHerrenFilterwert.ReadOnly = true;  // Eingabe verhindern                                                           // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar is                                                     // this.ActiveControl = cbOrientalischFilterby;
+                                                    // txtHerrenFilterwert.ReadOnly = true;  // Eingabe verhindern                                                           // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar is                                                     // this.ActiveControl = cbOrientalischFilterby;
             }
             _MarkiereParfümZeilen(dgvHerrenParfüms);
         }
@@ -1058,20 +1060,20 @@ namespace BilsanParfums
             else
             {
                 lbVorschälgeFürHerrendüfte.Visible = false;
-                _FilterAnwenden(cbHerrenFilterby, txtHerrenFilterwert, _bindingSourceHerrenParfüms,dgvHerrenParfüms);
+                _FilterAnwenden(cbHerrenFilterby, txtHerrenFilterwert, _bindingSourceHerrenParfüms, dgvHerrenParfüms);
             }
             //_MarkiereParfümZeilen(dgvHerrenParfüms);
         }
         private void lbVorschälgeFürHerrendüfte_Click(object sender, EventArgs e)
         {
-            _WähleVorschlagAus(cbHerrenFilterby, txtHerrenFilterwert, lbVorschälgeFürHerrendüfte, _bindingSourceHerrenParfüms,dgvHerrenParfüms);
+            _WähleVorschlagAus(cbHerrenFilterby, txtHerrenFilterwert, lbVorschälgeFürHerrendüfte, _bindingSourceHerrenParfüms, dgvHerrenParfüms);
         }
 
         private void lbVorschälgeFürHerrendüfte_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                _WähleVorschlagAus(cbHerrenFilterby, txtHerrenFilterwert, lbVorschälgeFürHerrendüfte, _bindingSourceHerrenParfüms,dgvHerrenParfüms);
+                _WähleVorschlagAus(cbHerrenFilterby, txtHerrenFilterwert, lbVorschälgeFürHerrendüfte, _bindingSourceHerrenParfüms, dgvHerrenParfüms);
                 e.Handled = true;
             }
             else if (e.KeyCode == Keys.Escape)
@@ -1183,13 +1185,13 @@ namespace BilsanParfums
             if (cbUnisexFilterby.SelectedIndex != -1)
             {
                 txtUnisexFilterwert.Clear();        // Textfeld leeren
-               // txtUnisexFilterwert.ReadOnly = false; // Eingabe erlauben
+                                                    // txtUnisexFilterwert.ReadOnly = false; // Eingabe erlauben
                 txtUnisexFilterwert.Focus();        // Fokus auf das Textfeld setzen
             }
             else // Wenn kein Element ausgewählt ist (SelectedIndex ist -1)
             {
                 txtUnisexFilterwert.Clear();        // Textfeld leeren
-               // txtUnisexFilterwert.ReadOnly = true;  // Eingabe verhindern                                                           // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar is                                                     // this.ActiveControl = cbOrientalischFilterby;
+                                                    // txtUnisexFilterwert.ReadOnly = true;  // Eingabe verhindern                                                           // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar is                                                     // this.ActiveControl = cbOrientalischFilterby;
             }
             _MarkiereParfümZeilen(dgvUnisexParfüms);
         }
@@ -1236,9 +1238,9 @@ namespace BilsanParfums
             else
             {
                 lbVorschlägeFürUnisexdüfte.Visible = false;
-                _FilterAnwenden(cbUnisexFilterby, txtUnisexFilterwert, _bindingSourceUnisexParfüms,dgvUnisexParfüms);
+                _FilterAnwenden(cbUnisexFilterby, txtUnisexFilterwert, _bindingSourceUnisexParfüms, dgvUnisexParfüms);
             }
-           // _MarkiereParfümZeilen(dgvUnisexParfüms);
+            // _MarkiereParfümZeilen(dgvUnisexParfüms);
         }
         private void lbVorschlägeFürUnisexdüfte_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1336,7 +1338,7 @@ namespace BilsanParfums
             else // Für alle anderen Filtertypen (Name, Marke, Nummer etc.)
             {
                 cbOrientalischeParfümsStatus.Visible = false; // Blendet die Status-ComboBox aus
-                                                               // Optional: cbIsVorhandenOderInBestellung.SelectedIndex = -1; // Setzt die Auswahl zurück
+                                                              // Optional: cbIsVorhandenOderInBestellung.SelectedIndex = -1; // Setzt die Auswahl zurück
                 txtOrientalischFilterwert.Visible = true;     // Zeigt das Textfeld an
             }
 
@@ -1353,9 +1355,9 @@ namespace BilsanParfums
             else // Wenn kein Element ausgewählt ist (SelectedIndex ist -1)
             {
                 txtOrientalischFilterwert.Clear();        // Textfeld leeren
-               // txtOrientalischFilterwert.ReadOnly = true;  // Eingabe verhindern
-                                                            // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar ist
-                                                            // this.ActiveControl = cbOrientalischFilterby;
+                                                          // txtOrientalischFilterwert.ReadOnly = true;  // Eingabe verhindern
+                                                          // Optional: Den Fokus von der TextBox entfernen, wenn sie nicht nutzbar ist
+                                                          // this.ActiveControl = cbOrientalischFilterby;
             }
             _MarkiereParfümZeilen(dgvOrientalischeParfüms);
 
@@ -1536,7 +1538,8 @@ namespace BilsanParfums
             }
 
             // Rufen Sie die Methode mit dem Titel und dem Filter-Typ auf
-            _ErstellePdfVonParfuem(dgvAlleParfüms, pdfTitle, filterType);
+            //_ErstellePdfVonParfuem(dgvAlleParfüms, pdfTitle, filterType);
+            _ErstelleExcelVonParfuem(dgvAlleParfüms, pdfTitle, filterType);
         }
 
         private void _ErstellePdfVonParfuem(DataGridView dgv, string pdfTitle, string filterType)
@@ -1777,6 +1780,103 @@ namespace BilsanParfums
 
             // Rufen Sie die Methode mit dem Titel und dem Filter-Typ auf
             _ErstellePdfVonParfuem(dgvOrientalischeParfüms, pdfTitle, filterType);
+        }
+        private void _ErstelleExcelVonParfuem(DataGridView dgv, string excelTitle, string filterType)
+        {
+            // Pfad zum Desktop des aktuellen Benutzers
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            // Name und Pfad der Excel-Datei
+            string fileName = excelTitle + "-" + DateTime.Now.ToString("dd.MM.yyyy") + ".xlsx";
+            string filePath = Path.Combine(desktopPath, fileName);
+
+            try
+            {
+                using (var workbook = new XLWorkbook())
+                {
+                    var worksheet = workbook.Worksheets.Add("Parfüms");
+
+                    // Spaltennamen für die Nummer
+                    string nummerSpaltenName = (filterType == "Vorhanden") ? "Parfümnummer" : "AlteNummer";
+
+                    // Header schreiben (nur 3 Spalten)
+                    worksheet.Cell(1, 1).Value = nummerSpaltenName;
+                    worksheet.Cell(1, 2).Value = "Marke";
+                    worksheet.Cell(1, 3).Value = "Name";
+                    worksheet.Range(1, 1, 1, 3).Style.Fill.BackgroundColor = XLColor.LightGray;
+                    worksheet.Range(1, 1, 1, 3).Style.Font.Bold = true;
+
+                    // Filterlogik anwenden
+                    var parfums = dgv.Rows.Cast<DataGridViewRow>().Where(row => !row.IsNewRow);
+
+                    if (filterType == "Vorhanden")
+                    {
+                        parfums = parfums.Where(row => (bool)row.Cells["IstVorhanden"].Value == true);
+                    }
+                    else if (filterType == "In Bestellung")
+                    {
+                        parfums = parfums.Where(row => (bool)row.Cells["InBestellung"].Value == true);
+                    }
+
+                    var sortierteParfums = parfums
+                        .OrderBy(row => row.Cells["Kategorie"].Value?.ToString())
+                        .ToList();
+
+                    string aktuelleKategorie = "";
+                    int excelRow = 2;
+
+                    foreach (var row in sortierteParfums)
+                    {
+                        var kategorie = row.Cells["Kategorie"]?.Value?.ToString();
+                        var parfuemNummer = row.Cells[nummerSpaltenName]?.Value?.ToString();
+                        var parfuemMarke = row.Cells["Marke"]?.Value?.ToString();
+                        var parfuemName = row.Cells["Name"]?.Value?.ToString();
+
+                        if (!string.IsNullOrEmpty(parfuemNummer) && !string.IsNullOrEmpty(parfuemMarke) && !string.IsNullOrEmpty(parfuemName))
+                        {
+                            // Neue Kategorie als Überschrift
+                            if (kategorie != aktuelleKategorie)
+                            {
+                                worksheet.Cell(excelRow, 1).Value = $"--- {kategorie} ---";
+                                worksheet.Range(excelRow, 1, excelRow, 3).Merge();
+                                worksheet.Row(excelRow).Style.Fill.BackgroundColor = XLColor.LightGreen;
+                                worksheet.Row(excelRow).Style.Font.Bold = true;
+                                worksheet.Row(excelRow).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+                                excelRow++;
+                                aktuelleKategorie = kategorie;
+                            }
+
+                            // Datenzeile
+                            worksheet.Cell(excelRow, 1).Value = parfuemNummer;
+                            worksheet.Cell(excelRow, 2).Value = parfuemMarke;
+                            worksheet.Cell(excelRow, 3).Value = parfuemName;
+
+                            // Abwechselnde Hintergrundfarben
+                            if ((excelRow % 2) == 0)
+                                worksheet.Row(excelRow).Style.Fill.BackgroundColor = XLColor.LightYellow;
+                            else
+                                worksheet.Row(excelRow).Style.Fill.BackgroundColor = XLColor.LightPink;
+
+                            excelRow++;
+                        }
+                    }
+
+                    // Automatisch Spaltenbreite anpassen
+                    worksheet.Columns().AdjustToContents();
+
+                    // Datei speichern
+                    workbook.SaveAs(filePath);
+                }
+
+                // Erfolgsmeldung
+                MessageBox.Show($"Die Excel-Datei wurde erfolgreich auf dem Desktop gespeichert:\n{filePath}", "Erfolg", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                // Fehlerbehandlung
+                MessageBox.Show($"Fehler beim Speichern der Excel-Datei: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

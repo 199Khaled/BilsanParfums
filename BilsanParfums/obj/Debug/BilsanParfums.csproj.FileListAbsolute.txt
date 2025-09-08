@@ -90,3 +90,16 @@ D:\BilsanParfums\BilsanParfums\obj\Debug\BilsanParfums.csproj.CoreCompileInputs.
 D:\BilsanParfums\BilsanParfums\obj\Debug\BilsanPa.685CCE3D.Up2Date
 D:\BilsanParfums\BilsanParfums\obj\Debug\BilsanParfums.exe
 D:\BilsanParfums\BilsanParfums\obj\Debug\BilsanParfums.pdb
+C:\BilsanParfums\BilsanParfums\bin\Debug\ClosedXML.dll
+C:\BilsanParfums\BilsanParfums\bin\Debug\ClosedXML.pdb
+C:\BilsanParfums\BilsanParfums\bin\Debug\ClosedXML.Parser.dll
+C:\BilsanParfums\BilsanParfums\bin\Debug\DocumentFormat.OpenXml.dll
+C:\BilsanParfums\BilsanParfums\bin\Debug\DocumentFormat.OpenXml.Framework.dll
+C:\BilsanParfums\BilsanParfums\bin\Debug\ExcelNumberFormat.dll
+C:\BilsanParfums\BilsanParfums\bin\Debug\Microsoft.Bcl.HashCode.dll
+C:\BilsanParfums\BilsanParfums\bin\Debug\RBush.dll
+C:\BilsanParfums\BilsanParfums\bin\Debug\SixLabors.Fonts.dll
+C:\BilsanParfums\BilsanParfums\bin\Debug\System.Buffers.dll
+C:\BilsanParfums\BilsanParfums\bin\Debug\System.Memory.dll
+C:\BilsanParfums\BilsanParfums\bin\Debug\System.Numerics.Vectors.dll
+C:\BilsanParfums\BilsanParfums\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
