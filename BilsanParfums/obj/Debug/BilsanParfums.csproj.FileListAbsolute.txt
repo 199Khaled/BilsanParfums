@@ -103,3 +103,14 @@ C:\BilsanParfums\BilsanParfums\bin\Debug\System.Buffers.dll
 C:\BilsanParfums\BilsanParfums\bin\Debug\System.Memory.dll
 C:\BilsanParfums\BilsanParfums\bin\Debug\System.Numerics.Vectors.dll
 C:\BilsanParfums\BilsanParfums\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\BilsanParfums\BilsanParfums\bin\Debug\System.Memory.dll
+D:\BilsanParfums\BilsanParfums\bin\Debug\DocumentFormat.OpenXml.Framework.dll
+D:\BilsanParfums\BilsanParfums\bin\Debug\DocumentFormat.OpenXml.dll
+D:\BilsanParfums\BilsanParfums\bin\Debug\SixLabors.Fonts.dll
+D:\BilsanParfums\BilsanParfums\bin\Debug\ExcelNumberFormat.dll
+D:\BilsanParfums\BilsanParfums\bin\Debug\ClosedXML.Parser.dll
+D:\BilsanParfums\BilsanParfums\bin\Debug\Microsoft.Bcl.HashCode.dll
+D:\BilsanParfums\BilsanParfums\bin\Debug\System.Buffers.dll
+D:\BilsanParfums\BilsanParfums\bin\Debug\RBush.dll
+D:\BilsanParfums\BilsanParfums\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\BilsanParfums\BilsanParfums\bin\Debug\ClosedXML.pdb

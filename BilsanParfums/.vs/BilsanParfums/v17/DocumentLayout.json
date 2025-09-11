@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\BilsanParfums\\BilsanParfums\\",
+  "WorkspaceRootPath": "D:\\BilsanParfums\\BilsanParfums\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|c:\\bilsanparfums\\bilsanparfums\\frmparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|d:\\bilsanparfums\\bilsanparfums\\frmparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|solutionrelative:frmparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|C:\\BilsanParfums\\BilsanParfums\\frmparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|D:\\BilsanParfums\\BilsanParfums\\frmparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{0B594D30-1DCF-4EBD-A78E-1CBAC26A3FB3}|BilsanParfums.csproj|solutionrelative:frmparf\u00FCms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -18,17 +18,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "frmParf\u00FCms.cs",
-              "DocumentMoniker": "C:\\BilsanParfums\\BilsanParfums\\frmParf\u00FCms.cs",
+              "DocumentMoniker": "D:\\BilsanParfums\\BilsanParfums\\frmParf\u00FCms.cs",
               "RelativeDocumentMoniker": "frmParf\u00FCms.cs",
-              "ToolTip": "C:\\BilsanParfums\\BilsanParfums\\frmParf\u00FCms.cs",
+              "ToolTip": "D:\\BilsanParfums\\BilsanParfums\\frmParf\u00FCms.cs",
               "RelativeToolTip": "frmParf\u00FCms.cs",
-              "ViewState": "AQIAACgHAAAAAAAAAAAmwAUGAAA9AAAA",
+              "ViewState": "AgIAAPQGAAAAAAAAAAAuwAIHAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-25T17:57:14.311Z",
               "EditorCaption": ""
@@ -36,14 +52,24 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "frmParf\u00FCms.cs [Entwurf]",
-              "DocumentMoniker": "C:\\BilsanParfums\\BilsanParfums\\frmParf\u00FCms.cs",
+              "Title": "frmParf\u00FCms.cs [Design]",
+              "DocumentMoniker": "D:\\BilsanParfums\\BilsanParfums\\frmParf\u00FCms.cs",
               "RelativeDocumentMoniker": "frmParf\u00FCms.cs",
-              "ToolTip": "C:\\BilsanParfums\\BilsanParfums\\frmParf\u00FCms.cs [Entwurf]",
-              "RelativeToolTip": "frmParf\u00FCms.cs [Entwurf]",
+              "ToolTip": "D:\\BilsanParfums\\BilsanParfums\\frmParf\u00FCms.cs [Design]",
+              "RelativeToolTip": "frmParf\u00FCms.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-25T17:56:53.475Z",
-              "EditorCaption": " [Entwurf]"
+              "EditorCaption": " [Design]"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 56,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         }
