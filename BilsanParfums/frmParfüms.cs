@@ -1538,153 +1538,247 @@ namespace BilsanParfums
             }
 
             // Rufen Sie die Methode mit dem Titel und dem Filter-Typ auf
-            //_ErstellePdfVonParfuem(dgvAlleParfüms, pdfTitle, filterType);
-            _ErstelleExcelVonParfuem(dgvAlleParfüms, pdfTitle, filterType);
+            _ErstellePdfVonParfuem(dgvAlleParfüms, pdfTitle, filterType);
+            //_ErstelleExcelVonParfuem(dgvAlleParfüms, pdfTitle, filterType);
         }
-
         private void _ErstellePdfVonParfuem(DataGridView dgv, string pdfTitle, string filterType)
         {
-            // Pfad zum Desktop des aktuellen Benutzers
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-            // Name und Pfad der PDF-Datei
             string fileName = pdfTitle + "-" + DateTime.Now.ToString("dd.MM.yyyy") + ".pdf";
             string filePath = Path.Combine(desktopPath, fileName);
 
             try
             {
-                // PDF speichern
                 using (FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
                 {
-                    using (Document pdfDoc = new Document())
+                    using (Document pdfDoc = new Document(PageSize.A4, 20f, 20f, 20f, 20f))
                     {
                         PdfWriter.GetInstance(pdfDoc, stream);
                         pdfDoc.Open();
 
-                        // Erstelle eine Tabelle mit 3 Spalten
-                        PdfPTable table = new PdfPTable(4);
+                        // Tabelle mit 5 Spalten
+                        PdfPTable table = new PdfPTable(5);
                         table.WidthPercentage = 100;
-                        // Spaltennamen für die Nummer
-                        string nummerSpaltenName = (filterType == "Vorhanden") ? "Parfümnummer" : "AlteNummer";
+                        table.SetWidths(new float[] { 1.5f, 1.5f, 2f, 3f, 2.5f }); // Breitenverteilung
 
-                        // Header in der PDF-Tabelle festlegen
-                        table.AddCell(new PdfPCell(new Phrase(nummerSpaltenName)) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 10f });
-                        table.AddCell(new PdfPCell(new Phrase("Marke")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 10f });
-                        table.AddCell(new PdfPCell(new Phrase("Name")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 10f });
-                        table.AddCell(new PdfPCell(new Phrase("Duftrichtung")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 10f });
+                        // Header
+                        table.AddCell(new PdfPCell(new Phrase("AlteNummer")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 8f });
+                        table.AddCell(new PdfPCell(new Phrase("Parfümnummer")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 8f });
+                        table.AddCell(new PdfPCell(new Phrase("Marke")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 8f });
+                        table.AddCell(new PdfPCell(new Phrase("Name")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 8f });
+                        table.AddCell(new PdfPCell(new Phrase("Duftrichtung")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 8f });
 
-
-
-                        //// Header mit Hintergrundfarbe
-                        //table.AddCell(new PdfPCell(new Phrase("Parfümnummer"))
-                        //{
-                        //    BackgroundColor = BaseColor.LIGHT_GRAY,
-                        //    Padding = 10f
-                        //});
-                        //table.AddCell(new PdfPCell(new Phrase("Parfümmarke"))
-                        //{
-                        //    BackgroundColor = BaseColor.LIGHT_GRAY,
-                        //    Padding = 10f
-                        //});
-                        //table.AddCell(new PdfPCell(new Phrase("Parfümname"))
-                        //{
-                        //    BackgroundColor = BaseColor.LIGHT_GRAY,
-                        //    Padding = 10f
-                        //});
-
-                        // Filterlogik basierend auf dem `filterType`-Parameter
+                        // Filterlogik
                         var parfums = dgv.Rows.Cast<DataGridViewRow>().Where(row => !row.IsNewRow);
 
                         if (filterType == "Vorhanden")
-                        {
                             parfums = parfums.Where(row => (bool)row.Cells["IstVorhanden"].Value == true);
-                        }
                         else if (filterType == "In Bestellung")
-                        {
-                            parfums = parfums.Where(row => (bool)row.Cells["InBestellung"].Value == true); // Annahme: Es gibt eine Spalte "InBestellung"
-                        }
+                            parfums = parfums.Where(row => (bool)row.Cells["InBestellung"].Value == true);
 
                         var sortierteParfums = parfums.OrderBy(row => row.Cells["Kategorie"].Value?.ToString()).ToList();
 
                         string aktuelleKategorie = "";
-                        int zeilenIndex = 0; // Für abwechselnde Farben
+                        int zeilenIndex = 0;
 
-                        // Füge die Daten sortiert in die Tabelle ein
                         foreach (DataGridViewRow row in sortierteParfums)
                         {
                             var kategorie = row.Cells["Kategorie"]?.Value?.ToString();
-                            // Hier wird der Spaltenname aus der Variablen genommen
-                            var parfuemNummer = row.Cells[nummerSpaltenName]?.Value?.ToString();
-                            var parfuemMarke = row.Cells["Marke"]?.Value.ToString();
-                            var parfuemName = row.Cells["Name"]?.Value?.ToString();
-                            var Duftrichtun = row.Cells["Duftrichtung"]?.Value?.ToString();
+                            var alteNummer = row.Cells["AlteNummer"]?.Value?.ToString();
+                            var parfuemNummer = row.Cells["Parfümnummer"]?.Value?.ToString();
+                            var marke = row.Cells["Marke"]?.Value?.ToString();
+                            var name = row.Cells["Name"]?.Value?.ToString();
+                            var duftrichtung = row.Cells["Duftrichtung"]?.Value?.ToString();
 
-                            if (!string.IsNullOrEmpty(parfuemNummer) && !string.IsNullOrEmpty(parfuemMarke) && !string.IsNullOrEmpty(parfuemName))
+                            if (!string.IsNullOrEmpty(name))
                             {
-                                // Neue Kategorie? Dann eine farbige Überschrift einfügen
+                                // Neue Kategorie als Überschrift
                                 if (kategorie != aktuelleKategorie)
                                 {
                                     PdfPCell headerCell = new PdfPCell(new Phrase("--- " + kategorie + " ---",
                                       new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12f, iTextSharp.text.Font.BOLD, BaseColor.BLACK)))
                                     {
-                                        Colspan = 4,
+                                        Colspan = 5,
                                         HorizontalAlignment = Element.ALIGN_CENTER,
                                         BackgroundColor = BaseColor.GREEN,
                                         Padding = 8f
                                     };
                                     table.AddCell(headerCell);
                                     aktuelleKategorie = kategorie;
-                                    zeilenIndex = 0; // Zeilenzähler zurücksetzen bei neuer Kategorie
+                                    zeilenIndex = 0;
                                 }
 
-                                // Abwechselnde Hintergrundfarben für Zeilen
-                                BaseColor rowColor = (zeilenIndex % 2 == 0) ? BaseColor.YELLOW : BaseColor.PINK;
+                                // Abwechselnde Hintergrundfarbe
+                                BaseColor rowColor = (zeilenIndex % 2 == 0) ? BaseColor.WHITE : new BaseColor(230, 230, 230);
 
-                                PdfPCell cell1 = new PdfPCell(new Phrase(parfuemNummer))
-                                {
-                                    BackgroundColor = rowColor,
-                                    Padding = 6f
-                                };
-                                PdfPCell cell2 = new PdfPCell(new Phrase(parfuemMarke))
-                                {
-                                    BackgroundColor = rowColor,
-                                    Padding = 6f
-                                };
-                                PdfPCell cell3 = new PdfPCell(new Phrase(parfuemName))
-                                {
-                                    BackgroundColor = rowColor,
-                                    Padding = 6f
-                                };
-                                PdfPCell cell4 = new PdfPCell(new Phrase(Duftrichtun))
-                                {
-                                    BackgroundColor = rowColor,
-                                    Padding = 6f
-                                };
-
-                                table.AddCell(cell1);
-                                table.AddCell(cell2);
-                                table.AddCell(cell3);
-                                table.AddCell(cell4);
+                                table.AddCell(new PdfPCell(new Phrase(alteNummer ?? "")) { BackgroundColor = rowColor, Padding = 6f });
+                                table.AddCell(new PdfPCell(new Phrase(parfuemNummer ?? "")) { BackgroundColor = rowColor, Padding = 6f });
+                                table.AddCell(new PdfPCell(new Phrase(marke ?? "")) { BackgroundColor = rowColor, Padding = 6f });
+                                table.AddCell(new PdfPCell(new Phrase(name ?? "")) { BackgroundColor = rowColor, Padding = 6f });
+                                table.AddCell(new PdfPCell(new Phrase(duftrichtung ?? "")) { BackgroundColor = rowColor, Padding = 6f });
 
                                 zeilenIndex++;
                             }
                         }
 
-                        // Tabelle zur PDF hinzufügen
                         pdfDoc.Add(table);
                         pdfDoc.Close();
                     }
                 }
 
-                // Erfolgsmeldung
-                MessageBox.Show($"Die Datei wurde erfolgreich auf dem Desktop gespeichert:\n{filePath}", "Erfolg", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Die Datei wurde erfolgreich auf dem Desktop gespeichert:\n{filePath}",
+                                "Erfolg", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                // Fehlerbehandlung
-                MessageBox.Show($"Fehler beim Speichern der Datei: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Fehler beim Speichern der Datei: {ex.Message}",
+                                "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        //private void _ErstellePdfVonParfuem(DataGridView dgv, string pdfTitle, string filterType)
+        //{
+        //    // Pfad zum Desktop des aktuellen Benutzers
+        //    string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+        //    // Name und Pfad der PDF-Datei
+        //    string fileName = pdfTitle + "-" + DateTime.Now.ToString("dd.MM.yyyy") + ".pdf";
+        //    string filePath = Path.Combine(desktopPath, fileName);
+
+        //    try
+        //    {
+        //        // PDF speichern
+        //        using (FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+        //        {
+        //            using (Document pdfDoc = new Document())
+        //            {
+        //                PdfWriter.GetInstance(pdfDoc, stream);
+        //                pdfDoc.Open();
+
+        //                // Erstelle eine Tabelle mit 3 Spalten
+        //                PdfPTable table = new PdfPTable(4);
+        //                table.WidthPercentage = 100;
+        //                // Spaltennamen für die Nummer
+        //                string nummerSpaltenName = (filterType == "Vorhanden") ? "Parfümnummer" : "AlteNummer";
+
+        //                // Header in der PDF-Tabelle festlegen
+        //                table.AddCell(new PdfPCell(new Phrase(nummerSpaltenName)) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 10f });
+        //                table.AddCell(new PdfPCell(new Phrase("Marke")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 10f });
+        //                table.AddCell(new PdfPCell(new Phrase("Name")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 10f });
+        //                table.AddCell(new PdfPCell(new Phrase("Duftrichtung")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 10f });
+
+
+
+        //                //// Header mit Hintergrundfarbe
+        //                //table.AddCell(new PdfPCell(new Phrase("Parfümnummer"))
+        //                //{
+        //                //    BackgroundColor = BaseColor.LIGHT_GRAY,
+        //                //    Padding = 10f
+        //                //});
+        //                //table.AddCell(new PdfPCell(new Phrase("Parfümmarke"))
+        //                //{
+        //                //    BackgroundColor = BaseColor.LIGHT_GRAY,
+        //                //    Padding = 10f
+        //                //});
+        //                //table.AddCell(new PdfPCell(new Phrase("Parfümname"))
+        //                //{
+        //                //    BackgroundColor = BaseColor.LIGHT_GRAY,
+        //                //    Padding = 10f
+        //                //});
+
+        //                // Filterlogik basierend auf dem `filterType`-Parameter
+        //                var parfums = dgv.Rows.Cast<DataGridViewRow>().Where(row => !row.IsNewRow);
+
+        //                if (filterType == "Vorhanden")
+        //                {
+        //                    parfums = parfums.Where(row => (bool)row.Cells["IstVorhanden"].Value == true);
+        //                }
+        //                else if (filterType == "In Bestellung")
+        //                {
+        //                    parfums = parfums.Where(row => (bool)row.Cells["InBestellung"].Value == true); // Annahme: Es gibt eine Spalte "InBestellung"
+        //                }
+
+        //                var sortierteParfums = parfums.OrderBy(row => row.Cells["Kategorie"].Value?.ToString()).ToList();
+
+        //                string aktuelleKategorie = "";
+        //                int zeilenIndex = 0; // Für abwechselnde Farben
+
+        //                // Füge die Daten sortiert in die Tabelle ein
+        //                foreach (DataGridViewRow row in sortierteParfums)
+        //                {
+        //                    var kategorie = row.Cells["Kategorie"]?.Value?.ToString();
+        //                    // Hier wird der Spaltenname aus der Variablen genommen
+        //                    var parfuemNummer = row.Cells[nummerSpaltenName]?.Value?.ToString();
+        //                    var parfuemMarke = row.Cells["Marke"]?.Value.ToString();
+        //                    var parfuemName = row.Cells["Name"]?.Value?.ToString();
+        //                    var Duftrichtun = row.Cells["Duftrichtung"]?.Value?.ToString();
+
+        //                    if (!string.IsNullOrEmpty(parfuemNummer) && !string.IsNullOrEmpty(parfuemMarke) && !string.IsNullOrEmpty(parfuemName))
+        //                    {
+        //                        // Neue Kategorie? Dann eine farbige Überschrift einfügen
+        //                        if (kategorie != aktuelleKategorie)
+        //                        {
+        //                            PdfPCell headerCell = new PdfPCell(new Phrase("--- " + kategorie + " ---",
+        //                              new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12f, iTextSharp.text.Font.BOLD, BaseColor.BLACK)))
+        //                            {
+        //                                Colspan = 4,
+        //                                HorizontalAlignment = Element.ALIGN_CENTER,
+        //                                BackgroundColor = BaseColor.GREEN,
+        //                                Padding = 8f
+        //                            };
+        //                            table.AddCell(headerCell);
+        //                            aktuelleKategorie = kategorie;
+        //                            zeilenIndex = 0; // Zeilenzähler zurücksetzen bei neuer Kategorie
+        //                        }
+
+        //                        // Abwechselnde Hintergrundfarben für Zeilen
+        //                        BaseColor rowColor = (zeilenIndex % 2 == 0) ? BaseColor.YELLOW : BaseColor.PINK;
+
+        //                        PdfPCell cell1 = new PdfPCell(new Phrase(parfuemNummer))
+        //                        {
+        //                            BackgroundColor = rowColor,
+        //                            Padding = 6f
+        //                        };
+        //                        PdfPCell cell2 = new PdfPCell(new Phrase(parfuemMarke))
+        //                        {
+        //                            BackgroundColor = rowColor,
+        //                            Padding = 6f
+        //                        };
+        //                        PdfPCell cell3 = new PdfPCell(new Phrase(parfuemName))
+        //                        {
+        //                            BackgroundColor = rowColor,
+        //                            Padding = 6f
+        //                        };
+        //                        PdfPCell cell4 = new PdfPCell(new Phrase(Duftrichtun))
+        //                        {
+        //                            BackgroundColor = rowColor,
+        //                            Padding = 6f
+        //                        };
+
+        //                        table.AddCell(cell1);
+        //                        table.AddCell(cell2);
+        //                        table.AddCell(cell3);
+        //                        table.AddCell(cell4);
+
+        //                        zeilenIndex++;
+        //                    }
+        //                }
+
+        //                // Tabelle zur PDF hinzufügen
+        //                pdfDoc.Add(table);
+        //                pdfDoc.Close();
+        //            }
+        //        }
+
+        //        // Erfolgsmeldung
+        //        MessageBox.Show($"Die Datei wurde erfolgreich auf dem Desktop gespeichert:\n{filePath}", "Erfolg", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Fehlerbehandlung
+        //        MessageBox.Show($"Fehler beim Speichern der Datei: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
 
         private void btnParfümlisteFürDamen_Click(object sender, EventArgs e)
         {
