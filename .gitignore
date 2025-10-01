@@ -1,0 +1,13 @@
+.vs/
+*.user
+*.suo
+bin/
+obj/
+*.dll
+*.pdb
+Datenbank/*.mdf
+Datenbank/*.ldf
+Datenbank/*.bak
+
+# Sonstiges
+*.log
