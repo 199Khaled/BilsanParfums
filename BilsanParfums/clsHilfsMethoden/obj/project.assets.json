@@ -1824,17 +1824,17 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\khale\\.nuget\\packages\\": {},
+    "C:\\Users\\Hamssa\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj",
+      "projectUniqueName": "C:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj",
       "projectName": "clsHilfsMethoden",
-      "projectPath": "D:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj",
-      "packagesPath": "C:\\Users\\khale\\.nuget\\packages\\",
-      "outputPath": "D:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\obj\\",
+      "projectPath": "C:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj",
+      "packagesPath": "C:\\Users\\Hamssa\\.nuget\\packages\\",
+      "outputPath": "C:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "UsingMicrosoftNETSdk": false,
@@ -1842,7 +1842,7 @@
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\khale\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Hamssa\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

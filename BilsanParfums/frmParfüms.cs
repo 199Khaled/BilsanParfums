@@ -304,20 +304,20 @@ namespace BilsanParfums
 
         private void btnNeuesParfümHinzufügen_Click(object sender, EventArgs e)
         {
-            _ÖffneAddUpdateForm(-1);
+            _ÖffneAddUpdateForm(null);
         }
 
         private void neueParfümHinzufügenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ÖffneAddUpdateForm(-1);
+            _ÖffneAddUpdateForm(null);
         }
 
         private void aktualisiereBestehendesParfümToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dgvAlleParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvAlleParfüms.CurrentRow.Cells[1].Value;
-                _ÖffneAddUpdateForm(parfümNummer);
+                string ParfümCode = dgvAlleParfüms.CurrentRow.Cells[1].Value.ToString();
+                _ÖffneAddUpdateForm(ParfümCode);
             }
         }
 
@@ -325,8 +325,8 @@ namespace BilsanParfums
         {
             if (dgvAlleParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvAlleParfüms.CurrentRow.Cells[1].Value;
-                _EntferneParfüm(parfümNummer);
+                string ParfümCode = dgvAlleParfüms.CurrentRow.Cells[1].Value.ToString();
+                _EntferneParfüm(ParfümCode);
             }
         }
 
@@ -371,10 +371,13 @@ namespace BilsanParfums
 
                 switch (spalteName)
                 {
-                    case "ParfümNummer":
                     case "AlteNummer":
                         filterString = $"{spalteName} = {filterwert}";
                         break;
+                    //case "ParfümCode":
+                    //    filterString = $"{spalteName} = '{filterwert}'";
+                    //    break;
+                    case "ParfümCode":
                     case "Name":
                     case "Marke":
                     case "Kategorie":
@@ -487,9 +490,9 @@ namespace BilsanParfums
         /// <summary>
         /// Öffnet die Hinzufügen-/Aktualisieren-Form.
         /// </summary>
-        private void _ÖffneAddUpdateForm(int parfümNummer)
+        private void _ÖffneAddUpdateForm(string ParfümCode)
         {
-            using (frmAddUpdateParfüms frm = new frmAddUpdateParfüms(parfümNummer))
+            using (frmAddUpdateParfüms frm = new frmAddUpdateParfüms(ParfümCode))
             {
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
@@ -532,13 +535,13 @@ namespace BilsanParfums
         /// <summary>
         /// Entfernt ein Parfüm aus der Datenbank.
         /// </summary>
-        private void _EntferneParfüm(int parfümNummer)
+        private void _EntferneParfüm(string ParfümCode)
         {
             bool result = (MessageBox.Show("Sind Sie sicher, Sie möchten diesen Vorgang durchführen?", "Hinweis", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.OK);
 
             if (!result) return;
 
-            clsNeueParfümDaten parfuemDaten = clsNeueParfümDaten.FindByParfümNummer(parfümNummer);
+            clsNeueParfümDaten parfuemDaten = clsNeueParfümDaten.FindByParfümNummer(ParfümCode);
 
             if (parfuemDaten != null && parfuemDaten.Delete())
             {
@@ -751,7 +754,7 @@ namespace BilsanParfums
 
             string selectedItem = cbFilterby.SelectedItem.ToString();
 
-            if (selectedItem == "ParfümNummer" || selectedItem == "AlteNummer")
+            if (selectedItem == "AlteNummer")
             {
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
             }
@@ -784,7 +787,7 @@ namespace BilsanParfums
 
             string selectedItem = cbDamenFilterby.SelectedItem.ToString();
 
-            if (selectedItem == "ParfümNummer" || selectedItem == "AlteNummer")
+            if (selectedItem == "AlteNummer")
             {
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
             }
@@ -915,19 +918,19 @@ namespace BilsanParfums
         }
         private void btnParfümhinzufügen_Click(object sender, EventArgs e)
         {
-            _ÖffneAddUpdateForm(-1);
+            _ÖffneAddUpdateForm(null);
         }
         private void neuesParfümHinzufügenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ÖffneAddUpdateForm(-1);
+            _ÖffneAddUpdateForm(null);
         }
 
         private void bestehendesParfümAktualisierenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dgvDamenParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvDamenParfüms.CurrentRow.Cells[1].Value;
-                _ÖffneAddUpdateForm(parfümNummer);
+                string ParfümCode = dgvDamenParfüms.CurrentRow.Cells[1].Value.ToString();
+                _ÖffneAddUpdateForm(ParfümCode);
             }
         }
 
@@ -935,8 +938,8 @@ namespace BilsanParfums
         {
             if (dgvDamenParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvDamenParfüms.CurrentRow.Cells[1].Value;
-                _EntferneParfüm(parfümNummer);
+                string ParfümCode = dgvDamenParfüms.CurrentRow.Cells[1].Value.ToString();
+                _EntferneParfüm(ParfümCode);
             }
         }
         private void dgvDamenParfüms_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -974,7 +977,7 @@ namespace BilsanParfums
             string selectedItem = cbHerrenFilterby.SelectedItem.ToString();
 
             // Wenn der ausgewählte Filter "ParfümNummer" ist, nur Ziffern und Steuertasten zulassen.
-            if (selectedItem == "ParfümNummer" || selectedItem == "AlteNummer")
+            if (selectedItem == "AlteNummer")
             {
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
             }
@@ -1101,19 +1104,19 @@ namespace BilsanParfums
         }
         private void btnParfünhinzufügen_Click(object sender, EventArgs e)
         {
-            _ÖffneAddUpdateForm(-1);
+            _ÖffneAddUpdateForm(null);
         }
         private void neuesParfümsHinzufügenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ÖffneAddUpdateForm(-1);
+            _ÖffneAddUpdateForm(null);
         }
 
         private void aktualisiereBestehendesParfümToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             if (dgvHerrenParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvHerrenParfüms.CurrentRow.Cells[1].Value;
-                _ÖffneAddUpdateForm(parfümNummer);
+                string ParfümCode = dgvHerrenParfüms.CurrentRow.Cells[1].Value.ToString();
+                _ÖffneAddUpdateForm(ParfümCode);
             }
         }
 
@@ -1121,8 +1124,8 @@ namespace BilsanParfums
         {
             if (dgvHerrenParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvHerrenParfüms.CurrentRow.Cells[0].Value;
-                _EntferneParfüm(parfümNummer);
+                string ParfümCode = dgvDamenParfüms.CurrentRow.Cells[1].Value.ToString();
+                _EntferneParfüm(ParfümCode);
             }
         }
         private void dgvHerrenParfüms_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -1151,7 +1154,7 @@ namespace BilsanParfums
 
             string selectedItem = cbUnisexFilterby.SelectedItem.ToString();
 
-            if (selectedItem == "ParfümNummer" || selectedItem == "AlteNummer")
+            if (selectedItem == "AlteNummer")
             {
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
             }
@@ -1278,19 +1281,19 @@ namespace BilsanParfums
         }
         private void btnHinzufügen_Click(object sender, EventArgs e)
         {
-            _ÖffneAddUpdateForm(-1);
+            _ÖffneAddUpdateForm(null);
         }
         private void neuesParfümHinzufügenToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            _ÖffneAddUpdateForm(-1);
+            _ÖffneAddUpdateForm(null);
         }
 
         private void aktualisiereBestehendesParfümToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             if (dgvUnisexParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvUnisexParfüms.CurrentRow.Cells[1].Value;
-                _ÖffneAddUpdateForm(parfümNummer);
+                string ParfümCode = dgvUnisexParfüms.CurrentRow.Cells[1].Value.ToString();
+                _ÖffneAddUpdateForm(ParfümCode);
             }
         }
 
@@ -1298,8 +1301,8 @@ namespace BilsanParfums
         {
             if (dgvUnisexParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvUnisexParfüms.CurrentRow.Cells[1].Value;
-                _EntferneParfüm(parfümNummer);
+                string ParfümCode = dgvDamenParfüms.CurrentRow.Cells[1].Value.ToString();
+                _EntferneParfüm(ParfümCode);
             }
         }
 
@@ -1423,7 +1426,7 @@ namespace BilsanParfums
             // Jetzt wissen wir, dass SelectedItem nicht null ist und können ToString() aufrufen
             string selectedItem = cbOrientalischFilterby.SelectedItem.ToString();
 
-            if (selectedItem == "ParfümNummer" || selectedItem == "AlteNummer")
+            if (selectedItem == "AlteNummer")
             {
                 // Nur Zahlen, Backspace, Delete etc. zulassen
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
@@ -1470,20 +1473,20 @@ namespace BilsanParfums
 
         private void btnOrientalischeduftHinzufügen_Click(object sender, EventArgs e)
         {
-            _ÖffneAddUpdateForm(-1);
+            _ÖffneAddUpdateForm(null);
         }
 
         private void neuesParfümHinzufügenToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            _ÖffneAddUpdateForm(-1);
+            _ÖffneAddUpdateForm(null);
         }
 
         private void aktualisiereBestehendesParfümToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             if (dgvOrientalischeParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvOrientalischeParfüms.CurrentRow.Cells[1].Value;
-                _ÖffneAddUpdateForm(parfümNummer);
+                string ParfümCode = dgvOrientalischeParfüms.CurrentRow.Cells[1].Value.ToString();
+                _ÖffneAddUpdateForm(ParfümCode);
             }
         }
 
@@ -1491,8 +1494,8 @@ namespace BilsanParfums
         {
             if (dgvOrientalischeParfüms.CurrentRow != null)
             {
-                int parfümNummer = (int)dgvOrientalischeParfüms.CurrentRow.Cells[1].Value;
-                _EntferneParfüm(parfümNummer);
+                string ParfümCode = dgvDamenParfüms.CurrentRow.Cells[1].Value.ToString();
+                _EntferneParfüm(ParfümCode);
             }
         }
 
@@ -1563,7 +1566,7 @@ namespace BilsanParfums
 
                         // Header
                         table.AddCell(new PdfPCell(new Phrase("AlteNummer")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 8f });
-                        table.AddCell(new PdfPCell(new Phrase("Parfümnummer")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 8f });
+                        table.AddCell(new PdfPCell(new Phrase("ParfümCode")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 8f });
                         table.AddCell(new PdfPCell(new Phrase("Marke")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 8f });
                         table.AddCell(new PdfPCell(new Phrase("Name")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 8f });
                         table.AddCell(new PdfPCell(new Phrase("Duftrichtung")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 8f });
@@ -1585,7 +1588,7 @@ namespace BilsanParfums
                         {
                             var kategorie = row.Cells["Kategorie"]?.Value?.ToString();
                             var alteNummer = row.Cells["AlteNummer"]?.Value?.ToString();
-                            var parfuemNummer = row.Cells["Parfümnummer"]?.Value?.ToString();
+                            var parfuemNummer = row.Cells["ParfümCode"]?.Value?.ToString();
                             var marke = row.Cells["Marke"]?.Value?.ToString();
                             var name = row.Cells["Name"]?.Value?.ToString();
                             var duftrichtung = row.Cells["Duftrichtung"]?.Value?.ToString();
@@ -1891,7 +1894,7 @@ namespace BilsanParfums
                     var worksheet = workbook.Worksheets.Add("Parfüms");
 
                     // Spaltennamen für die Nummer
-                    string nummerSpaltenName = (filterType == "Vorhanden") ? "Parfümnummer" : "AlteNummer";
+                    string nummerSpaltenName = (filterType == "Vorhanden") ? "ParfümCode" : "AlteNummer";
 
                     // Header schreiben (nur 3 Spalten)
                     worksheet.Cell(1, 1).Value = nummerSpaltenName;
@@ -1922,11 +1925,11 @@ namespace BilsanParfums
                     foreach (var row in sortierteParfums)
                     {
                         var kategorie = row.Cells["Kategorie"]?.Value?.ToString();
-                        var parfuemNummer = row.Cells[nummerSpaltenName]?.Value?.ToString();
+                        var parfuemCode = row.Cells[nummerSpaltenName]?.Value?.ToString();
                         var parfuemMarke = row.Cells["Marke"]?.Value?.ToString();
                         var parfuemName = row.Cells["Name"]?.Value?.ToString();
 
-                        if (!string.IsNullOrEmpty(parfuemNummer) && !string.IsNullOrEmpty(parfuemMarke) && !string.IsNullOrEmpty(parfuemName))
+                        if (!string.IsNullOrEmpty(parfuemCode) && !string.IsNullOrEmpty(parfuemMarke) && !string.IsNullOrEmpty(parfuemName))
                         {
                             // Neue Kategorie als Überschrift
                             if (kategorie != aktuelleKategorie)
@@ -1942,7 +1945,7 @@ namespace BilsanParfums
                             }
 
                             // Datenzeile
-                            worksheet.Cell(excelRow, 1).Value = parfuemNummer;
+                            worksheet.Cell(excelRow, 1).Value = parfuemCode;
                             worksheet.Cell(excelRow, 2).Value = parfuemMarke;
                             worksheet.Cell(excelRow, 3).Value = parfuemName;
 

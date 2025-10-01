@@ -28,7 +28,7 @@ namespace BilsanParfums
         // Die ParfümNummer, die beim Initialisieren des Formulars übergeben wird.
         // -1 bedeutet, dass ein neues Parfüm hinzugefügt werden soll (addnew).
         // Eine positive Zahl bedeutet, dass ein bestehendes Parfüm aktualisiert werden soll (update).
-        int _parfümNummer;
+        string _ParfümCode;
 
         // Öffentliche Eigenschaft, um den Namen des erfolgreich gespeicherten Parfüms an die aufrufende Form zurückzugeben.
         // Nützlich, um z.B. einen Autovervollständigungsbaum in der Hauptform zu aktualisieren.
@@ -42,10 +42,10 @@ namespace BilsanParfums
         /// Konstruktor für das frmAddUpdateParfüms-Formular.
         /// </summary>
         /// <param name="parfümNummer">Die ParfümNummer des zu bearbeitenden Parfüms, oder -1 für ein neues Parfüm.</param>
-        public frmAddUpdateParfüms(int parfümNummer)
+        public frmAddUpdateParfüms(string ParfümCode)
         {
             InitializeComponent(); // Initialisiert die Komponenten des Formulars (UI-Elemente)
-            this._parfümNummer = parfümNummer; // Speichert die übergebene ParfümNummer
+            this._ParfümCode = ParfümCode; // Speichert die übergebene ParfümNummer
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace BilsanParfums
             // Führt die Validierung für jedes Pflichtfeld aus.
             // Der '&=' Operator stellt sicher, dass alle Validierungsfunktionen aufgerufen werden,
             // auch wenn eine vorherige Validierung fehlschlägt.
-            isValid = _TextFelderValidierung(txtParfümNummer, "ParfümNummer");
+            isValid = _TextFelderValidierung(txtParfümNummer, "ParfümCode");
             isValid &= _TextFelderValidierung(txtMarke, "Marke");
             isValid &= _TextFelderValidierung(txtName, "Name");
             isValid &= _TextFelderValidierung(txtKategorie, "Kategorie");
@@ -116,13 +116,13 @@ namespace BilsanParfums
         /// </summary>
         private void _holeParfümDatenFromDatenbank()
         {
-            _parfüms = clsNeueParfümDaten.FindByParfümNummer(_parfümNummer); // Parfümdaten abrufen
+            _parfüms = clsNeueParfümDaten.FindByParfümNummer(_ParfümCode); // Parfümdaten abrufen
 
             if (_parfüms != null)
             {
                 // Daten aus dem geladenen _parfüms-Objekt in die UI-Felder übertragen
                 txtAlteNummer.Text = _parfüms.AlteNummer.ToString();
-                txtParfümNummer.Text = _parfüms.parfümNummer.ToString();
+                txtParfümNummer.Text = _parfüms.ParfümCode;
                 txtMarke.Text = _parfüms.Marke;
                 txtName.Text = _parfüms.Name;
                 txtKategorie.Text = _parfüms.Kategorie;
@@ -153,10 +153,10 @@ namespace BilsanParfums
             // und das _parfüms-Objekt bereits initialisiert wurde.
             if (_mode == enMode.update && _parfüms != null)
             {
-                int alteParfümNummer = _parfüms.parfümNummer;
-                int AktuelleParfümNummer = Convert.ToInt32(txtParfümNummer.Text);
+                string alteParfümCode = _parfüms.ParfümCode;
+                string AktuelleParfümCode = txtParfümNummer.Text.Trim();
 
-                return alteParfümNummer == AktuelleParfümNummer;
+                return alteParfümCode == AktuelleParfümCode;
             }
             return false; // Gibt false zurück, wenn nicht im Update-Modus oder _parfüms ist null.
         }
@@ -169,9 +169,9 @@ namespace BilsanParfums
             // Setzt die ParfümNummer. Im Update-Modus wird 'neuParfümNummer' verwendet (falls in clsParfüms definiert),
             // ansonsten 'parfümNummer' für neue Einträge.
             if (_mode == enMode.update)
-                _parfüms.neuParfümNummer = Convert.ToInt32(txtParfümNummer.Text);
+                _parfüms.neuParfümCode = txtParfümNummer.Text.Trim();
             else
-                _parfüms.parfümNummer = Convert.ToInt32(txtParfümNummer.Text);
+                _parfüms.ParfümCode = txtParfümNummer.Text.Trim();
 
             // Zuweisung der Textfeldwerte zu den Eigenschaften des Parfüm-Objekts
             if (!string.IsNullOrEmpty(txtAlteNummer.Text))
@@ -179,11 +179,11 @@ namespace BilsanParfums
             else
                 _parfüms.AlteNummer = null;
 
-            _parfüms.Marke = txtMarke.Text;
-            _parfüms.Name = txtName.Text;
-            _parfüms.Kategorie = txtKategorie.Text;
-            _parfüms.Duftrichtung = txtDuftrichtung.Text;
-            _parfüms.Basisnote = txtBasisnote.Text;
+            _parfüms.Marke = txtMarke.Text.Trim();
+            _parfüms.Name = txtName.Text.Trim();
+            _parfüms.Kategorie = txtKategorie.Text.Trim();
+            _parfüms.Duftrichtung = txtDuftrichtung.Text.Trim();
+            _parfüms.Basisnote = txtBasisnote.Text.Trim();
 
             // Direkte Zuweisung der Checked-Eigenschaft von Checkboxen
             _parfüms.IstVorhanden = chbIstVorhanden.Checked;
@@ -197,13 +197,13 @@ namespace BilsanParfums
         /// <returns>True, wenn die ParfümNummer vergeben ist und geändert wurde; False sonst.</returns>
         private bool _IstParfümNummerVergeben()
         {
-            int parfümNummer = Convert.ToInt32(txtParfümNummer.Text);
+            string ParfümCode = txtParfümNummer.Text.Trim();
 
             // Prüft, ob die Nummer bereits existiert UND ob es sich NICHT um die alte Nummer im Update-Modus handelt.
             // Dies verhindert eine Kollision, wenn die Nummer im Update-Modus unverändert bleibt.
-            if (clsNeueParfümDaten.IstParfümNummerVergeben(parfümNummer) && !_IstAlteParfümNummerGleichWieNeue())
+            if (clsNeueParfümDaten.IstParfümNummerVergeben(ParfümCode) && !_IstAlteParfümNummerGleichWieNeue())
             {
-                MessageBox.Show("Diese Nummer ist bereits vergeben!\nBitte versuchen Sie eine andere Nummer.", "Hinweis",
+                MessageBox.Show("Dieser ParfümCode ist bereits vergeben!\nBitte versuchen Sie einen anderen ParfümCode.", "Hinweis",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return true;
             }
@@ -307,7 +307,7 @@ namespace BilsanParfums
         private void frmAddUpdateParfüms_Load(object sender, EventArgs e)
         {
             // Wenn _parfümNummer nicht -1 ist, bedeutet dies, dass ein bestehendes Parfüm geladen werden soll (Update-Modus).
-            if (_parfümNummer != -1)
+            if (!string.IsNullOrEmpty(  _ParfümCode))
             {
                 _mode = enMode.update; // Setzt den Modus auf "Update"
                 _holeParfümDatenFromDatenbank(); // Lädt die Daten des Parfüms aus der Datenbank

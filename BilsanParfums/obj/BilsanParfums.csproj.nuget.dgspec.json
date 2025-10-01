@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\BilsanParfums\\BilsanParfums\\BilsanParfums.csproj": {}
+    "C:\\BilsanParfums\\BilsanParfums\\BilsanParfums.csproj": {}
   },
   "projects": {
-    "D:\\BilsanParfums\\BilsanParfums\\BilsanParfums.csproj": {
+    "C:\\BilsanParfums\\BilsanParfums\\BilsanParfums.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\BilsanParfums\\BilsanParfums\\BilsanParfums.csproj",
+        "projectUniqueName": "C:\\BilsanParfums\\BilsanParfums\\BilsanParfums.csproj",
         "projectName": "BilsanParfums",
-        "projectPath": "D:\\BilsanParfums\\BilsanParfums\\BilsanParfums.csproj",
-        "packagesPath": "C:\\Users\\khale\\.nuget\\packages\\",
-        "outputPath": "D:\\BilsanParfums\\BilsanParfums\\obj\\",
+        "projectPath": "C:\\BilsanParfums\\BilsanParfums\\BilsanParfums.csproj",
+        "packagesPath": "C:\\Users\\Hamssa\\.nuget\\packages\\",
+        "outputPath": "C:\\BilsanParfums\\BilsanParfums\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "UsingMicrosoftNETSdk": false,
@@ -19,7 +19,7 @@
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\khale\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Hamssa\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -33,11 +33,11 @@
         "frameworks": {
           "net472": {
             "projectReferences": {
-              "D:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\Busnisse_Layer.csproj": {
-                "projectPath": "D:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\Busnisse_Layer.csproj"
+              "C:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\Busnisse_Layer.csproj": {
+                "projectPath": "C:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\Busnisse_Layer.csproj"
               },
-              "D:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj": {
-                "projectPath": "D:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj"
+              "C:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj": {
+                "projectPath": "C:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj"
               }
             }
           }
@@ -81,17 +81,17 @@
         }
       }
     },
-    "D:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\Busnisse_Layer.csproj": {
+    "C:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\Busnisse_Layer.csproj": {
       "restore": {
-        "projectUniqueName": "D:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\Busnisse_Layer.csproj",
+        "projectUniqueName": "C:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\Busnisse_Layer.csproj",
         "projectName": "Busnisse_Layer",
-        "projectPath": "D:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\Busnisse_Layer.csproj",
+        "projectPath": "C:\\BilsanParfums\\BilsanParfums\\Busnisse_Layer\\Busnisse_Layer.csproj",
         "UsingMicrosoftNETSdk": false,
         "frameworks": {
           "net472": {
             "projectReferences": {
-              "D:\\BilsanParfums\\BilsanParfums\\Data_Layer\\Data_Layer.csproj": {
-                "projectPath": "D:\\BilsanParfums\\BilsanParfums\\Data_Layer\\Data_Layer.csproj"
+              "C:\\BilsanParfums\\BilsanParfums\\Data_Layer\\Data_Layer.csproj": {
+                "projectPath": "C:\\BilsanParfums\\BilsanParfums\\Data_Layer\\Data_Layer.csproj"
               }
             }
           }
@@ -101,14 +101,14 @@
         "net472": {}
       }
     },
-    "D:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj": {
+    "C:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj",
+        "projectUniqueName": "C:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj",
         "projectName": "clsHilfsMethoden",
-        "projectPath": "D:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj",
-        "packagesPath": "C:\\Users\\khale\\.nuget\\packages\\",
-        "outputPath": "D:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\obj\\",
+        "projectPath": "C:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\HilfsMethoden.csproj",
+        "packagesPath": "C:\\Users\\Hamssa\\.nuget\\packages\\",
+        "outputPath": "C:\\BilsanParfums\\BilsanParfums\\clsHilfsMethoden\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "UsingMicrosoftNETSdk": false,
@@ -116,7 +116,7 @@
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\khale\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Hamssa\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -177,11 +177,11 @@
         }
       }
     },
-    "D:\\BilsanParfums\\BilsanParfums\\Data_Layer\\Data_Layer.csproj": {
+    "C:\\BilsanParfums\\BilsanParfums\\Data_Layer\\Data_Layer.csproj": {
       "restore": {
-        "projectUniqueName": "D:\\BilsanParfums\\BilsanParfums\\Data_Layer\\Data_Layer.csproj",
+        "projectUniqueName": "C:\\BilsanParfums\\BilsanParfums\\Data_Layer\\Data_Layer.csproj",
         "projectName": "Data_Layer",
-        "projectPath": "D:\\BilsanParfums\\BilsanParfums\\Data_Layer\\Data_Layer.csproj",
+        "projectPath": "C:\\BilsanParfums\\BilsanParfums\\Data_Layer\\Data_Layer.csproj",
         "UsingMicrosoftNETSdk": false,
         "frameworks": {
           "net472": {
