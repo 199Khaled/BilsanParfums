@@ -16,8 +16,10 @@ namespace BilsanParfums
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmParfüms());
-          // Application.Run(new frmFlakons());
+            //Application.Run(new frmParfüms());
+            // Application.Run(new frmFlakons());
+            //Application.Run(new frmÖle());
+            Application.Run(new frmHauptForm());
         }
     }
 }

@@ -13,7 +13,7 @@ namespace BilsanDb_DataLayer
     {
         //#nullable enable
 
-        public static bool GetFlakonsInfoByID(int? FlakonID , ref string Form, ref string Verschlussart, ref string Farbe, ref string FlakonsMengeInMl, ref int Flakons_pro_Karton, ref int Kartons_Lager, ref int? Verbleibende_Flakons, ref DateTime? Erstellungsdatum)
+        public static bool GetFlakonsInfoByID(int? FlakonID , ref string Form, ref string Verschlussart, ref string Farbe, ref string FlakonsMengeInMl, ref int? Verbleibende_Flakons, ref DateTime? Aktivierungsdatum)
 {
     bool isFound = false;
 
@@ -42,10 +42,8 @@ namespace BilsanDb_DataLayer
                                 Verschlussart = reader["Verschlussart"] != DBNull.Value ? reader["Verschlussart"].ToString() : null;
                                 Farbe = reader["Farbe"] != DBNull.Value ? reader["Farbe"].ToString() : null;
                                 FlakonsMengeInMl = (string)reader["FlakonsMengeInMl"];
-                                Flakons_pro_Karton = (int)reader["Flakons_pro_Karton"];
-                                Kartons_Lager = (int)reader["Kartons_Lager"];
                                 Verbleibende_Flakons = reader["Verbleibende_Flakons"] != DBNull.Value ? (int?)reader["Verbleibende_Flakons"] : null;
-                                Erstellungsdatum = reader["Erstellungsdatum"] != DBNull.Value ? (DateTime?)reader["Erstellungsdatum"] : null;
+                                Aktivierungsdatum = reader["Aktivierungsdatum"] != DBNull.Value ? (DateTime?)reader["Aktivierungsdatum"] : null;
 
                     }
                 }
@@ -111,10 +109,8 @@ namespace BilsanDb_DataLayer
                     Verschlussart As Verschlussart,
                     Farbe AS Farbe,
                     FlakonsMengeInMl AS inML,
-                    Flakons_pro_Karton AS proKarton,
-                    Kartons_Lager AS Kartons,
                     Verbleibende_Flakons AS Rest,
-                    Erstellungsdatum AS Datum
+                    Aktivierungsdatum AS Aktivierungsdatum
                 FROM dbo.Flakons";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -139,7 +135,7 @@ namespace BilsanDb_DataLayer
 
             return dt;
         }
-        public static int? AddNewFlakons(string FlakonsMengeInMl, int Flakons_pro_Karton, int Kartons_Lager, int? Verbleibende_Flakons, DateTime? Erstellungsdatum, string Form = null, string Verschlussart = null, string Farbe = null)
+        public static int? AddNewFlakons(string FlakonsMengeInMl, int? Verbleibende_Flakons, DateTime? Aktivierungsdatum, string Form = null, string Verschlussart = null, string Farbe = null)
     {
         int? FlakonID = null;
 
@@ -157,10 +153,8 @@ namespace BilsanDb_DataLayer
                     command.Parameters.AddWithValue("@Verschlussart", Verschlussart ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@Farbe", Farbe ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@FlakonsMengeInMl", FlakonsMengeInMl);
-                    command.Parameters.AddWithValue("@Flakons_pro_Karton", Flakons_pro_Karton);
-                    command.Parameters.AddWithValue("@Kartons_Lager", Kartons_Lager);
                     command.Parameters.AddWithValue("@Verbleibende_Flakons", Verbleibende_Flakons ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@Erstellungsdatum", Erstellungsdatum ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Aktivierungsdatum", Aktivierungsdatum ?? (object)DBNull.Value);
 
 
                     SqlParameter outputIdParam = new SqlParameter("@NewID", SqlDbType.Int)
@@ -184,13 +178,13 @@ namespace BilsanDb_DataLayer
         catch (Exception ex)
         {
             // Handle all exceptions in a general way
-            ErrorHandler.HandleException(ex, nameof(AddNewFlakons), $"Parameters: int FlakonsMengeInMl, int Flakons_pro_Karton, int Kartons_Lager, int? Verbleibende_Flakons, DateTime? Erstellungsdatum, string Form = null, string Verschlussart = null, string Farbe = null");
+            ErrorHandler.HandleException(ex, nameof(AddNewFlakons), $"Parameters: int FlakonsMengeInMl, int? Verbleibende_Flakons, DateTime? Aktivierungsdatum, string Form = null, string Verschlussart = null, string Farbe = null");
         }
 
         return FlakonID;
     }
 
-        public static bool UpdateFlakonsByID(int? FlakonID,string FlakonsMengeInMl, int Flakons_pro_Karton, int Kartons_Lager, int? Verbleibende_Flakons, DateTime? Erstellungsdatum, string Form = null, string Verschlussart = null, string Farbe = null)
+        public static bool UpdateFlakonsByID(int? FlakonID,string FlakonsMengeInMl, int? Verbleibende_Flakons, DateTime? Aktivierungsdatum, string Form = null, string Verschlussart = null, string Farbe = null)
 {
     int rowsAffected = 0;
 
@@ -210,10 +204,8 @@ namespace BilsanDb_DataLayer
                     command.Parameters.AddWithValue("@Verschlussart", Verschlussart ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@Farbe", Farbe ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@FlakonsMengeInMl", FlakonsMengeInMl);
-                    command.Parameters.AddWithValue("@Flakons_pro_Karton", Flakons_pro_Karton);
-                    command.Parameters.AddWithValue("@Kartons_Lager", Kartons_Lager);
                     command.Parameters.AddWithValue("@Verbleibende_Flakons", Verbleibende_Flakons ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@Erstellungsdatum", Erstellungsdatum ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Aktivierungsdatum", Aktivierungsdatum ?? (object)DBNull.Value);
 
 
                 // Open the connection and execute the update

@@ -17,10 +17,8 @@ namespace BilsanDb_BusinessLayer
         public string Verschlussart { get; set; }
         public string Farbe { get; set; }
         public string FlakonsMengeInMl { get; set; }
-        public int Flakons_pro_Karton { get; set; }
-        public int Kartons_Lager { get; set; }
         public int? Verbleibende_Flakons { get; set; } = null;
-        public DateTime? Erstellungsdatum { get; set; } = null;
+        public DateTime? Aktivierungsdatum { get; set; } = null;
 
 
         public clsFlakons()
@@ -30,10 +28,8 @@ namespace BilsanDb_BusinessLayer
             this.Verschlussart = null;
             this.Farbe = null;
             this.FlakonsMengeInMl = null;
-            this.Flakons_pro_Karton = 0;
-            this.Kartons_Lager = 0;
             this.Verbleibende_Flakons = 0;
-            this.Erstellungsdatum = DateTime.Now;
+            this.Aktivierungsdatum = DateTime.Now;
 
 
             Mode = enMode.AddNew;
@@ -41,16 +37,14 @@ namespace BilsanDb_BusinessLayer
 
 
         private clsFlakons(
-int? FlakonID, string FlakonsMengeInMl, int Flakons_pro_Karton, int Kartons_Lager, int? Verbleibende_Flakons, DateTime? Erstellungsdatum, string Form = null, string Verschlussart = null, string Farbe = null)        {
+int? FlakonID, string FlakonsMengeInMl,int? Verbleibende_Flakons, DateTime? Aktivierungsdatum, string Form = null, string Verschlussart = null, string Farbe = null)        {
             this.FlakonID = FlakonID;
             this.Form = Form;
             this.Verschlussart = Verschlussart;
             this.Farbe = Farbe;
             this.FlakonsMengeInMl = FlakonsMengeInMl;
-            this.Flakons_pro_Karton = Flakons_pro_Karton;
-            this.Kartons_Lager = Kartons_Lager;
             this.Verbleibende_Flakons = Verbleibende_Flakons;
-            this.Erstellungsdatum = Erstellungsdatum;
+            this.Aktivierungsdatum = Aktivierungsdatum;
             Mode = enMode.Update;
         }
 
@@ -58,15 +52,15 @@ int? FlakonID, string FlakonsMengeInMl, int Flakons_pro_Karton, int Kartons_Lage
        private bool _AddNewFlakons()
        {
         this.FlakonID = clsFlakonsDatenzugriff.AddNewFlakons(
-this.FlakonsMengeInMl, this.Flakons_pro_Karton, this.Kartons_Lager, this.Verbleibende_Flakons, this.Erstellungsdatum, this.Form, this.Verschlussart, this.Farbe);
+this.FlakonsMengeInMl, this.Verbleibende_Flakons, this.Aktivierungsdatum, this.Form, this.Verschlussart, this.Farbe);
         return (this.FlakonID != null);
        }
 
 
        public static bool AddNewFlakons(
-ref int? FlakonID, string FlakonsMengeInMl, int Flakons_pro_Karton, int Kartons_Lager, int? Verbleibende_Flakons, DateTime? Erstellungsdatum, string Form = null, string Verschlussart = null, string Farbe = null)        {
+ref int? FlakonID, string FlakonsMengeInMl, int? Verbleibende_Flakons, DateTime? Aktivierungsdatum, string Form = null, string Verschlussart = null, string Farbe = null)        {
         FlakonID = clsFlakonsDatenzugriff.AddNewFlakons(
-FlakonsMengeInMl, Flakons_pro_Karton, Kartons_Lager, Verbleibende_Flakons, Erstellungsdatum, Form, Verschlussart, Farbe);
+FlakonsMengeInMl,  Verbleibende_Flakons, Aktivierungsdatum, Form, Verschlussart, Farbe);
 
         return (FlakonID != null);
 
@@ -76,14 +70,14 @@ FlakonsMengeInMl, Flakons_pro_Karton, Kartons_Lager, Verbleibende_Flakons, Erste
        private bool _UpdateFlakons()
        {
         return clsFlakonsDatenzugriff.UpdateFlakonsByID(
-FlakonID, FlakonsMengeInMl, Flakons_pro_Karton, Kartons_Lager, Verbleibende_Flakons, Erstellungsdatum, Form, Verschlussart, Farbe);
+FlakonID, FlakonsMengeInMl, Verbleibende_Flakons, Aktivierungsdatum, Form, Verschlussart, Farbe);
        }
 
         
        public static bool UpdateFlakonsByID(
-int? FlakonID, string FlakonsMengeInMl, int Flakons_pro_Karton, int Kartons_Lager, int? Verbleibende_Flakons, DateTime? Erstellungsdatum, string Form = null, string Verschlussart = null, string Farbe = null)        {
+int? FlakonID, string FlakonsMengeInMl,  int? Verbleibende_Flakons, DateTime? Aktivierungsdatum, string Form = null, string Verschlussart = null, string Farbe = null)        {
         return clsFlakonsDatenzugriff.UpdateFlakonsByID(
-FlakonID, FlakonsMengeInMl, Flakons_pro_Karton, Kartons_Lager, Verbleibende_Flakons, Erstellungsdatum, Form, Verschlussart, Farbe);
+FlakonID, FlakonsMengeInMl,  Verbleibende_Flakons, Aktivierungsdatum, Form, Verschlussart, Farbe);
 
         }
 
@@ -99,16 +93,14 @@ FlakonID, FlakonsMengeInMl, Flakons_pro_Karton, Kartons_Lager, Verbleibende_Flak
             string Verschlussart = "";
             string Farbe = "";
             string FlakonsMengeInMl = "";
-            int Flakons_pro_Karton = 0;
-            int Kartons_Lager = 0;
             int? Verbleibende_Flakons = 0;
-            DateTime? Erstellungsdatum = DateTime.Now;
+            DateTime? Aktivierungsdatum = DateTime.Now;
             bool IsFound = clsFlakonsDatenzugriff.GetFlakonsInfoByID(FlakonID,
- ref Form,  ref Verschlussart,  ref Farbe,  ref FlakonsMengeInMl,  ref Flakons_pro_Karton,  ref Kartons_Lager,  ref Verbleibende_Flakons,  ref Erstellungsdatum);
+ ref Form,  ref Verschlussart,  ref Farbe,  ref FlakonsMengeInMl,   ref Verbleibende_Flakons,  ref Aktivierungsdatum);
 
            if (IsFound)
                return new clsFlakons(
-FlakonID, FlakonsMengeInMl, Flakons_pro_Karton, Kartons_Lager, Verbleibende_Flakons, Erstellungsdatum, Form, Verschlussart, Farbe);
+FlakonID, FlakonsMengeInMl, Verbleibende_Flakons, Aktivierungsdatum, Form, Verschlussart, Farbe);
             else
                 return null;
             }
@@ -162,11 +154,9 @@ FlakonID, FlakonsMengeInMl, Flakons_pro_Karton, Kartons_Lager, Verbleibende_Flak
             Verschlussart,
             Farbe,
             FlakonsMengeInMl,
-            Flakons_pro_Karton,
-            Kartons_Lager,
             Verbleibende_Flakons,
-            Erstellungsdatum
-         }
+            Aktivierungsdatum
+        }
 
 
         public enum SearchMode

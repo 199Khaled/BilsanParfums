@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cbAlleParfümStatus = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.gbFlakonsInfo = new System.Windows.Forms.GroupBox();
-            this.lblBenötigteFlakons = new System.Windows.Forms.Label();
+            this.rbBenötigt = new System.Windows.Forms.RadioButton();
+            this.rbGeliefert = new System.Windows.Forms.RadioButton();
+            this.txtGelieferteFlakons = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtBenötigteFlakons = new Guna.UI2.WinForms.Guna2TextBox();
             this.cbVerschlussart = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -45,18 +47,14 @@
             this.cbForm = new Guna.UI2.WinForms.Guna2ComboBox();
             this.cbFarbe = new Guna.UI2.WinForms.Guna2ComboBox();
             this.cbFlakonsMengeInMl = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.txtVerbleibendeMenge = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtKarfonLager = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtFlakonsProkarton = new Guna.UI2.WinForms.Guna2TextBox();
-            this.lblVerbleibendeFlakons = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.dgvFlakons = new System.Windows.Forms.DataGridView();
+            this.lblVerbleibendeFlakons = new System.Windows.Forms.Label();
+            this.txtVerbleibendeMenge = new Guna.UI2.WinForms.Guna2TextBox();
             this.cbAlleParfümStatus.SuspendLayout();
             this.gbFlakonsInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -71,7 +69,7 @@
             this.cbAlleParfümStatus.Dock = System.Windows.Forms.DockStyle.Top;
             this.cbAlleParfümStatus.Location = new System.Drawing.Point(0, 0);
             this.cbAlleParfümStatus.Name = "cbAlleParfümStatus";
-            this.cbAlleParfümStatus.Size = new System.Drawing.Size(1182, 51);
+            this.cbAlleParfümStatus.Size = new System.Drawing.Size(1219, 51);
             this.cbAlleParfümStatus.TabIndex = 1;
             // 
             // label1
@@ -80,7 +78,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Gold;
-            this.label1.Location = new System.Drawing.Point(546, 14);
+            this.label1.Location = new System.Drawing.Point(564, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(154, 25);
             this.label1.TabIndex = 0;
@@ -91,7 +89,9 @@
             this.gbFlakonsInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbFlakonsInfo.BackColor = System.Drawing.Color.Gainsboro;
-            this.gbFlakonsInfo.Controls.Add(this.lblBenötigteFlakons);
+            this.gbFlakonsInfo.Controls.Add(this.rbBenötigt);
+            this.gbFlakonsInfo.Controls.Add(this.rbGeliefert);
+            this.gbFlakonsInfo.Controls.Add(this.txtGelieferteFlakons);
             this.gbFlakonsInfo.Controls.Add(this.txtBenötigteFlakons);
             this.gbFlakonsInfo.Controls.Add(this.cbVerschlussart);
             this.gbFlakonsInfo.Controls.Add(this.label8);
@@ -102,11 +102,7 @@
             this.gbFlakonsInfo.Controls.Add(this.cbFarbe);
             this.gbFlakonsInfo.Controls.Add(this.cbFlakonsMengeInMl);
             this.gbFlakonsInfo.Controls.Add(this.txtVerbleibendeMenge);
-            this.gbFlakonsInfo.Controls.Add(this.txtKarfonLager);
-            this.gbFlakonsInfo.Controls.Add(this.txtFlakonsProkarton);
             this.gbFlakonsInfo.Controls.Add(this.lblVerbleibendeFlakons);
-            this.gbFlakonsInfo.Controls.Add(this.label6);
-            this.gbFlakonsInfo.Controls.Add(this.label5);
             this.gbFlakonsInfo.Controls.Add(this.label4);
             this.gbFlakonsInfo.Controls.Add(this.label3);
             this.gbFlakonsInfo.Controls.Add(this.label2);
@@ -114,24 +110,67 @@
             this.gbFlakonsInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbFlakonsInfo.Location = new System.Drawing.Point(0, 57);
             this.gbFlakonsInfo.Name = "gbFlakonsInfo";
-            this.gbFlakonsInfo.Size = new System.Drawing.Size(1182, 320);
+            this.gbFlakonsInfo.Size = new System.Drawing.Size(1219, 320);
             this.gbFlakonsInfo.TabIndex = 2;
             this.gbFlakonsInfo.TabStop = false;
             this.gbFlakonsInfo.Text = "Flakonsinfo";
             // 
-            // lblBenötigteFlakons
+            // rbBenötigt
             // 
-            this.lblBenötigteFlakons.AutoSize = true;
-            this.lblBenötigteFlakons.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBenötigteFlakons.Location = new System.Drawing.Point(41, 196);
-            this.lblBenötigteFlakons.Name = "lblBenötigteFlakons";
-            this.lblBenötigteFlakons.Size = new System.Drawing.Size(147, 20);
-            this.lblBenötigteFlakons.TabIndex = 23;
-            this.lblBenötigteFlakons.Text = "Benötigte_Flakons:";
-            this.lblBenötigteFlakons.Visible = false;
+            this.rbBenötigt.AutoSize = true;
+            this.rbBenötigt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbBenötigt.Location = new System.Drawing.Point(515, 145);
+            this.rbBenötigt.Name = "rbBenötigt";
+            this.rbBenötigt.Size = new System.Drawing.Size(91, 24);
+            this.rbBenötigt.TabIndex = 26;
+            this.rbBenötigt.TabStop = true;
+            this.rbBenötigt.Text = "Benötigt:";
+            this.rbBenötigt.UseVisualStyleBackColor = true;
+            this.rbBenötigt.CheckedChanged += new System.EventHandler(this.rbBenötigt_CheckedChanged);
+            // 
+            // rbGeliefert
+            // 
+            this.rbGeliefert.AutoSize = true;
+            this.rbGeliefert.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbGeliefert.Location = new System.Drawing.Point(84, 145);
+            this.rbGeliefert.Name = "rbGeliefert";
+            this.rbGeliefert.Size = new System.Drawing.Size(105, 24);
+            this.rbGeliefert.TabIndex = 25;
+            this.rbGeliefert.TabStop = true;
+            this.rbGeliefert.Text = "Gelieferte :";
+            this.rbGeliefert.UseVisualStyleBackColor = true;
+            this.rbGeliefert.CheckedChanged += new System.EventHandler(this.rbGeliefert_CheckedChanged);
+            // 
+            // txtGelieferteFlakons
+            // 
+            this.txtGelieferteFlakons.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtGelieferteFlakons.DefaultText = "";
+            this.txtGelieferteFlakons.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtGelieferteFlakons.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtGelieferteFlakons.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtGelieferteFlakons.DisabledState.Parent = this.txtGelieferteFlakons;
+            this.txtGelieferteFlakons.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtGelieferteFlakons.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtGelieferteFlakons.FocusedState.Parent = this.txtGelieferteFlakons;
+            this.txtGelieferteFlakons.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtGelieferteFlakons.ForeColor = System.Drawing.Color.Black;
+            this.txtGelieferteFlakons.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtGelieferteFlakons.HoverState.Parent = this.txtGelieferteFlakons;
+            this.txtGelieferteFlakons.Location = new System.Drawing.Point(199, 141);
+            this.txtGelieferteFlakons.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtGelieferteFlakons.Name = "txtGelieferteFlakons";
+            this.txtGelieferteFlakons.PasswordChar = '\0';
+            this.txtGelieferteFlakons.PlaceholderText = "";
+            this.txtGelieferteFlakons.SelectedText = "";
+            this.txtGelieferteFlakons.ShadowDecoration.Parent = this.txtGelieferteFlakons;
+            this.txtGelieferteFlakons.Size = new System.Drawing.Size(223, 36);
+            this.txtGelieferteFlakons.TabIndex = 24;
+            this.txtGelieferteFlakons.Visible = false;
             // 
             // txtBenötigteFlakons
             // 
+            this.txtBenötigteFlakons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBenötigteFlakons.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtBenötigteFlakons.DefaultText = "";
             this.txtBenötigteFlakons.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -145,17 +184,16 @@
             this.txtBenötigteFlakons.ForeColor = System.Drawing.Color.Black;
             this.txtBenötigteFlakons.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtBenötigteFlakons.HoverState.Parent = this.txtBenötigteFlakons;
-            this.txtBenötigteFlakons.Location = new System.Drawing.Point(199, 190);
+            this.txtBenötigteFlakons.Location = new System.Drawing.Point(613, 141);
             this.txtBenötigteFlakons.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.txtBenötigteFlakons.Name = "txtBenötigteFlakons";
             this.txtBenötigteFlakons.PasswordChar = '\0';
             this.txtBenötigteFlakons.PlaceholderText = "";
             this.txtBenötigteFlakons.SelectedText = "";
             this.txtBenötigteFlakons.ShadowDecoration.Parent = this.txtBenötigteFlakons;
-            this.txtBenötigteFlakons.Size = new System.Drawing.Size(223, 36);
+            this.txtBenötigteFlakons.Size = new System.Drawing.Size(225, 36);
             this.txtBenötigteFlakons.TabIndex = 22;
             this.txtBenötigteFlakons.Visible = false;
-            this.txtBenötigteFlakons.TextChanged += new System.EventHandler(this.txtBenötigteFlakons_TextChanged);
             this.txtBenötigteFlakons.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBenötigteFlakons_KeyPress);
             // 
             // cbVerschlussart
@@ -259,7 +297,7 @@
             this.cbForm.Location = new System.Drawing.Point(613, 43);
             this.cbForm.Name = "cbForm";
             this.cbForm.ShadowDecoration.Parent = this.cbForm;
-            this.cbForm.Size = new System.Drawing.Size(188, 36);
+            this.cbForm.Size = new System.Drawing.Size(225, 36);
             this.cbForm.TabIndex = 16;
             // 
             // cbFarbe
@@ -285,7 +323,7 @@
             this.cbFarbe.Location = new System.Drawing.Point(613, 92);
             this.cbFarbe.Name = "cbFarbe";
             this.cbFarbe.ShadowDecoration.Parent = this.cbFarbe;
-            this.cbFarbe.Size = new System.Drawing.Size(188, 36);
+            this.cbFarbe.Size = new System.Drawing.Size(225, 36);
             this.cbFarbe.TabIndex = 15;
             // 
             // cbFlakonsMengeInMl
@@ -310,119 +348,6 @@
             this.cbFlakonsMengeInMl.ShadowDecoration.Parent = this.cbFlakonsMengeInMl;
             this.cbFlakonsMengeInMl.Size = new System.Drawing.Size(223, 36);
             this.cbFlakonsMengeInMl.TabIndex = 14;
-            // 
-            // txtVerbleibendeMenge
-            // 
-            this.txtVerbleibendeMenge.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtVerbleibendeMenge.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtVerbleibendeMenge.DefaultText = "";
-            this.txtVerbleibendeMenge.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtVerbleibendeMenge.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtVerbleibendeMenge.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtVerbleibendeMenge.DisabledState.Parent = this.txtVerbleibendeMenge;
-            this.txtVerbleibendeMenge.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtVerbleibendeMenge.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtVerbleibendeMenge.FocusedState.Parent = this.txtVerbleibendeMenge;
-            this.txtVerbleibendeMenge.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVerbleibendeMenge.ForeColor = System.Drawing.Color.Black;
-            this.txtVerbleibendeMenge.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtVerbleibendeMenge.HoverState.Parent = this.txtVerbleibendeMenge;
-            this.txtVerbleibendeMenge.Location = new System.Drawing.Point(613, 190);
-            this.txtVerbleibendeMenge.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtVerbleibendeMenge.Name = "txtVerbleibendeMenge";
-            this.txtVerbleibendeMenge.PasswordChar = '\0';
-            this.txtVerbleibendeMenge.PlaceholderText = "";
-            this.txtVerbleibendeMenge.SelectedText = "";
-            this.txtVerbleibendeMenge.ShadowDecoration.Parent = this.txtVerbleibendeMenge;
-            this.txtVerbleibendeMenge.Size = new System.Drawing.Size(188, 36);
-            this.txtVerbleibendeMenge.TabIndex = 13;
-            this.txtVerbleibendeMenge.Visible = false;
-            // 
-            // txtKarfonLager
-            // 
-            this.txtKarfonLager.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtKarfonLager.DefaultText = "";
-            this.txtKarfonLager.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtKarfonLager.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtKarfonLager.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtKarfonLager.DisabledState.Parent = this.txtKarfonLager;
-            this.txtKarfonLager.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtKarfonLager.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtKarfonLager.FocusedState.Parent = this.txtKarfonLager;
-            this.txtKarfonLager.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtKarfonLager.ForeColor = System.Drawing.Color.Black;
-            this.txtKarfonLager.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtKarfonLager.HoverState.Parent = this.txtKarfonLager;
-            this.txtKarfonLager.Location = new System.Drawing.Point(199, 141);
-            this.txtKarfonLager.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtKarfonLager.Name = "txtKarfonLager";
-            this.txtKarfonLager.PasswordChar = '\0';
-            this.txtKarfonLager.PlaceholderText = "";
-            this.txtKarfonLager.SelectedText = "";
-            this.txtKarfonLager.ShadowDecoration.Parent = this.txtKarfonLager;
-            this.txtKarfonLager.Size = new System.Drawing.Size(223, 36);
-            this.txtKarfonLager.TabIndex = 12;
-            this.txtKarfonLager.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtKarfonLager_KeyPress);
-            // 
-            // txtFlakonsProkarton
-            // 
-            this.txtFlakonsProkarton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFlakonsProkarton.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtFlakonsProkarton.DefaultText = "";
-            this.txtFlakonsProkarton.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtFlakonsProkarton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtFlakonsProkarton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtFlakonsProkarton.DisabledState.Parent = this.txtFlakonsProkarton;
-            this.txtFlakonsProkarton.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtFlakonsProkarton.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtFlakonsProkarton.FocusedState.Parent = this.txtFlakonsProkarton;
-            this.txtFlakonsProkarton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFlakonsProkarton.ForeColor = System.Drawing.Color.Black;
-            this.txtFlakonsProkarton.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtFlakonsProkarton.HoverState.Parent = this.txtFlakonsProkarton;
-            this.txtFlakonsProkarton.Location = new System.Drawing.Point(613, 141);
-            this.txtFlakonsProkarton.Margin = new System.Windows.Forms.Padding(9, 12, 9, 12);
-            this.txtFlakonsProkarton.Name = "txtFlakonsProkarton";
-            this.txtFlakonsProkarton.PasswordChar = '\0';
-            this.txtFlakonsProkarton.PlaceholderText = "";
-            this.txtFlakonsProkarton.SelectedText = "";
-            this.txtFlakonsProkarton.ShadowDecoration.Parent = this.txtFlakonsProkarton;
-            this.txtFlakonsProkarton.Size = new System.Drawing.Size(188, 36);
-            this.txtFlakonsProkarton.TabIndex = 11;
-            this.txtFlakonsProkarton.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFlakonsProkarton_KeyPress);
-            // 
-            // lblVerbleibendeFlakons
-            // 
-            this.lblVerbleibendeFlakons.AutoSize = true;
-            this.lblVerbleibendeFlakons.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVerbleibendeFlakons.Location = new System.Drawing.Point(434, 196);
-            this.lblVerbleibendeFlakons.Name = "lblVerbleibendeFlakons";
-            this.lblVerbleibendeFlakons.Size = new System.Drawing.Size(172, 20);
-            this.lblVerbleibendeFlakons.TabIndex = 6;
-            this.lblVerbleibendeFlakons.Text = "Verbleibende_Flakons:";
-            this.lblVerbleibendeFlakons.Visible = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(70, 151);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(118, 20);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Kartons_Lager:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(449, 151);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(157, 20);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Flakons_pro_Karton:";
             // 
             // label4
             // 
@@ -458,7 +383,7 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::BilsanParfums.Properties.Resources.Flakons;
-            this.pictureBox1.Location = new System.Drawing.Point(823, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(860, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(353, 286);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -478,40 +403,78 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvFlakons.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFlakons.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFlakons.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle25.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFlakons.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
             this.dgvFlakons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFlakons.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFlakons.DefaultCellStyle = dataGridViewCellStyle26;
             this.dgvFlakons.EnableHeadersVisualStyles = false;
             this.dgvFlakons.Location = new System.Drawing.Point(12, 427);
             this.dgvFlakons.MultiSelect = false;
             this.dgvFlakons.Name = "dgvFlakons";
             this.dgvFlakons.ReadOnly = true;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dgvFlakons.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvFlakons.RowsDefaultCellStyle = dataGridViewCellStyle27;
             this.dgvFlakons.RowTemplate.Height = 35;
-            this.dgvFlakons.Size = new System.Drawing.Size(1158, 263);
+            this.dgvFlakons.Size = new System.Drawing.Size(1195, 263);
             this.dgvFlakons.TabIndex = 3;
             this.dgvFlakons.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFlakons_CellDoubleClick);
+            // 
+            // lblVerbleibendeFlakons
+            // 
+            this.lblVerbleibendeFlakons.AutoSize = true;
+            this.lblVerbleibendeFlakons.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVerbleibendeFlakons.Location = new System.Drawing.Point(434, 196);
+            this.lblVerbleibendeFlakons.Name = "lblVerbleibendeFlakons";
+            this.lblVerbleibendeFlakons.Size = new System.Drawing.Size(172, 20);
+            this.lblVerbleibendeFlakons.TabIndex = 6;
+            this.lblVerbleibendeFlakons.Text = "Verbleibende_Flakons:";
+            // 
+            // txtVerbleibendeMenge
+            // 
+            this.txtVerbleibendeMenge.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtVerbleibendeMenge.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtVerbleibendeMenge.DefaultText = "";
+            this.txtVerbleibendeMenge.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtVerbleibendeMenge.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtVerbleibendeMenge.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtVerbleibendeMenge.DisabledState.Parent = this.txtVerbleibendeMenge;
+            this.txtVerbleibendeMenge.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtVerbleibendeMenge.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtVerbleibendeMenge.FocusedState.Parent = this.txtVerbleibendeMenge;
+            this.txtVerbleibendeMenge.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVerbleibendeMenge.ForeColor = System.Drawing.Color.Black;
+            this.txtVerbleibendeMenge.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtVerbleibendeMenge.HoverState.Parent = this.txtVerbleibendeMenge;
+            this.txtVerbleibendeMenge.Location = new System.Drawing.Point(613, 190);
+            this.txtVerbleibendeMenge.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtVerbleibendeMenge.Name = "txtVerbleibendeMenge";
+            this.txtVerbleibendeMenge.PasswordChar = '\0';
+            this.txtVerbleibendeMenge.PlaceholderText = "";
+            this.txtVerbleibendeMenge.ReadOnly = true;
+            this.txtVerbleibendeMenge.SelectedText = "";
+            this.txtVerbleibendeMenge.ShadowDecoration.Parent = this.txtVerbleibendeMenge;
+            this.txtVerbleibendeMenge.Size = new System.Drawing.Size(225, 36);
+            this.txtVerbleibendeMenge.TabIndex = 13;
             // 
             // frmFlakons
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1182, 702);
+            this.ClientSize = new System.Drawing.Size(1219, 702);
             this.Controls.Add(this.dgvFlakons);
             this.Controls.Add(this.gbFlakonsInfo);
             this.Controls.Add(this.cbAlleParfümStatus);
@@ -535,15 +498,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox gbFlakonsInfo;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label lblVerbleibendeFlakons;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private Guna.UI2.WinForms.Guna2TextBox txtFlakonsProkarton;
-        private Guna.UI2.WinForms.Guna2TextBox txtVerbleibendeMenge;
-        private Guna.UI2.WinForms.Guna2TextBox txtKarfonLager;
         private Guna.UI2.WinForms.Guna2ComboBox cbForm;
         private Guna.UI2.WinForms.Guna2ComboBox cbFarbe;
         private Guna.UI2.WinForms.Guna2ComboBox cbFlakonsMengeInMl;
@@ -553,8 +510,12 @@
         private Guna.UI2.WinForms.Guna2ComboBox cbVerschlussart;
         private System.Windows.Forms.Label label8;
         private Guna.UI2.WinForms.Guna2TextBox txtBenötigteFlakons;
-        private System.Windows.Forms.Label lblBenötigteFlakons;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.DataGridView dgvFlakons;
+        private System.Windows.Forms.RadioButton rbBenötigt;
+        private System.Windows.Forms.RadioButton rbGeliefert;
+        private Guna.UI2.WinForms.Guna2TextBox txtGelieferteFlakons;
+        private Guna.UI2.WinForms.Guna2TextBox txtVerbleibendeMenge;
+        private System.Windows.Forms.Label lblVerbleibendeFlakons;
     }
 }

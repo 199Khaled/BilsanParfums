@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsDuftÖle.cs" />
     <Compile Include="clsFlakonsDatenzugriff.cs" />
     <Compile Include="clsNeueParfümDatenzugriff.cs" />
     <Compile Include="clsParfümDatenzugriff.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SPTables\DuftÖle_SPs.sql" />
     <Content Include="SPTables\Flakons_SPs.sql" />
   </ItemGroup>
   <ItemGroup>

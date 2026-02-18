@@ -16,12 +16,11 @@ namespace BilsanParfums
     {
         enum enMode { addnew = 0, update = 1 }
         enMode _mode = enMode.addnew;
-        private readonly object _dataloadLock = new object();
 
         DataTable _dtFlakons;
         clsFlakons _flakons;
         BindingSource _bindingSource;
-        private int? _initialVerbleibendeMenge; // Neue Variable, um den initialen Wert zu speichern
+       
 
         public frmFlakons()
         {
@@ -38,8 +37,7 @@ namespace BilsanParfums
 
         private void _LadeFlakonsdatenFromDatabase()
         {
-            lock (_dataloadLock)
-            {
+           
                 _dtFlakons = clsFlakons.GetAllFlakons(); // Angenommen, diese Methode gibt DataTable zurück
                 if (_dtFlakons != null && _dtFlakons.Rows.Count > 0)
                 {
@@ -48,7 +46,7 @@ namespace BilsanParfums
                     _PasseDataGridViewSchriftAn(dgvFlakons);
                     // _MarkiereParfümZeilen(dgvFlakons); // DIESE ZEILE WIRD ENTFERNT, da CellFormatting es dynamisch macht
                 }
-            }
+            
         }
 
         private void _PasseDataGridViewSchriftAn(DataGridView dgv)
@@ -100,6 +98,15 @@ namespace BilsanParfums
 
         private void _ResetDefaultValues()
         {
+            _flakons = null;
+            _mode = enMode.addnew;
+
+            rbBenötigt.Checked = false;
+            rbGeliefert.Checked = false;
+
+            txtBenötigteFlakons.Visible = false;
+            txtGelieferteFlakons.Visible = false;
+
             cbFlakonsMengeInMl.SelectedIndex = -1;
             errorProvider1.SetError(cbFlakonsMengeInMl, null);
             cbFlakonsMengeInMl.FillColor = Color.White;
@@ -116,23 +123,10 @@ namespace BilsanParfums
             errorProvider1.SetError(cbFarbe, null);
             cbFarbe.FillColor = Color.White;
 
-            txtKarfonLager.Clear();
-            errorProvider1.SetError(txtKarfonLager, null);
-            txtKarfonLager.FillColor = Color.White;
-
-            txtFlakonsProkarton.Clear();
-            errorProvider1.SetError(txtFlakonsProkarton, null);
-            txtFlakonsProkarton.FillColor = Color.White;
-
             txtBenötigteFlakons.Clear();
+            txtGelieferteFlakons.Clear();
             txtVerbleibendeMenge.Clear();
 
-            lblBenötigteFlakons.Visible = false;
-            txtBenötigteFlakons.Visible = false;
-            lblVerbleibendeFlakons.Visible = false;
-            txtVerbleibendeMenge.Visible = false;
-
-            _initialVerbleibendeMenge = 0; // Beim Zurücksetzen auch den Initialwert löschen
         }
 
         private bool _TextFelderValidierung(Guna.UI2.WinForms.Guna2TextBox textBox, string fieldName)
@@ -174,17 +168,16 @@ namespace BilsanParfums
             isValid &= _ComboBoxValidierung(cbForm, "Form");
             isValid &= _ComboBoxValidierung(cbVerschlussart, "Verschlussart");
             isValid &= _ComboBoxValidierung(cbFarbe, "Farbe");
-            isValid &= _TextFelderValidierung(txtKarfonLager, "Kartonslager");
-            isValid &= _TextFelderValidierung(txtFlakonsProkarton, "Flakon pro Karton");
+            if (txtGelieferteFlakons.Visible)
+                isValid &= _TextFelderValidierung(txtGelieferteFlakons, "Gelieferte Flakons");
+            if (txtBenötigteFlakons.Visible)
+                isValid &= _TextFelderValidierung(txtBenötigteFlakons, "Benötigte Flakons");
+
             return isValid;
         }
 
         private void _LadenFlakonsdaten(int flakonID)
         {
-            lblBenötigteFlakons.Visible = true;
-            txtBenötigteFlakons.Visible = true;
-            lblVerbleibendeFlakons.Visible = true;
-            txtVerbleibendeMenge.Visible = true;
 
             _flakons = clsFlakons.FindByFlakonID(flakonID);
             if (_flakons != null)
@@ -193,58 +186,73 @@ namespace BilsanParfums
                 cbForm.SelectedItem = _flakons.Form;
                 cbFarbe.SelectedItem = _flakons.Farbe;
                 cbVerschlussart.SelectedItem = _flakons.Verschlussart;
-                txtKarfonLager.Text = _flakons.Kartons_Lager.ToString();
-                txtFlakonsProkarton.Text = _flakons.Flakons_pro_Karton.ToString();
-
-                // HIER WIRD DER INITIALE WERT GESPEICHERT
-                _initialVerbleibendeMenge = _flakons.Verbleibende_Flakons;
-                txtVerbleibendeMenge.Text = _initialVerbleibendeMenge.ToString();
+                txtVerbleibendeMenge.Text = _flakons.Verbleibende_Flakons.ToString();
             }
             else
             {
-                _initialVerbleibendeMenge = 0; // Wenn Flakon nicht gefunden, Initialwert auf 0 setzen
-                txtVerbleibendeMenge.Text = "0";
+                MessageBox.Show("Kein Flakon mit dieser ID gefunden.",
+                                "Nicht gefunden",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                _flakons = null;
             }
-            // Beim Laden der Daten, txtBenötigteFlakons zurücksetzen
-            txtBenötigteFlakons.Clear();
         }
 
-        private void _FillFlakonsdaten()
+        private bool _FillFlakonsdaten()
         {
             _flakons.FlakonsMengeInMl = cbFlakonsMengeInMl.SelectedItem.ToString();
             _flakons.Form = cbForm.SelectedItem.ToString();
             _flakons.Verschlussart = cbVerschlussart.SelectedItem.ToString();
             _flakons.Farbe = cbFarbe.SelectedItem.ToString();
-            _flakons.Kartons_Lager = Convert.ToInt32(txtKarfonLager.Text.Trim());
-            _flakons.Flakons_pro_Karton = Convert.ToInt32(txtFlakonsProkarton.Text.Trim());
 
-            if (_mode == enMode.addnew)
+            // 🔹 Aktuelle Flakons (wenn leer → 0)
+            int aktuelleFlakonsMenge = 0;
+            if (!string.IsNullOrWhiteSpace(txtVerbleibendeMenge.Text))
             {
-                int verbleibendeFlakons;
-                int kartonsLager = Convert.ToInt32(txtKarfonLager.Text.Trim());
-                int flakonsProKarton = Convert.ToInt32(txtFlakonsProkarton.Text.Trim());
-                verbleibendeFlakons = kartonsLager * flakonsProKarton;
-                _flakons.Verbleibende_Flakons = verbleibendeFlakons;
-            }
-            // Die Logik hier wurde vereinfacht, da txtVerbleibendeMenge nun eher ein Ausgabefeld ist
-            // und der Wert primär aus _initialVerbleibendeMenge und txtBenötigteFlakons abgeleitet wird.
-            // Wenn txtVerbleibendeMenge in _FillFlakonsdaten noch manuell überschrieben werden soll,
-            // wäre eine spezifischere Logik nötig, die aber nicht empfehlenswert wäre, wenn es berechnet wird.
-            // Ich gehe davon aus, dass _flakons.Verbleibende_Flakons den Endwert nach Abzug repräsentiert,
-            // der dann in der Datenbank gespeichert wird.
-
-            // Wenn die Form im Update-Modus ist und txtBenötigteFlakons gefüllt wurde,
-            // dann sollte der verbleibende Wert der sein, der im txtVerbleibendeMenge steht.
-            if (_mode == enMode.update && !string.IsNullOrEmpty(txtVerbleibendeMenge.Text))
-            {
-                if (int.TryParse(txtVerbleibendeMenge.Text.Trim(), out int finalRemaining))
+                if (!int.TryParse(txtVerbleibendeMenge.Text.Trim(), out aktuelleFlakonsMenge))
                 {
-                    _flakons.Verbleibende_Flakons = finalRemaining;
+                    MessageBox.Show("Ungültige aktuelle Menge!");
+                    return false;
                 }
             }
 
+            int neueFlakonsmenge = aktuelleFlakonsMenge;
+            // 🔹 Gelieferte Menge
+            if (rbGeliefert.Checked)
+            {
+                if (!int.TryParse(txtGelieferteFlakons.Text.Trim(), out int geliefert))
+                {
+                    MessageBox.Show("Ungültige gelieferte Menge!");
+                    return false;
+                }
 
-            _flakons.Erstellungsdatum = DateTime.Now.Date;
+                neueFlakonsmenge += geliefert;
+            }
+
+            // 🔹 Benötigte Menge (Abzug)
+            else if (rbBenötigt.Checked)
+            {
+                if (!int.TryParse(txtBenötigteFlakons.Text.Trim(), out int benötigt))
+                {
+                    MessageBox.Show("Ungültige benötigte Menge!");
+                    return false;
+                }
+
+                neueFlakonsmenge -= benötigt;
+            }
+
+            // 🔹 Negativen Bestand verhindern
+            if (neueFlakonsmenge < 0)
+            {
+                MessageBox.Show("Bestand darf nicht negativ sein!");
+                return false;
+            }
+
+            _flakons.Verbleibende_Flakons = neueFlakonsmenge;
+            _flakons.Aktivierungsdatum = DateTime.Now.Date;
+
+            return true;
         }
 
         private bool _FlakonsDatenSpeichern()
@@ -252,10 +260,16 @@ namespace BilsanParfums
             if (!_SindEingabenValidiert())
                 return false;
 
+            //sicherstellen, dass Object existiert.
             if (_flakons == null)
+            {
                 _flakons = new clsFlakons();
+            }
 
-            _FillFlakonsdaten();
+            if (!_FillFlakonsdaten())
+            {
+                return false;
+            }
 
             string statusMessage;
             if (_mode == enMode.addnew)
@@ -339,55 +353,16 @@ namespace BilsanParfums
             }
         }
 
-        private void txtBenötigteFlakons_TextChanged(object sender, EventArgs e)
+        private void rbGeliefert_CheckedChanged(object sender, EventArgs e)
         {
-            // Wenn txtBenötigteFlakons leer ist, den txtVerbleibendeMenge auf den Initialwert zurücksetzen
-            if (string.IsNullOrEmpty(txtBenötigteFlakons.Text.Trim()))
-            {
-                txtVerbleibendeMenge.Text = _initialVerbleibendeMenge.ToString();
-                return; // Beenden der Methode
-            }
+            txtBenötigteFlakons.Visible = false;
+            txtGelieferteFlakons.Visible = true;
+        }
 
-            // Sicherstellen, dass _initialVerbleibendeMenge geladen wurde (z.B. nach CellDoubleClick)
-            if (_initialVerbleibendeMenge == 0 && string.IsNullOrEmpty(txtVerbleibendeMenge.Text.Trim()))
-            {
-                // Dies sollte nur passieren, wenn keine Daten geladen wurden und der Benutzer direkt eingibt
-                // Hier könnten Sie eine Meldung anzeigen, dass zuerst ein Flakon ausgewählt werden muss
-                MessageBox.Show("Bitte wählen Sie zuerst einen Flakon aus oder geben Sie den initialen Bestand an.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtBenötigteFlakons.Text = string.Empty;
-                txtVerbleibendeMenge.Text = "0"; // Setzen Sie den Wert zurück
-                return;
-            }
-
-
-            int benötigteFlakons;
-            // Versuchen Sie, den Wert von txtBenötigteFlakons in eine Ganzzahl umzuwandeln
-            if (!int.TryParse(txtBenötigteFlakons.Text.Trim(), out benötigteFlakons))
-            {
-                // Fehlerbehandlung, falls der Text keine gültige Zahl ist (z.B. wenn der Benutzer Text eingibt)
-                // Setzen Sie den Verbleibenden Bestand auf den Initialwert zurück und löschen Sie die fehlerhafte Eingabe
-                txtVerbleibendeMenge.Text = _initialVerbleibendeMenge.ToString();
-                errorProvider1.SetError(txtBenötigteFlakons, "Bitte geben Sie eine gültige Zahl ein!");
-                return;
-            }
-            else
-            {
-                errorProvider1.SetError(txtBenötigteFlakons, null); // Fehlermeldung entfernen
-            }
-
-
-            // Berechnung des neuen verbleibenden Bestands basierend auf dem Initialwert
-            int? neuerVerbleibenderBestand = _initialVerbleibendeMenge - benötigteFlakons;
-
-            if (neuerVerbleibenderBestand < 0)
-            {
-                MessageBox.Show("Die benötigte Menge darf den verbleibenden Bestand nicht überschreiten!", "Mengenprüfung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtBenötigteFlakons.Text = string.Empty; // Eingabe löschen
-                txtVerbleibendeMenge.Text = _initialVerbleibendeMenge.ToString(); // Auf Initialwert zurücksetzen
-                return;
-            }
-
-            txtVerbleibendeMenge.Text = neuerVerbleibenderBestand.ToString();
+        private void rbBenötigt_CheckedChanged(object sender, EventArgs e)
+        {
+            txtGelieferteFlakons.Visible = false;
+            txtBenötigteFlakons.Visible = true;
         }
     }
 }

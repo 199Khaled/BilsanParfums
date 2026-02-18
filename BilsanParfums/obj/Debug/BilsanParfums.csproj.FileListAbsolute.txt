@@ -114,3 +114,7 @@ D:\BilsanParfums\BilsanParfums\bin\Debug\System.Buffers.dll
 D:\BilsanParfums\BilsanParfums\bin\Debug\RBush.dll
 D:\BilsanParfums\BilsanParfums\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 D:\BilsanParfums\BilsanParfums\bin\Debug\ClosedXML.pdb
+D:\BilsanParfums\BilsanParfums\bin\Debug\ClosedXML.dll
+D:\BilsanParfums\BilsanParfums\bin\Debug\System.Numerics.Vectors.dll
+D:\BilsanParfums\BilsanParfums\obj\Debug\BilsanParfums.frmÖle.resources
+D:\BilsanParfums\BilsanParfums\obj\Debug\BilsanParfums.frmHauptForm.resources
