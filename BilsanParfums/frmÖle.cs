@@ -71,7 +71,7 @@ namespace BilsanParfums
             if (e.ColumnIndex >= 0 && ((DataGridView)sender).Columns.Count > e.ColumnIndex)
             {
                 // Überprüfen, ob die aktuelle Zelle zur Spalte "Rest" gehört
-                if (((DataGridView)sender).Columns[e.ColumnIndex].Name == "Ölmenge")
+                if (((DataGridView)sender).Columns[e.ColumnIndex].Name == "ÖlMengeInGram")
                 {
                     // Versuchen Sie, den Wert sicher in eine Ganzzahl umzuwandeln
                     if (e.Value != null && int.TryParse(e.Value.ToString(), out int restFlakons))

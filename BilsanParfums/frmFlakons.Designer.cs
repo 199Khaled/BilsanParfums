@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cbAlleParfümStatus = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.gbFlakonsInfo = new System.Windows.Forms.GroupBox();
@@ -47,14 +47,14 @@
             this.cbForm = new Guna.UI2.WinForms.Guna2ComboBox();
             this.cbFarbe = new Guna.UI2.WinForms.Guna2ComboBox();
             this.cbFlakonsMengeInMl = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.txtVerbleibendeMenge = new Guna.UI2.WinForms.Guna2TextBox();
+            this.lblVerbleibendeFlakons = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.dgvFlakons = new System.Windows.Forms.DataGridView();
-            this.lblVerbleibendeFlakons = new System.Windows.Forms.Label();
-            this.txtVerbleibendeMenge = new Guna.UI2.WinForms.Guna2TextBox();
             this.cbAlleParfümStatus.SuspendLayout();
             this.gbFlakonsInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -110,7 +110,7 @@
             this.gbFlakonsInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbFlakonsInfo.Location = new System.Drawing.Point(0, 57);
             this.gbFlakonsInfo.Name = "gbFlakonsInfo";
-            this.gbFlakonsInfo.Size = new System.Drawing.Size(1219, 320);
+            this.gbFlakonsInfo.Size = new System.Drawing.Size(1219, 388);
             this.gbFlakonsInfo.TabIndex = 2;
             this.gbFlakonsInfo.TabStop = false;
             this.gbFlakonsInfo.Text = "Flakonsinfo";
@@ -236,7 +236,7 @@
             this.btnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.ForeColor = System.Drawing.Color.Gold;
             this.btnDelete.HoverState.Parent = this.btnDelete;
-            this.btnDelete.Location = new System.Drawing.Point(565, 254);
+            this.btnDelete.Location = new System.Drawing.Point(466, 262);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.ShadowDecoration.Parent = this.btnDelete;
             this.btnDelete.Size = new System.Drawing.Size(120, 45);
@@ -252,7 +252,7 @@
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.Gold;
             this.btnCancel.HoverState.Parent = this.btnCancel;
-            this.btnCancel.Location = new System.Drawing.Point(430, 254);
+            this.btnCancel.Location = new System.Drawing.Point(331, 262);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.ShadowDecoration.Parent = this.btnCancel;
             this.btnCancel.Size = new System.Drawing.Size(120, 45);
@@ -268,7 +268,7 @@
             this.btnSave.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.Gold;
             this.btnSave.HoverState.Parent = this.btnSave;
-            this.btnSave.Location = new System.Drawing.Point(290, 254);
+            this.btnSave.Location = new System.Drawing.Point(191, 262);
             this.btnSave.Name = "btnSave";
             this.btnSave.ShadowDecoration.Parent = this.btnSave;
             this.btnSave.Size = new System.Drawing.Size(120, 45);
@@ -349,6 +349,44 @@
             this.cbFlakonsMengeInMl.Size = new System.Drawing.Size(223, 36);
             this.cbFlakonsMengeInMl.TabIndex = 14;
             // 
+            // txtVerbleibendeMenge
+            // 
+            this.txtVerbleibendeMenge.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtVerbleibendeMenge.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtVerbleibendeMenge.DefaultText = "";
+            this.txtVerbleibendeMenge.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtVerbleibendeMenge.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtVerbleibendeMenge.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtVerbleibendeMenge.DisabledState.Parent = this.txtVerbleibendeMenge;
+            this.txtVerbleibendeMenge.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtVerbleibendeMenge.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtVerbleibendeMenge.FocusedState.Parent = this.txtVerbleibendeMenge;
+            this.txtVerbleibendeMenge.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVerbleibendeMenge.ForeColor = System.Drawing.Color.Black;
+            this.txtVerbleibendeMenge.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtVerbleibendeMenge.HoverState.Parent = this.txtVerbleibendeMenge;
+            this.txtVerbleibendeMenge.Location = new System.Drawing.Point(613, 190);
+            this.txtVerbleibendeMenge.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtVerbleibendeMenge.Name = "txtVerbleibendeMenge";
+            this.txtVerbleibendeMenge.PasswordChar = '\0';
+            this.txtVerbleibendeMenge.PlaceholderText = "";
+            this.txtVerbleibendeMenge.ReadOnly = true;
+            this.txtVerbleibendeMenge.SelectedText = "";
+            this.txtVerbleibendeMenge.ShadowDecoration.Parent = this.txtVerbleibendeMenge;
+            this.txtVerbleibendeMenge.Size = new System.Drawing.Size(225, 36);
+            this.txtVerbleibendeMenge.TabIndex = 13;
+            // 
+            // lblVerbleibendeFlakons
+            // 
+            this.lblVerbleibendeFlakons.AutoSize = true;
+            this.lblVerbleibendeFlakons.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVerbleibendeFlakons.Location = new System.Drawing.Point(434, 196);
+            this.lblVerbleibendeFlakons.Name = "lblVerbleibendeFlakons";
+            this.lblVerbleibendeFlakons.Size = new System.Drawing.Size(172, 20);
+            this.lblVerbleibendeFlakons.TabIndex = 6;
+            this.lblVerbleibendeFlakons.Text = "Verbleibende_Flakons:";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -382,10 +420,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = global::BilsanParfums.Properties.Resources.Flakons;
+            this.pictureBox1.Image = global::BilsanParfums.Properties.Resources.für_Programm;
             this.pictureBox1.Location = new System.Drawing.Point(860, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(353, 286);
+            this.pictureBox1.Size = new System.Drawing.Size(359, 400);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -403,82 +441,45 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvFlakons.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFlakons.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle25.BackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFlakons.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFlakons.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvFlakons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFlakons.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFlakons.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvFlakons.EnableHeadersVisualStyles = false;
-            this.dgvFlakons.Location = new System.Drawing.Point(12, 427);
+            this.dgvFlakons.Location = new System.Drawing.Point(12, 469);
             this.dgvFlakons.MultiSelect = false;
             this.dgvFlakons.Name = "dgvFlakons";
             this.dgvFlakons.ReadOnly = true;
-            dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dgvFlakons.RowsDefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvFlakons.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvFlakons.RowTemplate.Height = 35;
-            this.dgvFlakons.Size = new System.Drawing.Size(1195, 263);
+            this.dgvFlakons.Size = new System.Drawing.Size(1195, 302);
             this.dgvFlakons.TabIndex = 3;
             this.dgvFlakons.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFlakons_CellDoubleClick);
-            // 
-            // lblVerbleibendeFlakons
-            // 
-            this.lblVerbleibendeFlakons.AutoSize = true;
-            this.lblVerbleibendeFlakons.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVerbleibendeFlakons.Location = new System.Drawing.Point(434, 196);
-            this.lblVerbleibendeFlakons.Name = "lblVerbleibendeFlakons";
-            this.lblVerbleibendeFlakons.Size = new System.Drawing.Size(172, 20);
-            this.lblVerbleibendeFlakons.TabIndex = 6;
-            this.lblVerbleibendeFlakons.Text = "Verbleibende_Flakons:";
-            // 
-            // txtVerbleibendeMenge
-            // 
-            this.txtVerbleibendeMenge.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtVerbleibendeMenge.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtVerbleibendeMenge.DefaultText = "";
-            this.txtVerbleibendeMenge.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtVerbleibendeMenge.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtVerbleibendeMenge.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtVerbleibendeMenge.DisabledState.Parent = this.txtVerbleibendeMenge;
-            this.txtVerbleibendeMenge.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtVerbleibendeMenge.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtVerbleibendeMenge.FocusedState.Parent = this.txtVerbleibendeMenge;
-            this.txtVerbleibendeMenge.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVerbleibendeMenge.ForeColor = System.Drawing.Color.Black;
-            this.txtVerbleibendeMenge.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtVerbleibendeMenge.HoverState.Parent = this.txtVerbleibendeMenge;
-            this.txtVerbleibendeMenge.Location = new System.Drawing.Point(613, 190);
-            this.txtVerbleibendeMenge.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtVerbleibendeMenge.Name = "txtVerbleibendeMenge";
-            this.txtVerbleibendeMenge.PasswordChar = '\0';
-            this.txtVerbleibendeMenge.PlaceholderText = "";
-            this.txtVerbleibendeMenge.ReadOnly = true;
-            this.txtVerbleibendeMenge.SelectedText = "";
-            this.txtVerbleibendeMenge.ShadowDecoration.Parent = this.txtVerbleibendeMenge;
-            this.txtVerbleibendeMenge.Size = new System.Drawing.Size(225, 36);
-            this.txtVerbleibendeMenge.TabIndex = 13;
             // 
             // frmFlakons
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1219, 702);
+            this.ClientSize = new System.Drawing.Size(1219, 783);
             this.Controls.Add(this.dgvFlakons);
             this.Controls.Add(this.gbFlakonsInfo);
             this.Controls.Add(this.cbAlleParfümStatus);
             this.Name = "frmFlakons";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Flakons";
             this.Load += new System.EventHandler(this.frmFlakons_Load);
             this.cbAlleParfümStatus.ResumeLayout(false);

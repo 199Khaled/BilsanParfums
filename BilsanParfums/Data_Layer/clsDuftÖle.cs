@@ -58,40 +58,81 @@ namespace BilsanDb_DataLayer
     return isFound;
 }
 
+//        public static DataTable GetAllDuftÖle()
+//{
+//    DataTable dt = new DataTable();
+
+//    try
+//    {
+//        using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+//        {
+//            string query = "SP_Get_All_DuftÖle";
+
+//            using (SqlCommand command = new SqlCommand(query, connection))
+//            {
+//                command.CommandType = CommandType.StoredProcedure; 
+
+//                connection.Open();
+
+//                using (SqlDataReader reader = command.ExecuteReader())
+//                {
+//                    if (reader.HasRows)
+//                    {
+//                        dt.Load(reader);
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    catch (Exception ex)
+//    {
+//        // Handle all exceptions in a general way
+//        ErrorHandler.HandleException(ex, nameof(GetAllDuftÖle), "No parameters for this method.");
+//    }
+
+//    return dt;
+//}
         public static DataTable GetAllDuftÖle()
-{
-    DataTable dt = new DataTable();
-
-    try
-    {
-        using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
         {
-            string query = "SP_Get_All_DuftÖle";
+            DataTable dt = new DataTable();
 
-            using (SqlCommand command = new SqlCommand(query, connection))
+            try
             {
-                command.CommandType = CommandType.StoredProcedure; 
-
-                connection.Open();
-
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
-                    if (reader.HasRows)
+                    string query = @"
+                SELECT 
+                    ID AS ID,
+                   AlteNummer AS AlteNummer,
+                   ParfümCode As ParfümCode,
+                   Ölmenge AS ÖlMengeInGram,
+                   Öltype AS Öltype,
+                   Aktivierungsdatum AS Aktivierungsdatum
+                 
+                FROM dbo.DuftÖle";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        dt.Load(reader);
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                dt.Load(reader);
+                            }
+                        }
                     }
                 }
             }
-        }
-    }
-    catch (Exception ex)
-    {
-        // Handle all exceptions in a general way
-        ErrorHandler.HandleException(ex, nameof(GetAllDuftÖle), "No parameters for this method.");
-    }
+            catch (Exception ex)
+            {
+                // Handle all exceptions in a general way
+                ErrorHandler.HandleException(ex, nameof(GetAllDuftÖle), "No parameters for this method.");
+            }
 
-    return dt;
-}
+            return dt;
+        }
 
         public static int? AddNewDuftÖle(int? AlteNummer, int? Ölmenge, DateTime? Aktivierungsdatum, string ParfümCode = null, string Öltype = null)
     {
