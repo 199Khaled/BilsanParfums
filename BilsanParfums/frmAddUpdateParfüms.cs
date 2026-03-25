@@ -132,6 +132,7 @@ namespace BilsanParfums
                 // Checkboxen basierend auf den Booleschen Werten setzen
                 chbIstVorhanden.Checked = _parfüms.IstVorhanden;
                 chbInBestellung.Checked = _parfüms.InBestellung;
+                cbIstNeu.Checked = _parfüms.IstNeu;
             }
             else
             {
@@ -188,6 +189,7 @@ namespace BilsanParfums
             // Direkte Zuweisung der Checked-Eigenschaft von Checkboxen
             _parfüms.IstVorhanden = chbIstVorhanden.Checked;
             _parfüms.InBestellung = chbInBestellung.Checked;
+            _parfüms.IstNeu = cbIstNeu.Checked;
         }
 
         /// <summary>

@@ -51,6 +51,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtAlteNummer = new Guna.UI2.WinForms.Guna2TextBox();
             this.lblAlteNummer = new System.Windows.Forms.Label();
+            this.cbIstNeu = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -73,7 +74,7 @@
             // 
             this.chbInBestellung.AutoSize = true;
             this.chbInBestellung.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chbInBestellung.Location = new System.Drawing.Point(343, 493);
+            this.chbInBestellung.Location = new System.Drawing.Point(343, 520);
             this.chbInBestellung.Margin = new System.Windows.Forms.Padding(2);
             this.chbInBestellung.Name = "chbInBestellung";
             this.chbInBestellung.Size = new System.Drawing.Size(134, 24);
@@ -87,7 +88,7 @@
             this.chbIstVorhanden.Checked = true;
             this.chbIstVorhanden.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chbIstVorhanden.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chbIstVorhanden.Location = new System.Drawing.Point(174, 493);
+            this.chbIstVorhanden.Location = new System.Drawing.Point(184, 520);
             this.chbIstVorhanden.Margin = new System.Windows.Forms.Padding(2);
             this.chbIstVorhanden.Name = "chbIstVorhanden";
             this.chbIstVorhanden.Size = new System.Drawing.Size(138, 24);
@@ -100,10 +101,10 @@
             this.btnAbbrechen.BackColor = System.Drawing.Color.DarkCyan;
             this.btnAbbrechen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAbbrechen.ForeColor = System.Drawing.Color.Gold;
-            this.btnAbbrechen.Location = new System.Drawing.Point(349, 541);
+            this.btnAbbrechen.Location = new System.Drawing.Point(313, 614);
             this.btnAbbrechen.Margin = new System.Windows.Forms.Padding(2);
             this.btnAbbrechen.Name = "btnAbbrechen";
-            this.btnAbbrechen.Size = new System.Drawing.Size(128, 41);
+            this.btnAbbrechen.Size = new System.Drawing.Size(170, 51);
             this.btnAbbrechen.TabIndex = 31;
             this.btnAbbrechen.Text = "Abbrechen";
             this.btnAbbrechen.UseVisualStyleBackColor = false;
@@ -114,10 +115,10 @@
             this.btnspeichern.BackColor = System.Drawing.Color.DarkCyan;
             this.btnspeichern.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnspeichern.ForeColor = System.Drawing.Color.Gold;
-            this.btnspeichern.Location = new System.Drawing.Point(184, 541);
+            this.btnspeichern.Location = new System.Drawing.Point(115, 614);
             this.btnspeichern.Margin = new System.Windows.Forms.Padding(2);
             this.btnspeichern.Name = "btnspeichern";
-            this.btnspeichern.Size = new System.Drawing.Size(128, 41);
+            this.btnspeichern.Size = new System.Drawing.Size(170, 51);
             this.btnspeichern.TabIndex = 30;
             this.btnspeichern.Text = "Speichern";
             this.btnspeichern.UseVisualStyleBackColor = false;
@@ -351,7 +352,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(501, 46);
+            this.panel1.Size = new System.Drawing.Size(512, 46);
             this.panel1.TabIndex = 41;
             // 
             // label7
@@ -360,7 +361,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Gold;
-            this.label7.Location = new System.Drawing.Point(156, 10);
+            this.label7.Location = new System.Drawing.Point(162, 10);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(191, 24);
@@ -403,12 +404,25 @@
             this.lblAlteNummer.TabIndex = 43;
             this.lblAlteNummer.Text = "AlteNummer:";
             // 
+            // cbIstNeu
+            // 
+            this.cbIstNeu.AutoSize = true;
+            this.cbIstNeu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbIstNeu.Location = new System.Drawing.Point(257, 565);
+            this.cbIstNeu.Margin = new System.Windows.Forms.Padding(2);
+            this.cbIstNeu.Name = "cbIstNeu";
+            this.cbIstNeu.Size = new System.Drawing.Size(86, 24);
+            this.cbIstNeu.TabIndex = 44;
+            this.cbIstNeu.Text = "Ist Neu";
+            this.cbIstNeu.UseVisualStyleBackColor = true;
+            // 
             // frmAddUpdateParfüms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
-            this.ClientSize = new System.Drawing.Size(501, 585);
+            this.ClientSize = new System.Drawing.Size(512, 676);
+            this.Controls.Add(this.cbIstNeu);
             this.Controls.Add(this.lblAlteNummer);
             this.Controls.Add(this.txtAlteNummer);
             this.Controls.Add(this.panel1);
@@ -467,5 +481,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblAlteNummer;
         private Guna.UI2.WinForms.Guna2TextBox txtAlteNummer;
+        private System.Windows.Forms.CheckBox cbIstNeu;
     }
 }

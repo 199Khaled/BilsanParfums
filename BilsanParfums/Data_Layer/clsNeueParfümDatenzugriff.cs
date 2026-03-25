@@ -275,11 +275,11 @@ namespace Data_Layer
 
 
         public static bool AddNewPerfum(int? alteNummer, string ParfümCode, string marke, string name, string kategorie,
-              string duftrichtung, string basisnote, bool istVorhanden, bool inBestellung)
+              string duftrichtung, string basisnote, bool istVorhanden, bool inBestellung, bool IstNeu)
         {
             int rowAffected = 0;
-            string abfrage = @"Insert into NeueParfümsdaten (AlteNummer, ParfümCode, Marke, Name, Kategorie, Duftrichtung, Basisnote, IstVorhanden, InBestellung)
-                           Values(@alteNummer, @ParfümCode, @marke, @name, @kategorie, @duftrichtung, @basisnote, @istVorhanden, @inBestellung)";
+            string abfrage = @"Insert into NeueParfümsdaten (AlteNummer, ParfümCode, Marke, Name, Kategorie, Duftrichtung, Basisnote, IstVorhanden, InBestellung, IstNeu)
+                           Values(@alteNummer, @ParfümCode, @marke, @name, @kategorie, @duftrichtung, @basisnote, @istVorhanden, @inBestellung, @IstNeu)";
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -312,6 +312,7 @@ namespace Data_Layer
 
                         command.Parameters.AddWithValue("@istVorhanden", istVorhanden);
                         command.Parameters.AddWithValue("@inBestellung", inBestellung);
+                        command.Parameters.AddWithValue("@IstNeu", IstNeu);
                         connection.Open();
                         rowAffected = command.ExecuteNonQuery();
                     }
@@ -327,7 +328,7 @@ namespace Data_Layer
 
         public static bool UpdatePerfum(int? neuAlteNummer, string neuParfümCode, string ParfümCode,
             string marke, string name, string kategorie,
-              string duftrichtung, string basisnote, bool istVorhanden, bool inBestellung)
+              string duftrichtung, string basisnote, bool istVorhanden, bool inBestellung, bool IstNeu)
         {
             int rowAffected = 0;
             string abfrage = @"Update NeueParfümsdaten
@@ -339,7 +340,8 @@ namespace Data_Layer
                                Duftrichtung = @duftrichtung,
                                Basisnote = @basisnote,
                                IstVorhanden = @istVorhanden,
-                               InBestellung = @inBestellung
+                               InBestellung = @inBestellung,
+                               IstNeu       = @IstNeu
                            Where parfümCode = @parfümCode";
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -374,6 +376,7 @@ namespace Data_Layer
 
                         command.Parameters.AddWithValue("@istVorhanden", istVorhanden);
                         command.Parameters.AddWithValue("@inBestellung", inBestellung);
+                        command.Parameters.AddWithValue("@IstNeu", IstNeu);
                         connection.Open();
                         rowAffected = command.ExecuteNonQuery();
                     }
@@ -414,7 +417,7 @@ namespace Data_Layer
 
         public static bool Find(ref int? alteNummer, string ParfümCode, ref string marke, ref string name,
               ref string kategorie, ref string duftrichtung, ref string basisnote,
-              ref bool istVorhanden, ref bool inBestellung)
+              ref bool istVorhanden, ref bool inBestellung, ref bool IstNeu)
         {
             bool isFound = false;
             string abfrage = @"Select * From NeueParfümsdaten Where ParfümCode = @ParfümCode";
@@ -441,6 +444,7 @@ namespace Data_Layer
                                 basisnote = reader["Basisnote"] != DBNull.Value ? (string)reader["Basisnote"] : null;
                                 istVorhanden = (bool)reader["IstVorhanden"];
                                 inBestellung = (bool)reader["InBestellung"];
+                                IstNeu = (bool)reader["IstNeu"];
                             }
                         }
                     }
