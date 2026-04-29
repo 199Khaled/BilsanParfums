@@ -1631,9 +1631,9 @@ namespace BilsanParfums
                 dgv.EndEdit();
 
                 // Farben
-                BaseColor goldColor = new BaseColor(212, 175, 55);         // Header Gold
-                BaseColor darkGreenColor = new BaseColor(44, 85, 48);      // Kategorie dunkelgrün
-                BaseColor champagneColor = new BaseColor(245, 240, 230);   // Wechselzeile
+                BaseColor goldColor = new BaseColor(212, 175, 55);
+                BaseColor darkGreenColor = new BaseColor(44, 85, 48);
+                BaseColor champagneColor = new BaseColor(245, 240, 230);
                 BaseColor whiteColor = BaseColor.WHITE;
                 BaseColor blackColor = BaseColor.BLACK;
 
@@ -1667,21 +1667,23 @@ namespace BilsanParfums
                     };
                     pdfDoc.Add(title);
 
-                    PdfPTable table = new PdfPTable(4);
+                    // Hinweis
+                    Paragraph disclaimer = new Paragraph(
+                        "Hinweis: Alle Markennamen dienen nur zur Orientierung am Duftcharakter und stehen in keiner Verbindung zu den jeweiligen Herstellern.",
+                        normalFont)
+                    {
+                        Alignment = Element.ALIGN_CENTER,
+                        SpacingAfter = 10f
+                    };
+                    pdfDoc.Add(disclaimer);
+
+                    // 🔥 Nur noch 3 Spalten
+                    PdfPTable table = new PdfPTable(3);
                     table.WidthPercentage = 100;
-                    table.SetWidths(new float[] { 1.4f, 1.8f, 2.3f, 2.3f });
+                    table.SetWidths(new float[] { 2f, 3f, 3f });
                     table.SpacingBefore = 5f;
 
-                    string ersteSpalteTitel = filterType == "InBestellung" ? "Alte Nummer" : "ParfümCode";
-
-                    table.AddCell(new PdfPCell(new Phrase(ersteSpalteTitel, headerFont))
-                    {
-                        BackgroundColor = goldColor,
-                        HorizontalAlignment = Element.ALIGN_CENTER,
-                        VerticalAlignment = Element.ALIGN_MIDDLE,
-                        Padding = 6f
-                    });
-
+                    // Header
                     table.AddCell(new PdfPCell(new Phrase("Marke", headerFont))
                     {
                         BackgroundColor = goldColor,
@@ -1739,11 +1741,6 @@ namespace BilsanParfums
                             continue;
 
                         string kategorie = row.Cells["Kategorie"]?.Value?.ToString() ?? "";
-
-                        string parfuemNummer = filterType == "InBestellung"
-                               ? row.Cells["AlteNummer"]?.Value?.ToString() ?? ""
-                               : row.Cells["ParfümCode"]?.Value?.ToString() ?? "";
-
                         string marke = row.Cells["Marke"]?.Value?.ToString() ?? "";
                         string name = row.Cells["Name"]?.Value?.ToString() ?? "";
                         string duftrichtung = row.Cells["Duftrichtung"]?.Value?.ToString() ?? "";
@@ -1751,12 +1748,12 @@ namespace BilsanParfums
                         if (string.IsNullOrWhiteSpace(name))
                             continue;
 
-                        // Neue Kategorie
+                        // Kategorie-Zeile
                         if (kategorie != aktuelleKategorie)
                         {
                             PdfPCell categoryCell = new PdfPCell(new Phrase(" " + kategorie + " ", categoryFont))
                             {
-                                Colspan = 4,
+                                Colspan = 3,
                                 HorizontalAlignment = Element.ALIGN_CENTER,
                                 VerticalAlignment = Element.ALIGN_MIDDLE,
                                 BackgroundColor = darkGreenColor,
@@ -1770,15 +1767,7 @@ namespace BilsanParfums
 
                         bool isHighlightRow = (zeilenIndex % 2 != 0);
                         BaseColor rowColor = isHighlightRow ? champagneColor : whiteColor;
-                        iTextSharp.text.Font currentFont = isHighlightRow ? highlightFont : highlightFont;
-
-                        table.AddCell(new PdfPCell(new Phrase(parfuemNummer, currentFont))
-                        {
-                            BackgroundColor = rowColor,
-                            Padding = 5f,
-                            HorizontalAlignment = Element.ALIGN_CENTER,
-                            VerticalAlignment = Element.ALIGN_MIDDLE
-                        });
+                        iTextSharp.text.Font currentFont = highlightFont;
 
                         table.AddCell(new PdfPCell(new Phrase(marke, currentFont))
                         {
