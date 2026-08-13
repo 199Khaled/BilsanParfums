@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Busnisse_Layer.clsParfüms; // Ermöglicht direkten Zugriff auf statische Mitglieder von clsParfüms
+using System.IO;
 
 namespace BilsanParfums
 {
@@ -29,7 +30,7 @@ namespace BilsanParfums
         // -1 bedeutet, dass ein neues Parfüm hinzugefügt werden soll (addnew).
         // Eine positive Zahl bedeutet, dass ein bestehendes Parfüm aktualisiert werden soll (update).
         string _ParfümCode;
-
+        private string _ausgewählterBildPfad = null;
         // Öffentliche Eigenschaft, um den Namen des erfolgreich gespeicherten Parfüms an die aufrufende Form zurückzugeben.
         // Nützlich, um z.B. einen Autovervollständigungsbaum in der Hauptform zu aktualisieren.
         public string SavedParfumName { get; private set; }
@@ -127,12 +128,14 @@ namespace BilsanParfums
                 txtName.Text = _parfüms.Name;
                 txtKategorie.Text = _parfüms.Kategorie;
                 txtDuftrichtung.Text = _parfüms.Duftrichtung;
-                txtBasisnote.Text = _parfüms.Basisnote;
-
+    
                 // Checkboxen basierend auf den Booleschen Werten setzen
                 chbIstVorhanden.Checked = _parfüms.IstVorhanden;
                 chbInBestellung.Checked = _parfüms.InBestellung;
                 cbIstNeu.Checked = _parfüms.IstNeu;
+
+                // NEU
+                _LadeParfümBild(_parfüms.ParfümCode);
             }
             else
             {
@@ -184,8 +187,7 @@ namespace BilsanParfums
             _parfüms.Name = txtName.Text.Trim();
             _parfüms.Kategorie = txtKategorie.Text.Trim();
             _parfüms.Duftrichtung = txtDuftrichtung.Text.Trim();
-            _parfüms.Basisnote = txtBasisnote.Text.Trim();
-
+          
             // Direkte Zuweisung der Checked-Eigenschaft von Checkboxen
             _parfüms.IstVorhanden = chbIstVorhanden.Checked;
             _parfüms.InBestellung = chbInBestellung.Checked;
@@ -221,52 +223,60 @@ namespace BilsanParfums
         /// </summary>
         private void _parfümDatenSpeichern()
         {
-            // 1. Überprüfung der Textfeld-Validierung
             if (!_istValidiert())
                 return;
 
-            // 2. Überprüfung, ob die ParfümNummer bereits vergeben ist (bei neuen oder geänderten Nummern)
             if (_IstParfümNummerVergeben())
                 return;
 
-            // Stellt sicher, dass das _parfüms-Objekt im addnew-Modus initialisiert wird,
-            // falls es beim Load-Ereignis nicht passierte.
             if (_parfüms == null)
-            {
                 _parfüms = new clsNeueParfümDaten();
-            }
 
-            // 3. Füllen des _parfüms-Objekts mit den aktuellen Daten aus dem Formular
+            // Alten Code merken, bevor _fülleParfümDaten() läuft
+            string alterParfümCode =
+                _mode == enMode.update
+                    ? _parfüms.ParfümCode
+                    : null;
+
             _fülleParfümDaten();
 
-            string statusMessage;
-            if (_mode == enMode.addnew)
-                statusMessage = "hinzugefügt"; // Statusmeldung für das Hinzufügen
-            else
-                statusMessage = "aktualisiert"; // Statusmeldung für das Aktualisieren
+            string neuerParfümCode =
+                txtParfümNummer.Text.Trim();
 
-            // 4. Daten in der Business-Schicht speichern
+            string statusMessage =
+                _mode == enMode.addnew
+                    ? "hinzugefügt"
+                    : "aktualisiert";
+
             if (_parfüms.Save())
             {
-                // Bei erfolgreichem Speichern die öffentlichen Eigenschaften für die Rückgabe an die aufrufende Form setzen
+                // Falls Code beim Update geändert wurde:
+                if (_mode == enMode.update &&
+                    alterParfümCode != neuerParfümCode)
+                {
+                    _BenenneParfümBildUm(
+                        alterParfümCode,
+                        neuerParfümCode);
+                }
+
+                // Falls ein neues Bild ausgewählt wurde:
+                _SpeichereParfümBild(neuerParfümCode);
+
                 this.SavedParfumName = _parfüms.Name;
                 this.SavedParfumKategorie = _parfüms.Kategorie;
 
-                // WICHTIG: Die Aktualisierung des Autovervollständigungsbaums sollte NICHT HIER erfolgen.
-                // Der Baum (AVLTree) sollte eine globale/statische Instanz in der Hauptform sein
-                // und DORT aktualisiert werden, nachdem dieses Dialogfeld geschlossen wurde.
-                // Ein lokaler Baum hier wäre ineffizient und nutzlos.
-
-                // Signalisiert der aufrufenden Form, dass die Operation erfolgreich war.
                 this.DialogResult = DialogResult.OK;
-                this.Close(); // Schließt das Formular
+                this.Close();
             }
             else
             {
-                // Fehlermeldung anzeigen, falls der Speichervorgang fehlschlägt
-                MessageBox.Show($"Fehler beim {statusMessage} ist aufgetreten.", "Fehler",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.DialogResult = DialogResult.None; // Setzt das Ergebnis auf "Keine Aktion" bei Fehler
+                MessageBox.Show(
+                    $"Fehler beim {statusMessage} ist aufgetreten.",
+                    "Fehler",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                this.DialogResult = DialogResult.None;
             }
         }
 
@@ -274,33 +284,7 @@ namespace BilsanParfums
         /// Event-Handler für den "Bearbeiten"-Button.
         /// Diese Methode scheint dazu gedacht zu sein, die Basisnoten-Eingabe zu formatieren/bereinigen.
         /// </summary>
-        private void btnBearbeiten_Click(object sender, EventArgs e)
-        {
-            string input = txtBasisnote.Text;
-            List<string> scentNotes = new List<string>();
 
-            // Die Eingabe in Wörter aufteilen, basierend auf Leerzeichen, Kommas und Semikolons.
-            // Leere Einträge werden entfernt.
-            string[] words = input.Split(new char[] { ' ', ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
-
-            foreach (string word in words)
-            {
-                // Halbierung der Wörter (z.B. "ZederZeder" wird zu "Zeder").
-                // Dies ist eine sehr spezifische Logik; stellen Sie sicher, dass dies das gewünschte Verhalten ist.
-                int half = word.Length / 2;
-                string halvedWord = word.Substring(0, half);
-
-                // Fügt das halbierte Wort zur Liste hinzu, wenn es noch nicht enthalten ist, um Duplikate zu vermeiden.
-                if (!scentNotes.Contains(halvedWord))
-                {
-                    scentNotes.Add(halvedWord);
-                }
-            }
-
-            // Die bereinigten Duftnoten werden in einem durch Kommas getrennten String formatiert.
-            string result = string.Join(", ", scentNotes);
-            txtBasisnote.Text = result; // Aktualisiert das Textfeld mit dem formatierten Ergebnis
-        }
 
         /// <summary>
         /// Event-Handler für das Laden des Formulars.
@@ -329,6 +313,119 @@ namespace BilsanParfums
             // {
             //     txtParfümNummer.ReadOnly = false;
             // }
+        }
+
+        private void btnBildauswählen_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog dialog = new OpenFileDialog())
+            {
+                dialog.Title = "Parfümbild auswählen";
+                dialog.Filter =
+                    "Bilddateien|*.jpg;*.jpeg;*.png;*.bmp|Alle Dateien|*.*";
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    _ausgewählterBildPfad = dialog.FileName;
+
+                    // Bild anzeigen, ohne die Originaldatei dauerhaft zu sperren
+                    using (Image temp = Image.FromFile(dialog.FileName))
+                    {
+                        pbParfümbild.Image = new Bitmap(temp);
+                    }
+
+                    pbParfümbild.SizeMode = PictureBoxSizeMode.Zoom;
+                }
+            }
+        }
+        private void _SpeichereParfümBild(string parfümCode)
+        {
+            if (string.IsNullOrWhiteSpace(_ausgewählterBildPfad))
+                return;
+
+            if (string.IsNullOrWhiteSpace(parfümCode))
+                return;
+
+            string bilderOrdner =
+                Path.Combine(Application.StartupPath, "Bilder");
+
+            Directory.CreateDirectory(bilderOrdner);
+
+            string zielPfad =
+                Path.Combine(bilderOrdner, parfümCode + ".jpg");
+
+            try
+            {
+                using (Image original = Image.FromFile(_ausgewählterBildPfad))
+                using (Bitmap bitmap = new Bitmap(original))
+                {
+                    bitmap.Save(
+                        zielPfad,
+                        System.Drawing.Imaging.ImageFormat.Jpeg);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Das Parfümbild konnte nicht gespeichert werden.\n\n" +
+                    ex.Message,
+                    "Fehler",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+        private void _LadeParfümBild(string parfümCode)
+        {
+            string bilderOrdner =
+                Path.Combine(Application.StartupPath, "Bilder");
+
+            string bildPfad =
+                Path.Combine(bilderOrdner, parfümCode + ".jpg");
+
+            if (!File.Exists(bildPfad))
+            {
+               pbParfümbild.Image = null;
+                return;
+            }
+
+            try
+            {
+                using (Image temp = Image.FromFile(bildPfad))
+                {
+                    pbParfümbild.Image = new Bitmap(temp);
+                }
+
+                pbParfümbild.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+            catch
+            {
+                pbParfümbild.Image = null;
+            }
+        }
+        private void _BenenneParfümBildUm(
+         string alterCode,
+          string neuerCode)
+        {
+            if (string.IsNullOrWhiteSpace(alterCode) ||
+                string.IsNullOrWhiteSpace(neuerCode) ||
+                alterCode == neuerCode)
+                return;
+
+            string bilderOrdner =
+                Path.Combine(Application.StartupPath, "Bilder");
+
+            string alterPfad =
+                Path.Combine(bilderOrdner, alterCode + ".jpg");
+
+            string neuerPfad =
+                Path.Combine(bilderOrdner, neuerCode + ".jpg");
+
+            if (!File.Exists(alterPfad))
+                return;
+
+            if (File.Exists(neuerPfad))
+                File.Delete(neuerPfad);
+
+            File.Move(alterPfad, neuerPfad);
         }
     }
 }

@@ -275,11 +275,11 @@ namespace Data_Layer
 
 
         public static bool AddNewPerfum(int? alteNummer, string ParfümCode, string marke, string name, string kategorie,
-              string duftrichtung, string basisnote, bool istVorhanden, bool inBestellung, bool IstNeu)
+              string duftrichtung, bool istVorhanden, bool inBestellung, bool IstNeu)
         {
             int rowAffected = 0;
-            string abfrage = @"Insert into NeueParfümsdaten (AlteNummer, ParfümCode, Marke, Name, Kategorie, Duftrichtung, Basisnote, IstVorhanden, InBestellung, IstNeu)
-                           Values(@alteNummer, @ParfümCode, @marke, @name, @kategorie, @duftrichtung, @basisnote, @istVorhanden, @inBestellung, @IstNeu)";
+            string abfrage = @"Insert into NeueParfümsdaten (AlteNummer, ParfümCode, Marke, Name, Kategorie, Duftrichtung, IstVorhanden, InBestellung, IstNeu)
+                           Values(@alteNummer, @ParfümCode, @marke, @name, @kategorie, @duftrichtung, @istVorhanden, @inBestellung, @IstNeu)";
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -305,11 +305,6 @@ namespace Data_Layer
                         else
                             command.Parameters.AddWithValue("@duftrichtung", duftrichtung);
 
-                        if (string.IsNullOrEmpty(basisnote))
-                            command.Parameters.AddWithValue("@basisnote", DBNull.Value);
-                        else
-                            command.Parameters.AddWithValue("@basisnote", basisnote);
-
                         command.Parameters.AddWithValue("@istVorhanden", istVorhanden);
                         command.Parameters.AddWithValue("@inBestellung", inBestellung);
                         command.Parameters.AddWithValue("@IstNeu", IstNeu);
@@ -328,7 +323,7 @@ namespace Data_Layer
 
         public static bool UpdatePerfum(int? neuAlteNummer, string neuParfümCode, string ParfümCode,
             string marke, string name, string kategorie,
-              string duftrichtung, string basisnote, bool istVorhanden, bool inBestellung, bool IstNeu)
+              string duftrichtung, bool istVorhanden, bool inBestellung, bool IstNeu)
         {
             int rowAffected = 0;
             string abfrage = @"Update NeueParfümsdaten
@@ -338,7 +333,7 @@ namespace Data_Layer
                                Name = @name,
                                Kategorie = @kategorie,
                                Duftrichtung = @duftrichtung,
-                               Basisnote = @basisnote,
+                     
                                IstVorhanden = @istVorhanden,
                                InBestellung = @inBestellung,
                                IstNeu       = @IstNeu
@@ -368,11 +363,6 @@ namespace Data_Layer
                             command.Parameters.AddWithValue("@duftrichtung", DBNull.Value);
                         else
                             command.Parameters.AddWithValue("@duftrichtung", duftrichtung);
-
-                        if (string.IsNullOrEmpty(basisnote))
-                            command.Parameters.AddWithValue("@basisnote", DBNull.Value);
-                        else
-                            command.Parameters.AddWithValue("@basisnote", basisnote);
 
                         command.Parameters.AddWithValue("@istVorhanden", istVorhanden);
                         command.Parameters.AddWithValue("@inBestellung", inBestellung);
@@ -416,7 +406,7 @@ namespace Data_Layer
         }
 
         public static bool Find(ref int? alteNummer, string ParfümCode, ref string marke, ref string name,
-              ref string kategorie, ref string duftrichtung, ref string basisnote,
+              ref string kategorie, ref string duftrichtung,
               ref bool istVorhanden, ref bool inBestellung, ref bool IstNeu)
         {
             bool isFound = false;
@@ -441,7 +431,6 @@ namespace Data_Layer
                                 name = (string)reader["Name"];
                                 kategorie = (string)reader["Kategorie"];
                                 duftrichtung = reader["Duftrichtung"] != DBNull.Value ? (string)reader["Duftrichtung"] : null;
-                                basisnote = reader["Basisnote"] != DBNull.Value ? (string)reader["Basisnote"] : null;
                                 istVorhanden = (bool)reader["IstVorhanden"];
                                 inBestellung = (bool)reader["InBestellung"];
                                 IstNeu = (bool)reader["IstNeu"];

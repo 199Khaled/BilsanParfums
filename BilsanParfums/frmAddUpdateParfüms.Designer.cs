@@ -29,12 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btnBearbeiten = new System.Windows.Forms.Button();
             this.chbInBestellung = new System.Windows.Forms.CheckBox();
             this.chbIstVorhanden = new System.Windows.Forms.CheckBox();
             this.btnAbbrechen = new System.Windows.Forms.Button();
             this.btnspeichern = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,36 +43,24 @@
             this.txtName = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtKategorie = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtDuftrichtung = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtBasisnote = new Guna.UI2.WinForms.Guna2TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.txtAlteNummer = new Guna.UI2.WinForms.Guna2TextBox();
             this.lblAlteNummer = new System.Windows.Forms.Label();
             this.cbIstNeu = new System.Windows.Forms.CheckBox();
+            this.pbParfümbild = new System.Windows.Forms.PictureBox();
+            this.btnBildauswählen = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbParfümbild)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnBearbeiten
-            // 
-            this.btnBearbeiten.BackColor = System.Drawing.Color.Teal;
-            this.btnBearbeiten.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBearbeiten.ForeColor = System.Drawing.Color.Gold;
-            this.btnBearbeiten.Location = new System.Drawing.Point(53, 428);
-            this.btnBearbeiten.Margin = new System.Windows.Forms.Padding(2);
-            this.btnBearbeiten.Name = "btnBearbeiten";
-            this.btnBearbeiten.Size = new System.Drawing.Size(111, 45);
-            this.btnBearbeiten.TabIndex = 34;
-            this.btnBearbeiten.Text = "Korregieren";
-            this.btnBearbeiten.UseVisualStyleBackColor = false;
-            this.btnBearbeiten.Click += new System.EventHandler(this.btnBearbeiten_Click);
             // 
             // chbInBestellung
             // 
             this.chbInBestellung.AutoSize = true;
             this.chbInBestellung.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chbInBestellung.Location = new System.Drawing.Point(343, 520);
+            this.chbInBestellung.Location = new System.Drawing.Point(249, 418);
             this.chbInBestellung.Margin = new System.Windows.Forms.Padding(2);
             this.chbInBestellung.Name = "chbInBestellung";
             this.chbInBestellung.Size = new System.Drawing.Size(134, 24);
@@ -88,7 +74,7 @@
             this.chbIstVorhanden.Checked = true;
             this.chbIstVorhanden.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chbIstVorhanden.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chbIstVorhanden.Location = new System.Drawing.Point(184, 520);
+            this.chbIstVorhanden.Location = new System.Drawing.Point(107, 418);
             this.chbIstVorhanden.Margin = new System.Windows.Forms.Padding(2);
             this.chbIstVorhanden.Name = "chbIstVorhanden";
             this.chbIstVorhanden.Size = new System.Drawing.Size(138, 24);
@@ -101,10 +87,10 @@
             this.btnAbbrechen.BackColor = System.Drawing.Color.DarkCyan;
             this.btnAbbrechen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAbbrechen.ForeColor = System.Drawing.Color.Gold;
-            this.btnAbbrechen.Location = new System.Drawing.Point(313, 614);
+            this.btnAbbrechen.Location = new System.Drawing.Point(362, 587);
             this.btnAbbrechen.Margin = new System.Windows.Forms.Padding(2);
             this.btnAbbrechen.Name = "btnAbbrechen";
-            this.btnAbbrechen.Size = new System.Drawing.Size(170, 51);
+            this.btnAbbrechen.Size = new System.Drawing.Size(139, 51);
             this.btnAbbrechen.TabIndex = 31;
             this.btnAbbrechen.Text = "Abbrechen";
             this.btnAbbrechen.UseVisualStyleBackColor = false;
@@ -115,25 +101,14 @@
             this.btnspeichern.BackColor = System.Drawing.Color.DarkCyan;
             this.btnspeichern.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnspeichern.ForeColor = System.Drawing.Color.Gold;
-            this.btnspeichern.Location = new System.Drawing.Point(115, 614);
+            this.btnspeichern.Location = new System.Drawing.Point(214, 587);
             this.btnspeichern.Margin = new System.Windows.Forms.Padding(2);
             this.btnspeichern.Name = "btnspeichern";
-            this.btnspeichern.Size = new System.Drawing.Size(170, 51);
+            this.btnspeichern.Size = new System.Drawing.Size(139, 51);
             this.btnspeichern.TabIndex = 30;
             this.btnspeichern.Text = "Speichern";
             this.btnspeichern.UseVisualStyleBackColor = false;
             this.btnspeichern.Click += new System.EventHandler(this.btnspeichern_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(60, 402);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(96, 24);
-            this.label6.TabIndex = 23;
-            this.label6.Text = "Basisnote:";
             // 
             // label5
             // 
@@ -315,31 +290,6 @@
             this.txtDuftrichtung.Size = new System.Drawing.Size(293, 44);
             this.txtDuftrichtung.TabIndex = 39;
             // 
-            // txtBasisnote
-            // 
-            this.txtBasisnote.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtBasisnote.DefaultText = "";
-            this.txtBasisnote.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtBasisnote.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtBasisnote.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtBasisnote.DisabledState.Parent = this.txtBasisnote;
-            this.txtBasisnote.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtBasisnote.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBasisnote.FocusedState.Parent = this.txtBasisnote;
-            this.txtBasisnote.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBasisnote.ForeColor = System.Drawing.Color.Black;
-            this.txtBasisnote.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBasisnote.HoverState.Parent = this.txtBasisnote;
-            this.txtBasisnote.Location = new System.Drawing.Point(184, 395);
-            this.txtBasisnote.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.txtBasisnote.Name = "txtBasisnote";
-            this.txtBasisnote.PasswordChar = '\0';
-            this.txtBasisnote.PlaceholderText = "";
-            this.txtBasisnote.SelectedText = "";
-            this.txtBasisnote.ShadowDecoration.Parent = this.txtBasisnote;
-            this.txtBasisnote.Size = new System.Drawing.Size(293, 75);
-            this.txtBasisnote.TabIndex = 40;
-            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -408,7 +358,7 @@
             // 
             this.cbIstNeu.AutoSize = true;
             this.cbIstNeu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbIstNeu.Location = new System.Drawing.Point(257, 565);
+            this.cbIstNeu.Location = new System.Drawing.Point(396, 418);
             this.cbIstNeu.Margin = new System.Windows.Forms.Padding(2);
             this.cbIstNeu.Name = "cbIstNeu";
             this.cbIstNeu.Size = new System.Drawing.Size(86, 24);
@@ -416,28 +366,52 @@
             this.cbIstNeu.Text = "Ist Neu";
             this.cbIstNeu.UseVisualStyleBackColor = true;
             // 
+            // pbParfümbild
+            // 
+            this.pbParfümbild.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pbParfümbild.Location = new System.Drawing.Point(12, 472);
+            this.pbParfümbild.Name = "pbParfümbild";
+            this.pbParfümbild.Size = new System.Drawing.Size(197, 192);
+            this.pbParfümbild.TabIndex = 45;
+            this.pbParfümbild.TabStop = false;
+            // 
+            // btnBildauswählen
+            // 
+            this.btnBildauswählen.CheckedState.Parent = this.btnBildauswählen;
+            this.btnBildauswählen.CustomImages.Parent = this.btnBildauswählen;
+            this.btnBildauswählen.FillColor = System.Drawing.Color.White;
+            this.btnBildauswählen.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBildauswählen.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnBildauswählen.HoverState.Parent = this.btnBildauswählen;
+            this.btnBildauswählen.Location = new System.Drawing.Point(227, 472);
+            this.btnBildauswählen.Name = "btnBildauswählen";
+            this.btnBildauswählen.ShadowDecoration.Parent = this.btnBildauswählen;
+            this.btnBildauswählen.Size = new System.Drawing.Size(143, 37);
+            this.btnBildauswählen.TabIndex = 46;
+            this.btnBildauswählen.Text = "Bild auswählen";
+            this.btnBildauswählen.Click += new System.EventHandler(this.btnBildauswählen_Click);
+            // 
             // frmAddUpdateParfüms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(512, 676);
+            this.Controls.Add(this.btnBildauswählen);
+            this.Controls.Add(this.pbParfümbild);
             this.Controls.Add(this.cbIstNeu);
             this.Controls.Add(this.lblAlteNummer);
             this.Controls.Add(this.txtAlteNummer);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.txtBasisnote);
             this.Controls.Add(this.txtDuftrichtung);
             this.Controls.Add(this.txtKategorie);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.txtMarke);
             this.Controls.Add(this.txtParfümNummer);
-            this.Controls.Add(this.btnBearbeiten);
             this.Controls.Add(this.chbInBestellung);
             this.Controls.Add(this.chbIstVorhanden);
             this.Controls.Add(this.btnAbbrechen);
             this.Controls.Add(this.btnspeichern);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -452,19 +426,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbParfümbild)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnBearbeiten;
         private System.Windows.Forms.CheckBox chbInBestellung;
         private System.Windows.Forms.CheckBox chbIstVorhanden;
         private System.Windows.Forms.Button btnAbbrechen;
         private System.Windows.Forms.Button btnspeichern;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -475,12 +447,13 @@
         private Guna.UI2.WinForms.Guna2TextBox txtName;
         private Guna.UI2.WinForms.Guna2TextBox txtKategorie;
         private Guna.UI2.WinForms.Guna2TextBox txtDuftrichtung;
-        private Guna.UI2.WinForms.Guna2TextBox txtBasisnote;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblAlteNummer;
         private Guna.UI2.WinForms.Guna2TextBox txtAlteNummer;
         private System.Windows.Forms.CheckBox cbIstNeu;
+        private Guna.UI2.WinForms.Guna2Button btnBildauswählen;
+        private System.Windows.Forms.PictureBox pbParfümbild;
     }
 }

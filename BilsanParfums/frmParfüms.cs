@@ -58,6 +58,8 @@ namespace BilsanParfums
             _bindingSourceUnisexParfüms = new BindingSource();
             _bindingSourceKinderParfüms = new BindingSource();
             _bindingSourceOrientalischeParfüms = new BindingSource();
+
+            dgvAlleParfüms.CellClick += dgvAlleParfüms_CellClick;
         }
 
         private void frmParfüms_Load(object sender, EventArgs e)
@@ -105,6 +107,10 @@ namespace BilsanParfums
                     dgvAlleParfüms.DataSource = _bindingSourceAlleParfüms;
                     _AktualisiereAlleParfümdatenAnzahl(_bindingSourceAlleParfüms);
                     _PasseDataGridViewSchriftAn(dgvAlleParfüms);
+                    // ZUERST Bildspalte erstellen und Bilder laden
+                    _LadeParfümBilder(dgvAlleParfüms);
+
+                    // DANACH die Zeilen markieren
                     _MarkiereParfümZeilen(dgvAlleParfüms);
                 }
             }
@@ -316,7 +322,7 @@ namespace BilsanParfums
         {
             if (dgvAlleParfüms.CurrentRow != null)
             {
-                string ParfümCode = dgvAlleParfüms.CurrentRow.Cells[1].Value.ToString();
+                string ParfümCode = _HoleParfümCodeAusGrid(dgvAlleParfüms);
                 _ÖffneAddUpdateForm(ParfümCode);
             }
         }
@@ -325,16 +331,16 @@ namespace BilsanParfums
         {
             if (dgvAlleParfüms.CurrentRow != null)
             {
-                string ParfümCode = dgvAlleParfüms.CurrentRow.Cells[1].Value.ToString();
+                string ParfümCode = _HoleParfümCodeAusGrid(dgvAlleParfüms);
                 _EntferneParfüm(ParfümCode);
             }
         }
 
         private void dgvAlleParfüms_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dgvAlleParfüms.Rows[e.RowIndex].Cells[3].Value != null)
+            if (e.RowIndex >= 0 && dgvAlleParfüms.Rows[e.RowIndex].Cells["Name"].Value != null)
             {
-                string currentName = dgvAlleParfüms.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string currentName = dgvAlleParfüms.Rows[e.RowIndex].Cells["Name"].Value.ToString();
                 _ÖffneParfumoWebseite(currentName);
             }
         }
@@ -354,6 +360,16 @@ namespace BilsanParfums
                 if (filterComboBox.SelectedIndex == -1 || string.IsNullOrEmpty(filterwert))
                 {
                     bindingSource.Filter = string.Empty;
+
+                    // WICHTIG: Bilder nach dem Filtern neu laden
+                    _LadeParfümBilder(dgv);
+
+                    // Danach Farben setzen
+                    _MarkiereParfümZeilen(dgv);
+
+                    _AktualisiereParfümAnzahlFüeSelectedTabpage(bindingSource);
+
+                    
                     return;
                 }
 
@@ -391,8 +407,18 @@ namespace BilsanParfums
                 }
                 bindingSource.Filter = filterString;
             }
-            // Call the highlighting method here, passing the correct DataGridView
+
+            // ==========================================
+            // WICHTIG:
+            // Nach jeder Suche Bilder neu einsetzen
+            // ==========================================
+
+            _LadeParfümBilder(dgv);
+
+            // Danach Farben setzen
             _MarkiereParfümZeilen(dgv);
+
+            // Anzahl aktualisieren
             _AktualisiereParfümAnzahlFüeSelectedTabpage(bindingSource);
         }
 
@@ -454,12 +480,12 @@ namespace BilsanParfums
                 bool isInBestellung = row.Cells["InBestellung"].Value != null && Convert.ToBoolean(row.Cells["InBestellung"].Value);
                 bool istNeu = row.Cells["IstNeu"].Value != null && Convert.ToBoolean(row.Cells["IstNeu"].Value);
 
-                if(istNeu)
+                if (istNeu)
                 {
                     // Färbe die Zelle "InBestellung" zusätzlich Orange
                     row.Cells["IstNeu"].Style.BackColor = System.Drawing.Color.LightGreen;
                 }
-                else if(!istNeu)
+                else if (!istNeu)
                 {
                     foreach (DataGridViewCell cell in row.Cells)
                     {
@@ -500,9 +526,45 @@ namespace BilsanParfums
                     // Färbe nur die Zelle "InBestellung" Orange
                     row.Cells["InBestellung"].Style.BackColor = System.Drawing.Color.Orange;
                 }
+                // NEU: Bildspalte immer weiß lassen
+                if (dgv.Columns.Contains("ParfümBild"))
+                {
+                    row.Cells["ParfümBild"].Style.BackColor =
+                        System.Drawing.Color.White;
+
+                    row.Cells["ParfümBild"].Style.SelectionBackColor =
+                        System.Drawing.Color.White;
+                }
             }
 
         }
+        /// <summary>
+        /// Liest den ParfümCode sicher über den Spaltennamen aus dem aktuellen DataGridView.
+        /// Dadurch bleibt der Code korrekt, auch wenn zusätzliche Spalten (z. B. ParfümBild) eingefügt werden.
+        /// </summary>
+        private string _HoleParfümCodeAusGrid(DataGridView dgv)
+        {
+            if (dgv == null || dgv.CurrentRow == null)
+                return null;
+
+            if (!dgv.Columns.Contains("ParfümCode"))
+            {
+                MessageBox.Show(
+                    "Die Spalte 'ParfümCode' wurde im DataGridView nicht gefunden.",
+                    "Fehler",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return null;
+            }
+
+            object wert = dgv.CurrentRow.Cells["ParfümCode"].Value;
+            if (wert == null || wert == DBNull.Value)
+                return null;
+
+            string parfümCode = wert.ToString().Trim();
+            return string.IsNullOrWhiteSpace(parfümCode) ? null : parfümCode;
+        }
+
         /// <summary>
         /// Öffnet die Hinzufügen-/Aktualisieren-Form.
         /// </summary>
@@ -719,27 +781,55 @@ namespace BilsanParfums
         }
         private void txtFilterwert_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtFilterwert.Text))
+            // =====================================================
+            // TEXTFELD WURDE GELÖSCHT
+            // =====================================================
+            if (string.IsNullOrWhiteSpace(txtFilterwert.Text))
             {
+                // Filter entfernen
                 _bindingSourceAlleParfüms.Filter = string.Empty;
-                // WICHTIG: Die Markierung sollte hier nicht doppelt sein
+
+                // Bilder für alle sichtbaren Parfüms erneut laden
+                _LadeParfümBilder(dgvAlleParfüms);
+
+                // Danach Farben setzen
                 _MarkiereParfümZeilen(dgvAlleParfüms);
-                _AktualisiereParfümAnzahlFüeSelectedTabpage(_bindingSourceAlleParfüms);
+
+                // Anzahl aktualisieren
+                _AktualisiereParfümAnzahlFüeSelectedTabpage(
+                    _bindingSourceAlleParfüms);
+
+                // Vorschlagsliste schließen
+                lbVorschlägeFürAlleParfüms.Visible = false;
+
+                // WICHTIG:
+                // Hier aufhören, damit unten nicht erneut gefiltert wird
+                return;
             }
 
-            // Prüfen, ob der "Name"-Filter ausgewählt ist
+
+            // =====================================================
+            // SUCHE NACH NAME
+            // =====================================================
             if (cbFilterby.SelectedItem?.ToString() == "Name")
             {
-                // Nur wenn der "Name"-Filter aktiv ist, die AutoComplete-Logik ausführen
-                _FühreAutoCompleteAus(txtFilterwert, lbVorschlägeFürAlleParfüms);
-                // Die Sichtbarkeit wird in _FühreAutoCompleteAus gesteuert
+                _FühreAutoCompleteAus(
+                    txtFilterwert,
+                    lbVorschlägeFürAlleParfüms);
             }
+
+            // =====================================================
+            // SUCHE NACH ANDEREN FELDERN
+            // =====================================================
             else
             {
-                // Wenn ein anderer Filter ausgewählt ist, die Vorschläge ausblenden
                 lbVorschlägeFürAlleParfüms.Visible = false;
-                // Den Filter für die anderen Spalten anwenden
-                _FilterAnwenden(cbFilterby, txtFilterwert, _bindingSourceAlleParfüms, dgvAlleParfüms);
+
+                _FilterAnwenden(
+                    cbFilterby,
+                    txtFilterwert,
+                    _bindingSourceAlleParfüms,
+                    dgvAlleParfüms);
             }
         }
         private void lbVorschlägeFürAlleParfüms_Click_1(object sender, EventArgs e)
@@ -945,7 +1035,7 @@ namespace BilsanParfums
         {
             if (dgvDamenParfüms.CurrentRow != null)
             {
-                string ParfümCode = dgvDamenParfüms.CurrentRow.Cells[1].Value.ToString();
+                string ParfümCode = _HoleParfümCodeAusGrid(dgvDamenParfüms);
                 _ÖffneAddUpdateForm(ParfümCode);
             }
         }
@@ -954,7 +1044,7 @@ namespace BilsanParfums
         {
             if (dgvDamenParfüms.CurrentRow != null)
             {
-                string ParfümCode = dgvDamenParfüms.CurrentRow.Cells[1].Value.ToString();
+                string ParfümCode = _HoleParfümCodeAusGrid(dgvDamenParfüms);
                 _EntferneParfüm(ParfümCode);
             }
         }
@@ -964,9 +1054,9 @@ namespace BilsanParfums
         }
         private void dgvDamenParfüms_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dgvDamenParfüms.Rows[e.RowIndex].Cells[3].Value != null)
+            if (e.RowIndex >= 0 && dgvDamenParfüms.Rows[e.RowIndex].Cells["Name"].Value != null)
             {
-                string currentName = dgvDamenParfüms.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string currentName = dgvDamenParfüms.Rows[e.RowIndex].Cells["Name"].Value.ToString();
                 _ÖffneParfumoWebseite(currentName);
             }
         }
@@ -1131,7 +1221,7 @@ namespace BilsanParfums
         {
             if (dgvHerrenParfüms.CurrentRow != null)
             {
-                string ParfümCode = dgvHerrenParfüms.CurrentRow.Cells[1].Value.ToString();
+                string ParfümCode = _HoleParfümCodeAusGrid(dgvHerrenParfüms);
                 _ÖffneAddUpdateForm(ParfümCode);
             }
         }
@@ -1140,7 +1230,7 @@ namespace BilsanParfums
         {
             if (dgvHerrenParfüms.CurrentRow != null)
             {
-                string ParfümCode = dgvDamenParfüms.CurrentRow.Cells[1].Value.ToString();
+                string ParfümCode = _HoleParfümCodeAusGrid(dgvHerrenParfüms);
                 _EntferneParfüm(ParfümCode);
             }
         }
@@ -1150,9 +1240,9 @@ namespace BilsanParfums
         }
         private void dgvHerrenParfüms_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dgvHerrenParfüms.Rows[e.RowIndex].Cells[3].Value != null)
+            if (e.RowIndex >= 0 && dgvHerrenParfüms.Rows[e.RowIndex].Cells["Name"].Value != null)
             {
-                string currentName = dgvHerrenParfüms.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string currentName = dgvHerrenParfüms.Rows[e.RowIndex].Cells["Name"].Value.ToString();
                 _ÖffneParfumoWebseite(currentName);
             }
         }
@@ -1308,7 +1398,7 @@ namespace BilsanParfums
         {
             if (dgvUnisexParfüms.CurrentRow != null)
             {
-                string ParfümCode = dgvUnisexParfüms.CurrentRow.Cells[1].Value.ToString();
+                string ParfümCode = _HoleParfümCodeAusGrid(dgvUnisexParfüms);
                 _ÖffneAddUpdateForm(ParfümCode);
             }
         }
@@ -1317,7 +1407,7 @@ namespace BilsanParfums
         {
             if (dgvUnisexParfüms.CurrentRow != null)
             {
-                string ParfümCode = dgvDamenParfüms.CurrentRow.Cells[1].Value.ToString();
+                string ParfümCode = _HoleParfümCodeAusGrid(dgvUnisexParfüms);
                 _EntferneParfüm(ParfümCode);
             }
         }
@@ -1329,9 +1419,9 @@ namespace BilsanParfums
 
         private void dgvUnisexParfüms_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dgvUnisexParfüms.Rows[e.RowIndex].Cells[3].Value != null)
+            if (e.RowIndex >= 0 && dgvUnisexParfüms.Rows[e.RowIndex].Cells["Name"].Value != null)
             {
-                string currentName = dgvUnisexParfüms.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string currentName = dgvUnisexParfüms.Rows[e.RowIndex].Cells["Name"].Value.ToString();
                 _ÖffneParfumoWebseite(currentName);
             }
         }
@@ -1501,7 +1591,7 @@ namespace BilsanParfums
         {
             if (dgvOrientalischeParfüms.CurrentRow != null)
             {
-                string ParfümCode = dgvOrientalischeParfüms.CurrentRow.Cells[1].Value.ToString();
+                string ParfümCode = _HoleParfümCodeAusGrid(dgvOrientalischeParfüms);
                 _ÖffneAddUpdateForm(ParfümCode);
             }
         }
@@ -1510,16 +1600,16 @@ namespace BilsanParfums
         {
             if (dgvOrientalischeParfüms.CurrentRow != null)
             {
-                string ParfümCode = dgvDamenParfüms.CurrentRow.Cells[1].Value.ToString();
+                string ParfümCode = _HoleParfümCodeAusGrid(dgvOrientalischeParfüms);
                 _EntferneParfüm(ParfümCode);
             }
         }
 
         private void dgvOrientalischeParfüms_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dgvOrientalischeParfüms.Rows[e.RowIndex].Cells[3].Value != null)
+            if (e.RowIndex >= 0 && dgvOrientalischeParfüms.Rows[e.RowIndex].Cells["Name"].Value != null)
             {
-                string currentName = dgvOrientalischeParfüms.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string currentName = dgvOrientalischeParfüms.Rows[e.RowIndex].Cells["Name"].Value.ToString();
                 _ÖffneParfumoWebseite(currentName);
             }
         }
@@ -1545,7 +1635,7 @@ namespace BilsanParfums
             _ErstellePdfVonParfuem(dgvAlleParfüms, pdfTitle, filterType);
             //_ErstelleExcelVonParfuem(dgvAlleParfüms, pdfTitle, filterType);
         }
-     
+
 
         private void btnParfümlisteFürDamen_Click(object sender, EventArgs e)
         {
@@ -2074,6 +2164,144 @@ namespace BilsanParfums
             string pdfTitle = "Neu eingetroffen";
 
             _ErstellePdfVonParfuem(dgvAlleParfüms, pdfTitle, filterType);
+        }
+        private string _HoleParfümBildPfad(string parfümCode)
+        {
+            string bilderOrdner = Path.Combine(Application.StartupPath, "Bilder");
+
+            if (!Directory.Exists(bilderOrdner))
+                Directory.CreateDirectory(bilderOrdner);
+
+            string[] endungen = { ".jpg", ".jpeg", ".png", ".webp" };
+
+            foreach (string endung in endungen)
+            {
+                string pfad = Path.Combine(bilderOrdner, parfümCode + endung);
+
+                if (File.Exists(pfad))
+                    return pfad;
+            }
+
+            return null;
+        }
+        private void _FügeBildSpalteHinzu(DataGridView dgv)
+        {
+            if (dgv.Columns.Contains("ParfümBild"))
+                return;
+
+            DataGridViewImageColumn bildSpalte = new DataGridViewImageColumn();
+
+            bildSpalte.Name = "ParfümBild";
+            bildSpalte.HeaderText = "Bild";
+            bildSpalte.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            bildSpalte.Width = 100;
+
+            dgv.Columns.Add(bildSpalte);
+        }
+        private void _LadeParfümBilder(DataGridView dgv)
+        {
+            _FügeBildSpalteHinzu(dgv);
+
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                if (row.IsNewRow)
+                    continue;
+
+                string parfümCode =
+                    row.Cells["ParfümCode"].Value?.ToString();
+
+                if (string.IsNullOrWhiteSpace(parfümCode))
+                    continue;
+
+                string bildPfad = _HoleParfümBildPfad(parfümCode);
+
+                if (bildPfad != null)
+                {
+                    using (FileStream fs = new FileStream(
+                        bildPfad,
+                        FileMode.Open,
+                        FileAccess.Read))
+                    {
+                        using (System.Drawing.Image temp =
+                               System.Drawing.Image.FromStream(fs))
+                        {
+                            row.Cells["ParfümBild"].Value =
+                                new Bitmap(temp);
+                        }
+                    }
+                }
+                else
+                {
+                    row.Cells["ParfümBild"].Value = null;
+                }
+            }
+
+            dgv.RowTemplate.Height = 90;
+
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                if (!row.IsNewRow)
+                    row.Height = 90;
+            }
+        }
+
+        //Neue Methode zum Bild in ein großes Fenster anzuzeigen ....
+        private void dgvAlleParfüms_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Klick auf Header ignorieren
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
+
+            DataGridView dgv = (DataGridView)sender;
+
+            // Nur reagieren, wenn auf die Bildspalte geklickt wurde
+            if (dgv.Columns[e.ColumnIndex].Name != "ParfümBild")
+                return;
+
+            object wert = dgv.Rows[e.RowIndex].Cells["ParfümBild"].Value;
+
+            // Kein Bild vorhanden
+            if (wert == null || wert == DBNull.Value)
+            {
+                MessageBox.Show(
+                    "Für dieses Parfüm ist kein Bild vorhanden.",
+                    "Kein Bild",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
+
+            System.Drawing.Image bild = wert as System.Drawing.Image;
+
+            if (bild == null)
+                return;
+
+
+            // Neues Fenster für großes Bild
+            using (Form bildForm = new Form())
+            {
+                bildForm.Text = "Parfümbild";
+                bildForm.StartPosition = FormStartPosition.CenterParent;
+                bildForm.Size = new Size(700, 700);
+                bildForm.MinimumSize = new Size(400, 400);
+                bildForm.BackColor = Color.White;
+
+                PictureBox pictureBox = new PictureBox();
+
+                pictureBox.Dock = DockStyle.Fill;
+                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox.BackColor = Color.White;
+
+                // Kopie erstellen, damit das Bild im DataGridView nicht gesperrt wird
+                pictureBox.Image = new Bitmap(bild);
+
+                bildForm.Controls.Add(pictureBox);
+
+                bildForm.ShowDialog(this);
+
+                pictureBox.Image?.Dispose();
+            }
         }
     }
 }

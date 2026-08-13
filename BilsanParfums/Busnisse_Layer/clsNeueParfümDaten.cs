@@ -20,14 +20,13 @@ namespace Busnisse_Layer
         public string Name { get; set; }
         public string Kategorie { get; set; }
         public string Duftrichtung { get; set; }
-        public string Basisnote { get; set; }
 
         public bool IstVorhanden { get; set; }
         public bool InBestellung { get; set; }
         public bool IstNeu { get; set; }
 
         private clsNeueParfümDaten(int? alteNummer, string ParfümCode, string marke, string name, string kategorie,
-          string duftrichtung, string Basisnote,
+          string duftrichtung,
           bool istVorhande, bool InBestellung, bool istNeu)
         {
             this.AlteNummer = alteNummer;
@@ -36,7 +35,7 @@ namespace Busnisse_Layer
             this.Name = name;
             this.Kategorie = kategorie;
             this.Duftrichtung = duftrichtung;
-            this.Basisnote = Basisnote;
+     
 
             this.IstVorhanden = istVorhande;
             this.InBestellung = InBestellung;
@@ -53,7 +52,7 @@ namespace Busnisse_Layer
             this.Name = string.Empty;
             this.Kategorie = string.Empty;
             this.Duftrichtung = string.Empty;
-            this.Basisnote = string.Empty;
+        
 
             this.IstVorhanden = true;
             this.InBestellung = false;
@@ -66,15 +65,15 @@ namespace Busnisse_Layer
         {
             int? alteNummer = null;
             string marke = string.Empty; string name = string.Empty; string kategorie = string.Empty;
-            string duftrichtung = string.Empty; string Basisnote = string.Empty;
+            string duftrichtung = string.Empty; 
             bool IstVorhanden = false;
             bool InBestellung = false;
             bool IstNeu = false;
 
             if (clsNeueParfümDatenzugriff.Find(ref alteNummer, ParfümCode, ref marke, ref name, ref kategorie,
-                ref duftrichtung, ref Basisnote, ref IstVorhanden, ref InBestellung, ref IstNeu))
+                ref duftrichtung, ref IstVorhanden, ref InBestellung, ref IstNeu))
             {
-                return new clsNeueParfümDaten(alteNummer, ParfümCode, marke, name, kategorie, duftrichtung, Basisnote,
+                return new clsNeueParfümDaten(alteNummer, ParfümCode, marke, name, kategorie, duftrichtung, 
                                      IstVorhanden, InBestellung, IstNeu);
             }
             else
@@ -85,7 +84,7 @@ namespace Busnisse_Layer
         {
             if (clsNeueParfümDatenzugriff.AddNewPerfum(this.AlteNummer,
                 this.ParfümCode, this.Marke, this.Name,
-                 this.Kategorie, this.Duftrichtung, this.Basisnote
+                 this.Kategorie, this.Duftrichtung
                 , this.IstVorhanden, this.InBestellung, this.IstNeu))
             {
                 return true;
@@ -98,7 +97,7 @@ namespace Busnisse_Layer
         {
             return clsNeueParfümDatenzugriff.UpdatePerfum(this.AlteNummer,
                 this.neuParfümCode, this.ParfümCode, this.Marke, this.Name,
-                this.Kategorie, this.Duftrichtung, this.Basisnote
+                this.Kategorie, this.Duftrichtung
                       , this.IstVorhanden, this.InBestellung, this.IstNeu);
         }
 
