@@ -37,7 +37,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::BilsanParfums.Properties.Resources.für_Programm;
+            this.pictureBox1.Image = global::BilsanParfums.Properties.Resources._34e1dc58_07e0_4efa_a559_3f5b594b993d;
             this.pictureBox1.Location = new System.Drawing.Point(12, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(562, 832);

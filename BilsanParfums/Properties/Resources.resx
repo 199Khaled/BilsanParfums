@@ -121,9 +121,6 @@
   <data name="plus_10021331" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\plus_10021331.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="update_7411697" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\update_7411697.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="refresh_5791276" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\refresh_5791276.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -133,10 +130,16 @@
   <data name="Duftöl" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Duftöl.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="delete_5953478 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\delete_5953478 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="update_7411697" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\update_7411697.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="für Programm" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\für Programm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="delete_5953478 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delete_5953478 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="34e1dc58-07e0-4efa-a559-3f5b594b993d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\34e1dc58-07e0-4efa-a559-3f5b594b993d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

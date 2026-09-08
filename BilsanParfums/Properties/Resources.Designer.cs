@@ -63,6 +63,16 @@ namespace BilsanParfums.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _34e1dc58_07e0_4efa_a559_3f5b594b993d {
+            get {
+                object obj = ResourceManager.GetObject("34e1dc58-07e0-4efa-a559-3f5b594b993d", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap delete_5953478__1_ {
             get {
                 object obj = ResourceManager.GetObject("delete_5953478 (1)", resourceCulture);
