@@ -59,7 +59,7 @@ namespace BilsanParfums
             _bindingSourceKinderParfüms = new BindingSource();
             _bindingSourceOrientalischeParfüms = new BindingSource();
 
-            dgvAlleParfüms.CellClick += dgvAlleParfüms_CellClick;
+            //dgvAlleParfüms.CellClick += dgvAlleParfüms_CellClick;
         }
 
         private void frmParfüms_Load(object sender, EventArgs e)
@@ -108,7 +108,7 @@ namespace BilsanParfums
                     _AktualisiereAlleParfümdatenAnzahl(_bindingSourceAlleParfüms);
                     _PasseDataGridViewSchriftAn(dgvAlleParfüms);
                     // ZUERST Bildspalte erstellen und Bilder laden
-                    _LadeParfümBilder(dgvAlleParfüms);
+                    //_LadeParfümBilder(dgvAlleParfüms);
 
                     // DANACH die Zeilen markieren
                     _MarkiereParfümZeilen(dgvAlleParfüms);
@@ -362,14 +362,14 @@ namespace BilsanParfums
                     bindingSource.Filter = string.Empty;
 
                     // WICHTIG: Bilder nach dem Filtern neu laden
-                    _LadeParfümBilder(dgv);
+                    //_LadeParfümBilder(dgv);
 
                     // Danach Farben setzen
                     _MarkiereParfümZeilen(dgv);
 
                     _AktualisiereParfümAnzahlFüeSelectedTabpage(bindingSource);
 
-                    
+
                     return;
                 }
 
@@ -413,7 +413,7 @@ namespace BilsanParfums
             // Nach jeder Suche Bilder neu einsetzen
             // ==========================================
 
-            _LadeParfümBilder(dgv);
+            //_LadeParfümBilder(dgv);
 
             // Danach Farben setzen
             _MarkiereParfümZeilen(dgv);
@@ -790,7 +790,7 @@ namespace BilsanParfums
                 _bindingSourceAlleParfüms.Filter = string.Empty;
 
                 // Bilder für alle sichtbaren Parfüms erneut laden
-                _LadeParfümBilder(dgvAlleParfüms);
+                //_LadeParfümBilder(dgvAlleParfüms);
 
                 // Danach Farben setzen
                 _MarkiereParfümZeilen(dgvAlleParfüms);
@@ -1708,689 +1708,197 @@ namespace BilsanParfums
             // Rufen Sie die Methode mit dem Titel und dem Filter-Typ auf
             _ErstellePdfVonParfuem(dgvUnisexParfüms, pdfTitle, filterType);
         }
-        private void _ErstellePdfVonParfuem(
-      DataGridView dgv,
-      string pdfTitle,
-      string filterType)
+
+        private void _ErstellePdfVonParfuem(DataGridView dgv, string pdfTitle, string filterType)
         {
-            string desktopPath =
-                Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-            string fileName =
-                pdfTitle + "-" + DateTime.Now.ToString("dd.MM.yyyy") + ".pdf";
-
-            string filePath =
-                Path.Combine(desktopPath, fileName);
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string fileName = pdfTitle + "-" + DateTime.Now.ToString("dd.MM.yyyy") + ".pdf";
+            string filePath = Path.Combine(desktopPath, fileName);
 
             try
             {
                 dgv.CommitEdit(DataGridViewDataErrorContexts.Commit);
                 dgv.EndEdit();
 
+                BaseColor goldColor = new BaseColor(212, 175, 55);
+                BaseColor darkGreenColor = new BaseColor(44, 85, 48);
+                BaseColor champagneColor = new BaseColor(245, 240, 230);
+                BaseColor whiteColor = BaseColor.WHITE;
+                BaseColor blackColor = BaseColor.BLACK;
 
-                // =====================================================
-                // FARBEN
-                // =====================================================
+                iTextSharp.text.Font titleFont = new iTextSharp.text.Font(
+                    iTextSharp.text.Font.FontFamily.HELVETICA, 16f, iTextSharp.text.Font.BOLD, blackColor);
 
-                BaseColor goldColor =
-                    new BaseColor(212, 175, 55);
+                iTextSharp.text.Font headerFont = new iTextSharp.text.Font(
+                    iTextSharp.text.Font.FontFamily.HELVETICA, 11f, iTextSharp.text.Font.BOLD, BaseColor.WHITE);
 
-                BaseColor darkGreenColor =
-                    new BaseColor(44, 85, 48);
+                iTextSharp.text.Font categoryFont = new iTextSharp.text.Font(
+                    iTextSharp.text.Font.FontFamily.HELVETICA, 12f, iTextSharp.text.Font.BOLD, BaseColor.WHITE);
 
-                BaseColor champagneColor =
-                    new BaseColor(245, 240, 230);
+                iTextSharp.text.Font normalFont = new iTextSharp.text.Font(
+                    iTextSharp.text.Font.FontFamily.HELVETICA, 10f, iTextSharp.text.Font.NORMAL, blackColor);
 
-                BaseColor whiteColor =
-                    BaseColor.WHITE;
+                iTextSharp.text.Font disclaimerFont = new iTextSharp.text.Font(
+                    iTextSharp.text.Font.FontFamily.HELVETICA, 10f, iTextSharp.text.Font.BOLD, BaseColor.RED);
 
-                BaseColor blackColor =
-                    BaseColor.BLACK;
+                iTextSharp.text.Font highlightFont = new iTextSharp.text.Font(
+                    iTextSharp.text.Font.FontFamily.HELVETICA, 11.5f, iTextSharp.text.Font.NORMAL, blackColor);
 
-                BaseColor redColor =
-                    BaseColor.RED;
-
-
-                // =====================================================
-                // SCHRIFTARTEN
-                // =====================================================
-
-                iTextSharp.text.Font titleFont =
-                    new iTextSharp.text.Font(
-                        iTextSharp.text.Font.FontFamily.HELVETICA,
-                        16f,
-                        iTextSharp.text.Font.BOLD,
-                        blackColor);
-
-
-                iTextSharp.text.Font headerFont =
-                    new iTextSharp.text.Font(
-                        iTextSharp.text.Font.FontFamily.HELVETICA,
-                        11f,
-                        iTextSharp.text.Font.BOLD,
-                        BaseColor.WHITE);
-
-
-                iTextSharp.text.Font categoryFont =
-                    new iTextSharp.text.Font(
-                        iTextSharp.text.Font.FontFamily.HELVETICA,
-                        12f,
-                        iTextSharp.text.Font.BOLD,
-                        BaseColor.WHITE);
-
-
-                iTextSharp.text.Font normalFont =
-                    new iTextSharp.text.Font(
-                        iTextSharp.text.Font.FontFamily.HELVETICA,
-                        10f,
-                        iTextSharp.text.Font.NORMAL,
-                        blackColor);
-
-
-                iTextSharp.text.Font disclaimerFont =
-                    new iTextSharp.text.Font(
-                        iTextSharp.text.Font.FontFamily.HELVETICA,
-                        10f,
-                        iTextSharp.text.Font.BOLD,
-                        redColor);
-
-
-                iTextSharp.text.Font highlightFont =
-                    new iTextSharp.text.Font(
-                        iTextSharp.text.Font.FontFamily.HELVETICA,
-                        11.5f,
-                        iTextSharp.text.Font.NORMAL,
-                        blackColor);
-
-
-                // Rot nur für "by"
-                iTextSharp.text.Font byRedFont =
-                    new iTextSharp.text.Font(
-                        iTextSharp.text.Font.FontFamily.HELVETICA,
-                        11.5f,
-                        iTextSharp.text.Font.BOLD,
-                        redColor);
-
-
-                // =====================================================
-                // NUR BEI BESTELLLISTE BILDER DRUCKEN
-                // =====================================================
-
-                bool bilderDrucken =
-                    filterType == "InBestellung";
-
-
-                using (FileStream stream =
-                    new FileStream(
-                        filePath,
-                        FileMode.Create,
-                        FileAccess.Write,
-                        FileShare.None))
+                using (FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+                using (Document pdfDoc = new Document(PageSize.A4, 25f, 25f, 25f, 25f))
                 {
-                    using (Document pdfDoc =
-                        new Document(
-                            PageSize.A4,
-                            25f,
-                            25f,
-                            25f,
-                            25f))
+                    PdfWriter.GetInstance(pdfDoc, stream);
+                    pdfDoc.Open();
+
+                    Paragraph title = new Paragraph(pdfTitle, titleFont)
                     {
-                        PdfWriter.GetInstance(pdfDoc, stream);
+                        Alignment = Element.ALIGN_CENTER,
+                        SpacingAfter = 12f
+                    };
+                    pdfDoc.Add(title);
 
-                        pdfDoc.Open();
+                    Paragraph disclaimer = new Paragraph(
+                        "Hinweis: Die genannten Namen dienen lediglich zur Orientierung der Duftnoten. Unsere Produkte stehen in keiner Verbindung zu den Originalmarken oder deren Herstellern.",
+                        disclaimerFont)
+                    {
+                        Alignment = Element.ALIGN_CENTER,
+                        SpacingAfter = 10f
+                    };
+                    pdfDoc.Add(disclaimer);
 
+                    PdfPTable table = new PdfPTable(3);
+                    table.WidthPercentage = 100;
+                    table.SetWidths(new float[] { 1.5f, 3f, 3f });
+                    table.SpacingBefore = 5f;
 
-                        // =====================================================
-                        // TITEL
-                        // =====================================================
+                    table.AddCell(new PdfPCell(new Phrase("ParfümCode", headerFont))
+                    {
+                        BackgroundColor = goldColor,
+                        HorizontalAlignment = Element.ALIGN_CENTER,
+                        VerticalAlignment = Element.ALIGN_MIDDLE,
+                        Padding = 6f
+                    });
 
-                        Paragraph title =
-                            new Paragraph(pdfTitle, titleFont)
+                    table.AddCell(new PdfPCell(new Phrase("Vorbild", headerFont))
+                    {
+                        BackgroundColor = goldColor,
+                        HorizontalAlignment = Element.ALIGN_CENTER,
+                        VerticalAlignment = Element.ALIGN_MIDDLE,
+                        Padding = 6f
+                    });
+
+                    table.AddCell(new PdfPCell(new Phrase("Duftrichtung", headerFont))
+                    {
+                        BackgroundColor = goldColor,
+                        HorizontalAlignment = Element.ALIGN_CENTER,
+                        VerticalAlignment = Element.ALIGN_MIDDLE,
+                        Padding = 6f
+                    });
+
+                    var alleZeilen = dgv.Rows
+                        .Cast<DataGridViewRow>()
+                        .Where(row => !row.IsNewRow)
+                        .OrderBy(row => row.Cells["Kategorie"]?.Value?.ToString())
+                        .ThenBy(row => row.Cells["ParfümCode"]?.Value?.ToString())
+                        .ToList();
+
+                    string aktuelleKategorie = "";
+                    int zeilenIndex = 0;
+                    int gedruckteZeilen = 0;
+
+                    foreach (DataGridViewRow row in alleZeilen)
+                    {
+                        bool istVorhanden = HoleBoolWert(row, "IstVorhanden");
+                        bool inBestellung = HoleBoolWert(row, "InBestellung");
+                        bool istNeu = HoleBoolWert(row, "IstNeu");
+
+                        bool sollGedrucktWerden = false;
+
+                        if (filterType == "Vorhanden" && istVorhanden)
+                            sollGedrucktWerden = true;
+                        else if (filterType == "InBestellung" && inBestellung)
+                            sollGedrucktWerden = true;
+                        else if (filterType == "IstNeu" && istNeu)
+                            sollGedrucktWerden = true;
+                        else if (filterType == "Alle")
+                            sollGedrucktWerden = true;
+
+                        if (!sollGedrucktWerden)
+                            continue;
+
+                        string kategorie = row.Cells["Kategorie"]?.Value?.ToString() ?? "";
+                        string code = row.Cells["ParfümCode"]?.Value?.ToString() ?? "";
+                        string name = row.Cells["Name"]?.Value?.ToString() ?? "";
+                        string marke = row.Cells["Marke"]?.Value?.ToString() ?? "";
+                        string duftrichtung = row.Cells["Duftrichtung"]?.Value?.ToString() ?? "";
+
+                        if (string.IsNullOrWhiteSpace(name))
+                            continue;
+
+                        string vorbildText = name;
+
+                        if (!string.IsNullOrWhiteSpace(marke))
+                        {
+                            vorbildText = $"{name} by {marke}";
+                        }
+
+                        if (kategorie != aktuelleKategorie)
+                        {
+                            PdfPCell categoryCell = new PdfPCell(new Phrase(" " + kategorie + " ", categoryFont))
                             {
-                                Alignment = Element.ALIGN_CENTER,
-                                SpacingAfter = 12f
+                                Colspan = 3,
+                                HorizontalAlignment = Element.ALIGN_CENTER,
+                                VerticalAlignment = Element.ALIGN_MIDDLE,
+                                BackgroundColor = darkGreenColor,
+                                Padding = 6f
                             };
 
-                        pdfDoc.Add(title);
-
-
-                        // =====================================================
-                        // HINWEIS
-                        // =====================================================
-
-                        Paragraph disclaimer =
-                            new Paragraph(
-                                "Hinweis: Die genannten Namen dienen lediglich zur Orientierung der Duftnoten. " +
-                                "Unsere Produkte stehen in keiner Verbindung zu den Originalmarken oder deren Herstellern.",
-                                disclaimerFont)
-                            {
-                                Alignment = Element.ALIGN_CENTER,
-                                SpacingAfter = 10f
-                            };
-
-                        pdfDoc.Add(disclaimer);
-
-
-                        // =====================================================
-                        // TABELLE
-                        // =====================================================
-
-                        PdfPTable table;
-
-
-                        // Bestellliste = 4 Spalten
-                        if (bilderDrucken)
-                        {
-                            table = new PdfPTable(4);
-
-                            table.SetWidths(
-                                new float[]
-                                {
-                            1.4f,   // Bild
-                            1.5f,   // ParfümCode
-                            3f,     // Vorbild
-                            3f      // Duftrichtung
-                                });
+                            table.AddCell(categoryCell);
+                            aktuelleKategorie = kategorie;
+                            zeilenIndex = 0;
                         }
 
-                        // Andere Listen = 3 Spalten
-                        else
+                        bool isHighlightRow = (zeilenIndex % 2 != 0);
+                        BaseColor rowColor = isHighlightRow ? champagneColor : whiteColor;
+                        iTextSharp.text.Font currentFont = highlightFont;
+
+                        table.AddCell(new PdfPCell(new Phrase(code, currentFont))
                         {
-                            table = new PdfPTable(3);
+                            BackgroundColor = rowColor,
+                            Padding = 5f,
+                            HorizontalAlignment = Element.ALIGN_CENTER,
+                            VerticalAlignment = Element.ALIGN_MIDDLE
+                        });
 
-                            table.SetWidths(
-                                new float[]
-                                {
-                            1.5f,
-                            3f,
-                            3f
-                                });
-                        }
-
-
-                        table.WidthPercentage = 100;
-                        table.SpacingBefore = 5f;
-
-
-                        // =====================================================
-                        // HEADER: BILD
-                        // nur bei Bestellliste
-                        // =====================================================
-
-                        if (bilderDrucken)
+                        table.AddCell(new PdfPCell(new Phrase(vorbildText, currentFont))
                         {
-                            table.AddCell(
-                                new PdfPCell(
-                                    new Phrase("Bild", headerFont))
-                                {
-                                    BackgroundColor = goldColor,
-                                    HorizontalAlignment =
-                                        Element.ALIGN_CENTER,
+                            BackgroundColor = rowColor,
+                            Padding = 5f,
+                            VerticalAlignment = Element.ALIGN_MIDDLE
+                        });
 
-                                    VerticalAlignment =
-                                        Element.ALIGN_MIDDLE,
-
-                                    Padding = 6f
-                                });
-                        }
-
-
-                        // =====================================================
-                        // HEADER: PARFÜMCODE
-                        // =====================================================
-
-                        table.AddCell(
-                            new PdfPCell(
-                                new Phrase(
-                                    "ParfümCode",
-                                    headerFont))
-                            {
-                                BackgroundColor = goldColor,
-
-                                HorizontalAlignment =
-                                    Element.ALIGN_CENTER,
-
-                                VerticalAlignment =
-                                    Element.ALIGN_MIDDLE,
-
-                                Padding = 6f
-                            });
-
-
-                        // =====================================================
-                        // HEADER: VORBILD
-                        // =====================================================
-
-                        table.AddCell(
-                            new PdfPCell(
-                                new Phrase(
-                                    "Vorbild",
-                                    headerFont))
-                            {
-                                BackgroundColor = goldColor,
-
-                                HorizontalAlignment =
-                                    Element.ALIGN_CENTER,
-
-                                VerticalAlignment =
-                                    Element.ALIGN_MIDDLE,
-
-                                Padding = 6f
-                            });
-
-
-                        // =====================================================
-                        // HEADER: DUFTRICHTUNG
-                        // =====================================================
-
-                        table.AddCell(
-                            new PdfPCell(
-                                new Phrase(
-                                    "Duftrichtung",
-                                    headerFont))
-                            {
-                                BackgroundColor = goldColor,
-
-                                HorizontalAlignment =
-                                    Element.ALIGN_CENTER,
-
-                                VerticalAlignment =
-                                    Element.ALIGN_MIDDLE,
-
-                                Padding = 6f
-                            });
-
-
-                        // =====================================================
-                        // DATEN SORTIEREN
-                        // =====================================================
-
-                        var alleZeilen =
-                            dgv.Rows
-                            .Cast<DataGridViewRow>()
-                            .Where(row => !row.IsNewRow)
-                            .OrderBy(
-                                row =>
-                                row.Cells["Kategorie"]?.Value?.ToString())
-                            .ThenBy(
-                                row =>
-                                row.Cells["ParfümCode"]?.Value?.ToString())
-                            .ToList();
-
-
-                        string aktuelleKategorie = "";
-
-                        int zeilenIndex = 0;
-
-                        int gedruckteZeilen = 0;
-
-
-                        // =====================================================
-                        // ZEILEN DURCHLAUFEN
-                        // =====================================================
-
-                        foreach (DataGridViewRow row in alleZeilen)
+                        table.AddCell(new PdfPCell(new Phrase(duftrichtung, currentFont))
                         {
-                            bool istVorhanden =
-                                HoleBoolWert(
-                                    row,
-                                    "IstVorhanden");
-
-                            bool inBestellung =
-                                HoleBoolWert(
-                                    row,
-                                    "InBestellung");
-
-                            bool istNeu =
-                                HoleBoolWert(
-                                    row,
-                                    "IstNeu");
-
-
-                            bool sollGedrucktWerden = false;
-
-
-                            if (filterType == "Vorhanden" &&
-                                istVorhanden)
-                            {
-                                sollGedrucktWerden = true;
-                            }
-
-                            else if (
-                                filterType == "InBestellung" &&
-                                inBestellung)
-                            {
-                                sollGedrucktWerden = true;
-                            }
-
-                            else if (
-                                filterType == "IstNeu" &&
-                                istNeu)
-                            {
-                                sollGedrucktWerden = true;
-                            }
-
-                            else if (filterType == "Alle")
-                            {
-                                sollGedrucktWerden = true;
-                            }
-
-
-                            if (!sollGedrucktWerden)
-                                continue;
-
-
-                            // =================================================
-                            // WERTE HOLEN
-                            // =================================================
-
-                            string kategorie =
-                                row.Cells["Kategorie"]?
-                                .Value?.ToString() ?? "";
-
-
-                            string code =
-                                row.Cells["ParfümCode"]?
-                                .Value?.ToString() ?? "";
-
-
-                            string name =
-                                row.Cells["Name"]?
-                                .Value?.ToString() ?? "";
-
-
-                            string marke =
-                                row.Cells["Marke"]?
-                                .Value?.ToString() ?? "";
-
-
-                            string duftrichtung =
-                                row.Cells["Duftrichtung"]?
-                                .Value?.ToString() ?? "";
-
-
-                            if (string.IsNullOrWhiteSpace(name))
-                                continue;
-
-
-                            // =================================================
-                            // KATEGORIE
-                            // =================================================
-
-                            if (kategorie != aktuelleKategorie)
-                            {
-                                PdfPCell categoryCell =
-                                    new PdfPCell(
-                                        new Phrase(
-                                            " " + kategorie + " ",
-                                            categoryFont))
-                                    {
-                                        // 4 Spalten wenn Bilder vorhanden
-                                        // sonst 3
-                                        Colspan =
-                                            bilderDrucken ? 4 : 3,
-
-                                        HorizontalAlignment =
-                                            Element.ALIGN_CENTER,
-
-                                        VerticalAlignment =
-                                            Element.ALIGN_MIDDLE,
-
-                                        BackgroundColor =
-                                            darkGreenColor,
-
-                                        Padding = 6f
-                                    };
-
-
-                                table.AddCell(categoryCell);
-
-                                aktuelleKategorie = kategorie;
-
-                                zeilenIndex = 0;
-                            }
-
-
-                            // =================================================
-                            // ABWECHSELNDE ZEILENFARBE
-                            // =================================================
-
-                            bool isHighlightRow =
-                                (zeilenIndex % 2 != 0);
-
-
-                            BaseColor rowColor =
-                                isHighlightRow
-                                ? champagneColor
-                                : whiteColor;
-
-
-                            // =================================================
-                            // BILD
-                            // NUR BEI BESTELLLISTE
-                            // =================================================
-
-                            if (bilderDrucken)
-                            {
-                                string bildPfad =
-                                    _HoleParfümBildPfad(code);
-
-
-                                if (!string.IsNullOrWhiteSpace(
-                                        bildPfad)
-                                    &&
-                                    File.Exists(bildPfad))
-                                {
-                                    try
-                                    {
-                                        // WICHTIG:
-                                        // Vollständiger Name wegen
-                                        // System.Drawing.Image
-                                        // und iTextSharp.text.Image
-
-                                        iTextSharp.text.Image pdfBild =
-                                            iTextSharp.text.Image
-                                            .GetInstance(bildPfad);
-
-
-                                        // Bildgröße begrenzen
-                                        pdfBild.ScaleToFit(
-                                            55f,
-                                            65f);
-
-
-                                        pdfBild.Alignment =
-                                            Element.ALIGN_CENTER;
-
-
-                                        PdfPCell bildCell =
-                                            new PdfPCell(
-                                                pdfBild,
-                                                true)
-                                            {
-                                                BackgroundColor =
-                                                    rowColor,
-
-                                                HorizontalAlignment =
-                                                    Element.ALIGN_CENTER,
-
-                                                VerticalAlignment =
-                                                    Element.ALIGN_MIDDLE,
-
-                                                Padding = 4f,
-
-                                                FixedHeight = 75f
-                                            };
-
-
-                                        table.AddCell(bildCell);
-                                    }
-
-                                    catch
-                                    {
-                                        // Falls Bild beschädigt oder
-                                        // Format nicht unterstützt wird
-
-                                        table.AddCell(
-                                            new PdfPCell(
-                                                new Phrase(
-                                                    "Kein Bild",
-                                                    normalFont))
-                                            {
-                                                BackgroundColor =
-                                                    rowColor,
-
-                                                HorizontalAlignment =
-                                                    Element.ALIGN_CENTER,
-
-                                                VerticalAlignment =
-                                                    Element.ALIGN_MIDDLE,
-
-                                                FixedHeight = 75f,
-
-                                                Padding = 4f
-                                            });
-                                    }
-                                }
-
-                                else
-                                {
-                                    // Kein Bild vorhanden
-
-                                    table.AddCell(
-                                        new PdfPCell(
-                                            new Phrase(
-                                                "Kein Bild",
-                                                normalFont))
-                                        {
-                                            BackgroundColor =
-                                                rowColor,
-
-                                            HorizontalAlignment =
-                                                Element.ALIGN_CENTER,
-
-                                            VerticalAlignment =
-                                                Element.ALIGN_MIDDLE,
-
-                                            FixedHeight = 75f,
-
-                                            Padding = 4f
-                                        });
-                                }
-                            }
-
-
-                            // =================================================
-                            // PARFÜMCODE
-                            // =================================================
-
-                            table.AddCell(
-                                new PdfPCell(
-                                    new Phrase(
-                                        code,
-                                        highlightFont))
-                                {
-                                    BackgroundColor = rowColor,
-
-                                    Padding = 5f,
-
-                                    HorizontalAlignment =
-                                        Element.ALIGN_CENTER,
-
-                                    VerticalAlignment =
-                                        Element.ALIGN_MIDDLE
-                                });
-
-
-                            // =================================================
-                            // VORBILD
-                            // Name + "by" + Marke
-                            // =================================================
-
-                            Phrase vorbildPhrase =
-                                new Phrase();
-
-
-                            vorbildPhrase.Add(
-                                new Chunk(
-                                    name + " ",
-                                    highlightFont));
-
-
-                            if (!string.IsNullOrWhiteSpace(marke))
-                            {
-                                vorbildPhrase.Add(
-                                    new Chunk(
-                                        "by ",
-                                        byRedFont));
-
-
-                                vorbildPhrase.Add(
-                                    new Chunk(
-                                        marke,
-                                        highlightFont));
-                            }
-
-
-                            table.AddCell(
-                                new PdfPCell(vorbildPhrase)
-                                {
-                                    BackgroundColor = rowColor,
-
-                                    Padding = 5f,
-
-                                    VerticalAlignment =
-                                        Element.ALIGN_MIDDLE
-                                });
-
-
-                            // =================================================
-                            // DUFTRICHTUNG
-                            // =================================================
-
-                            table.AddCell(
-                                new PdfPCell(
-                                    new Phrase(
-                                        duftrichtung,
-                                        highlightFont))
-                                {
-                                    BackgroundColor = rowColor,
-
-                                    Padding = 5f,
-
-                                    VerticalAlignment =
-                                        Element.ALIGN_MIDDLE
-                                });
-
-
-                            zeilenIndex++;
-
-                            gedruckteZeilen++;
-                        }
-
-
-                        // =====================================================
-                        // KEINE DATEN
-                        // =====================================================
-
-                        if (gedruckteZeilen == 0)
-                        {
-                            pdfDoc.Add(
-                                new Paragraph(
-                                    "Keine Daten für den gewählten Filter gefunden.",
-                                    normalFont));
-                        }
-
-                        else
-                        {
-                            pdfDoc.Add(table);
-                        }
-
-
-                        pdfDoc.Close();
+                            BackgroundColor = rowColor,
+                            Padding = 5f,
+                            VerticalAlignment = Element.ALIGN_MIDDLE
+                        });
+
+                        zeilenIndex++;
+                        gedruckteZeilen++;
                     }
-                }
 
+                    if (gedruckteZeilen == 0)
+                    {
+                        pdfDoc.Add(new Paragraph("Keine Daten für den gewählten Filter gefunden.", normalFont));
+                    }
+                    else
+                    {
+                        pdfDoc.Add(table);
+                    }
+
+                    pdfDoc.Close();
+                }
 
                 MessageBox.Show(
                     $"Die Datei wurde erfolgreich auf dem Desktop gespeichert:\n{filePath}",
@@ -2398,7 +1906,6 @@ namespace BilsanParfums
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show(
@@ -2408,212 +1915,6 @@ namespace BilsanParfums
                     MessageBoxIcon.Error);
             }
         }
-        //private void _ErstellePdfVonParfuem(DataGridView dgv, string pdfTitle, string filterType)
-        //{
-        //    string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        //    string fileName = pdfTitle + "-" + DateTime.Now.ToString("dd.MM.yyyy") + ".pdf";
-        //    string filePath = Path.Combine(desktopPath, fileName);
-
-        //    try
-        //    {
-        //        dgv.CommitEdit(DataGridViewDataErrorContexts.Commit);
-        //        dgv.EndEdit();
-
-        //        BaseColor goldColor = new BaseColor(212, 175, 55);
-        //        BaseColor darkGreenColor = new BaseColor(44, 85, 48);
-        //        BaseColor champagneColor = new BaseColor(245, 240, 230);
-        //        BaseColor whiteColor = BaseColor.WHITE;
-        //        BaseColor blackColor = BaseColor.BLACK;
-
-        //        iTextSharp.text.Font titleFont = new iTextSharp.text.Font(
-        //            iTextSharp.text.Font.FontFamily.HELVETICA, 16f, iTextSharp.text.Font.BOLD, blackColor);
-
-        //        iTextSharp.text.Font headerFont = new iTextSharp.text.Font(
-        //            iTextSharp.text.Font.FontFamily.HELVETICA, 11f, iTextSharp.text.Font.BOLD, BaseColor.WHITE);
-
-        //        iTextSharp.text.Font categoryFont = new iTextSharp.text.Font(
-        //            iTextSharp.text.Font.FontFamily.HELVETICA, 12f, iTextSharp.text.Font.BOLD, BaseColor.WHITE);
-
-        //        iTextSharp.text.Font normalFont = new iTextSharp.text.Font(
-        //            iTextSharp.text.Font.FontFamily.HELVETICA, 10f, iTextSharp.text.Font.NORMAL, blackColor);
-
-        //        iTextSharp.text.Font disclaimerFont = new iTextSharp.text.Font(
-        //            iTextSharp.text.Font.FontFamily.HELVETICA, 10f, iTextSharp.text.Font.BOLD, BaseColor.RED);
-
-        //        iTextSharp.text.Font highlightFont = new iTextSharp.text.Font(
-        //            iTextSharp.text.Font.FontFamily.HELVETICA, 11.5f, iTextSharp.text.Font.NORMAL, blackColor);
-
-        //        using (FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
-        //        using (Document pdfDoc = new Document(PageSize.A4, 25f, 25f, 25f, 25f))
-        //        {
-        //            PdfWriter.GetInstance(pdfDoc, stream);
-        //            pdfDoc.Open();
-
-        //            Paragraph title = new Paragraph(pdfTitle, titleFont)
-        //            {
-        //                Alignment = Element.ALIGN_CENTER,
-        //                SpacingAfter = 12f
-        //            };
-        //            pdfDoc.Add(title);
-
-        //            Paragraph disclaimer = new Paragraph(
-        //                "Hinweis: Die genannten Namen dienen lediglich zur Orientierung der Duftnoten. Unsere Produkte stehen in keiner Verbindung zu den Originalmarken oder deren Herstellern.",
-        //                disclaimerFont)
-        //            {
-        //                Alignment = Element.ALIGN_CENTER,
-        //                SpacingAfter = 10f
-        //            };
-        //            pdfDoc.Add(disclaimer);
-
-        //            PdfPTable table = new PdfPTable(3);
-        //            table.WidthPercentage = 100;
-        //            table.SetWidths(new float[] { 1.5f, 3f, 3f });
-        //            table.SpacingBefore = 5f;
-
-        //            table.AddCell(new PdfPCell(new Phrase("ParfümCode", headerFont))
-        //            {
-        //                BackgroundColor = goldColor,
-        //                HorizontalAlignment = Element.ALIGN_CENTER,
-        //                VerticalAlignment = Element.ALIGN_MIDDLE,
-        //                Padding = 6f
-        //            });
-
-        //            table.AddCell(new PdfPCell(new Phrase("Vorbild", headerFont))
-        //            {
-        //                BackgroundColor = goldColor,
-        //                HorizontalAlignment = Element.ALIGN_CENTER,
-        //                VerticalAlignment = Element.ALIGN_MIDDLE,
-        //                Padding = 6f
-        //            });
-
-        //            table.AddCell(new PdfPCell(new Phrase("Duftrichtung", headerFont))
-        //            {
-        //                BackgroundColor = goldColor,
-        //                HorizontalAlignment = Element.ALIGN_CENTER,
-        //                VerticalAlignment = Element.ALIGN_MIDDLE,
-        //                Padding = 6f
-        //            });
-
-        //            var alleZeilen = dgv.Rows
-        //                .Cast<DataGridViewRow>()
-        //                .Where(row => !row.IsNewRow)
-        //                .OrderBy(row => row.Cells["Kategorie"]?.Value?.ToString())
-        //                .ThenBy(row => row.Cells["ParfümCode"]?.Value?.ToString())
-        //                .ToList();
-
-        //            string aktuelleKategorie = "";
-        //            int zeilenIndex = 0;
-        //            int gedruckteZeilen = 0;
-
-        //            foreach (DataGridViewRow row in alleZeilen)
-        //            {
-        //                bool istVorhanden = HoleBoolWert(row, "IstVorhanden");
-        //                bool inBestellung = HoleBoolWert(row, "InBestellung");
-        //                bool istNeu = HoleBoolWert(row, "IstNeu");
-
-        //                bool sollGedrucktWerden = false;
-
-        //                if (filterType == "Vorhanden" && istVorhanden)
-        //                    sollGedrucktWerden = true;
-        //                else if (filterType == "InBestellung" && inBestellung)
-        //                    sollGedrucktWerden = true;
-        //                else if (filterType == "IstNeu" && istNeu)
-        //                    sollGedrucktWerden = true;
-        //                else if (filterType == "Alle")
-        //                    sollGedrucktWerden = true;
-
-        //                if (!sollGedrucktWerden)
-        //                    continue;
-
-        //                string kategorie = row.Cells["Kategorie"]?.Value?.ToString() ?? "";
-        //                string code = row.Cells["ParfümCode"]?.Value?.ToString() ?? "";
-        //                string name = row.Cells["Name"]?.Value?.ToString() ?? "";
-        //                string marke = row.Cells["Marke"]?.Value?.ToString() ?? "";
-        //                string duftrichtung = row.Cells["Duftrichtung"]?.Value?.ToString() ?? "";
-
-        //                if (string.IsNullOrWhiteSpace(name))
-        //                    continue;
-
-        //                string vorbildText = name;
-
-        //                if (!string.IsNullOrWhiteSpace(marke))
-        //                {
-        //                    vorbildText = $"{name} by {marke}";
-        //                }
-
-        //                if (kategorie != aktuelleKategorie)
-        //                {
-        //                    PdfPCell categoryCell = new PdfPCell(new Phrase(" " + kategorie + " ", categoryFont))
-        //                    {
-        //                        Colspan = 3,
-        //                        HorizontalAlignment = Element.ALIGN_CENTER,
-        //                        VerticalAlignment = Element.ALIGN_MIDDLE,
-        //                        BackgroundColor = darkGreenColor,
-        //                        Padding = 6f
-        //                    };
-
-        //                    table.AddCell(categoryCell);
-        //                    aktuelleKategorie = kategorie;
-        //                    zeilenIndex = 0;
-        //                }
-
-        //                bool isHighlightRow = (zeilenIndex % 2 != 0);
-        //                BaseColor rowColor = isHighlightRow ? champagneColor : whiteColor;
-        //                iTextSharp.text.Font currentFont = highlightFont;
-
-        //                table.AddCell(new PdfPCell(new Phrase(code, currentFont))
-        //                {
-        //                    BackgroundColor = rowColor,
-        //                    Padding = 5f,
-        //                    HorizontalAlignment = Element.ALIGN_CENTER,
-        //                    VerticalAlignment = Element.ALIGN_MIDDLE
-        //                });
-
-        //                table.AddCell(new PdfPCell(new Phrase(vorbildText, currentFont))
-        //                {
-        //                    BackgroundColor = rowColor,
-        //                    Padding = 5f,
-        //                    VerticalAlignment = Element.ALIGN_MIDDLE
-        //                });
-
-        //                table.AddCell(new PdfPCell(new Phrase(duftrichtung, currentFont))
-        //                {
-        //                    BackgroundColor = rowColor,
-        //                    Padding = 5f,
-        //                    VerticalAlignment = Element.ALIGN_MIDDLE
-        //                });
-
-        //                zeilenIndex++;
-        //                gedruckteZeilen++;
-        //            }
-
-        //            if (gedruckteZeilen == 0)
-        //            {
-        //                pdfDoc.Add(new Paragraph("Keine Daten für den gewählten Filter gefunden.", normalFont));
-        //            }
-        //            else
-        //            {
-        //                pdfDoc.Add(table);
-        //            }
-
-        //            pdfDoc.Close();
-        //        }
-
-        //        MessageBox.Show(
-        //            $"Die Datei wurde erfolgreich auf dem Desktop gespeichert:\n{filePath}",
-        //            "Erfolg",
-        //            MessageBoxButtons.OK,
-        //            MessageBoxIcon.Information);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(
-        //            $"Fehler beim Speichern der Datei: {ex.Message}",
-        //            "Fehler",
-        //            MessageBoxButtons.OK,
-        //            MessageBoxIcon.Error);
-        //    }
-        //}
         private bool HoleBoolWert(DataGridViewRow row, string spaltenName)
         {
             if (!row.DataGridView.Columns.Contains(spaltenName))
@@ -2650,143 +1951,6 @@ namespace BilsanParfums
 
             _ErstellePdfVonParfuem(dgvAlleParfüms, pdfTitle, filterType);
         }
-        private string _HoleParfümBildPfad(string parfümCode)
-        {
-            string bilderOrdner = Path.Combine(Application.StartupPath, "Bilder");
-
-            if (!Directory.Exists(bilderOrdner))
-                Directory.CreateDirectory(bilderOrdner);
-
-            string[] endungen = { ".jpg", ".jpeg", ".png", ".webp" };
-
-            foreach (string endung in endungen)
-            {
-                string pfad = Path.Combine(bilderOrdner, parfümCode + endung);
-
-                if (File.Exists(pfad))
-                    return pfad;
-            }
-
-            return null;
-        }
-        private void _FügeBildSpalteHinzu(DataGridView dgv)
-        {
-            if (dgv.Columns.Contains("ParfümBild"))
-                return;
-
-            DataGridViewImageColumn bildSpalte = new DataGridViewImageColumn();
-
-            bildSpalte.Name = "ParfümBild";
-            bildSpalte.HeaderText = "Bild";
-            bildSpalte.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            bildSpalte.Width = 100;
-
-            dgv.Columns.Add(bildSpalte);
-        }
-        private void _LadeParfümBilder(DataGridView dgv)
-        {
-            _FügeBildSpalteHinzu(dgv);
-
-            foreach (DataGridViewRow row in dgv.Rows)
-            {
-                if (row.IsNewRow)
-                    continue;
-
-                string parfümCode =
-                    row.Cells["ParfümCode"].Value?.ToString();
-
-                if (string.IsNullOrWhiteSpace(parfümCode))
-                    continue;
-
-                string bildPfad = _HoleParfümBildPfad(parfümCode);
-
-                if (bildPfad != null)
-                {
-                    using (FileStream fs = new FileStream(
-                        bildPfad,
-                        FileMode.Open,
-                        FileAccess.Read))
-                    {
-                        using (System.Drawing.Image temp =
-                               System.Drawing.Image.FromStream(fs))
-                        {
-                            row.Cells["ParfümBild"].Value =
-                                new Bitmap(temp);
-                        }
-                    }
-                }
-                else
-                {
-                    row.Cells["ParfümBild"].Value = null;
-                }
-            }
-
-            dgv.RowTemplate.Height = 90;
-
-            foreach (DataGridViewRow row in dgv.Rows)
-            {
-                if (!row.IsNewRow)
-                    row.Height = 90;
-            }
-        }
-
-        //Neue Methode zum Bild in ein großes Fenster anzuzeigen ....
-        private void dgvAlleParfüms_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // Klick auf Header ignorieren
-            if (e.RowIndex < 0 || e.ColumnIndex < 0)
-                return;
-
-            DataGridView dgv = (DataGridView)sender;
-
-            // Nur reagieren, wenn auf die Bildspalte geklickt wurde
-            if (dgv.Columns[e.ColumnIndex].Name != "ParfümBild")
-                return;
-
-            object wert = dgv.Rows[e.RowIndex].Cells["ParfümBild"].Value;
-
-            // Kein Bild vorhanden
-            if (wert == null || wert == DBNull.Value)
-            {
-                MessageBox.Show(
-                    "Für dieses Parfüm ist kein Bild vorhanden.",
-                    "Kein Bild",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
-                return;
-            }
-
-            System.Drawing.Image bild = wert as System.Drawing.Image;
-
-            if (bild == null)
-                return;
-
-
-            // Neues Fenster für großes Bild
-            using (Form bildForm = new Form())
-            {
-                bildForm.Text = "Parfümbild";
-                bildForm.StartPosition = FormStartPosition.CenterParent;
-                bildForm.Size = new Size(700, 700);
-                bildForm.MinimumSize = new Size(400, 400);
-                bildForm.BackColor = Color.White;
-
-                PictureBox pictureBox = new PictureBox();
-
-                pictureBox.Dock = DockStyle.Fill;
-                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-                pictureBox.BackColor = Color.White;
-
-                // Kopie erstellen, damit das Bild im DataGridView nicht gesperrt wird
-                pictureBox.Image = new Bitmap(bild);
-
-                bildForm.Controls.Add(pictureBox);
-
-                bildForm.ShowDialog(this);
-
-                pictureBox.Image?.Dispose();
-            }
-        }
     }
 }
+

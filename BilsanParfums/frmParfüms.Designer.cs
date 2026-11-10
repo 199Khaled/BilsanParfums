@@ -473,7 +473,7 @@
             this.dgvAlleParfüms.ReadOnly = true;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvAlleParfüms.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvAlleParfüms.RowTemplate.Height = 35;
+            this.dgvAlleParfüms.RowTemplate.Height = 50;
             this.dgvAlleParfüms.Size = new System.Drawing.Size(1263, 644);
             this.dgvAlleParfüms.TabIndex = 0;
             this.dgvAlleParfüms.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAlleParfüms_CellDoubleClick);
